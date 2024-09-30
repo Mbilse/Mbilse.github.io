@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        
+        #div {
+        background-color: #000;
+            width: 250px;
+            height: 250px;
+            position: relative;
+            /* overflow: hidden; */
+            border-radius: 100%;
+        }
+        
+        #circle {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: blue;
+            animation: runs 1.7s linear infinite;
+        }
+        
+        #d1 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #fff;
+            animation: run1 2s linear infinite;
+            transform-origin: bottom left;
+        }
+        
+        #d2 {
+            position: absolute;
+            right: 50%;
+            top: 0;
+            background: #fff;
+            animation: run 2s linear infinite;
+            animation-delay: 0.75s;
+            transform-origin: bottom right;
+        }
+        
+        #d3 {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            background: #fff;
+            animation: run 2s linear infinite;
+            animation-delay: 0.25s;
+            transform-origin: top left;
+        }
+        
+        #d4 {
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            background: #fff;
+            animation: run 2s linear infinite;
+            animation-delay: 0.5s;
+            transform-origin: top right;
+        }
+        
+        #d1,
+        #d2,
+        #d3,
+        #d4 {
+            width: 50%;
+            height: 50%;
+        }
+        
+        @keyframes run {
+            0% {
+                transform: rotate(0deg);
+            }
+            50%,
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes run1 {
+            0% {
+                transform: rotate(20deg);
+            }
+            50%,
+            100% {
+                transform: rotate(380deg);
+            }
+        }
+        
+        @keyframes runs {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .zz {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            position: relative;
+            top: 10%;
+            left: 10%;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="div">
+        <div id="circle">
+            <div id="d1"></div>
+            <div id="d2"></div>
+            <div id="d3"></div>
+            <div id="d4"></div>
+            <div class="zz"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
