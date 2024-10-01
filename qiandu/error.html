@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>抱歉，改系统未开发</title>
+  <style>
+    .chat {
+      width: 932px;
+      height: 180px;
+      border: 2px solid #ccc;
+      padding: 10px;
+      background-color: lightblue;
+      color: white;
+    }
+    #w {
+        width: 70px;
+        height: 45px;
+        background-color: green;
+        color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat" id="chat"></div>
+  <script>
+    var chat = document.getElementById("chat");
+    var newM = document.createElement("div");
+    newM.innerHTML = "<center><strong><big><big><big><h1>未开发</center>";
+    chat.appendChild(newM);
+  </script>
+<br><br><br>
+<center>
+<input id="w" type="button" value="返回" onclick="window.location.href='wechat.html'" />
+</center>
+</body>
+</html>

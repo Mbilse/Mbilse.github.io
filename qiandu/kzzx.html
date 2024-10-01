@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制中心</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .control-center {
+            background-color: #f2f2f4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="control-center">
+        <h1>控制中心</h1>
+        <button onclick="alert('传感器 开')">传感器</button>
+        <button onclick="alert('58项权限己开启')">权限</button>
+        <button onclick="alert('授权成功')">网络</button>
+        <br />
+        <button onclick="alert('已开启')">WLAN</button>
+        <button onclick="alert('已开启')">蓝牙</button>
+        <button onclick="alert('已开启')">飞行模式</button>
+        <br />
+        <button onclick="alert('已开启')">多用户</button>
+        <button onclick="alert('已开启')">root</button>
+    </div>
+</body>
+</html>

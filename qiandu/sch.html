@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Search</title>
+    <style>
+    
+          
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 46vh;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 5px solid #acc;
+            border-radius: 10px;
+            border-radius: 40%;
+            padding: 10px;
+        }
+        .search-input {
+            border: none;
+            outline: none;
+            margin-right: 10px;
+            flex-grow: 5;
+        }
+        .search-button {
+            background-color: #2AAF50;
+            color: blue;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            border-radius: 50%;
+        }
+        .search-engine {
+            margin-top: 20px;
+            text-align: center;
+        }
+  </style>
+</head>
+<body>
+<font color =green><h1>        Zero Search</h1></font>
+    <br />
+   <font color =green><p>    Zero Search is a good search tool！</p></font>
+  <h5> <font color =green><p>    Zero search tool is a everything engine search tool, it can be a collection of users reflect the design of search results, the collection of major search engine optimization results.</p></font></h5>
+<div class="search-container">
+<div class="search-box">
+<input type="text" class="search-input" placeholder="input📝...">
+<button class="search-button" onclick="performSearch()">🔍</button>
+</div>
+<div class="search-engine">
+<label for="search-engine">Search<br />Engine</label>
+<select id="search-engine">
+<option value="https://www.bing.com/search?q=">none</option>
+<option value="https://www.google.com/search?q=">Google</option>
+<option value="https://www.bing.com/search?q=">Bing</option>
+<option value="https://yandex.com/search/?text=">Yandex</option>
+<option value="https://www.shodan.io/search?query=">Shodan</option>
+<option value="https://esoia.com/search?q=">Esoia</option>
+<option value="https://aiosearch.com/search?q=">Aio</option>
+<option value="https://www.baidu.com/s?wd=">Baidu</option>
+<option value="https://www.sogou.com/web?query=">Sogou</option>
+<option value="https://www.toutiao.com/search/?keyword=">Totiao</option>
+<option value="https://www.so.com/s?q=">360</option>
+<option value="https://kaifa.baidu.com/search?word=">Open</option>
+<option value="https://www.sm.cn/s?q=">Sm</option>
+<option value="https://www.2345.com/?k=">2345</option>
+<option value="https://www.hao123.com/?q=">hao123</option>
+<option value="http://s.2265.com/pc/?k=">2265</option>
+<option value="http://">http</option>
+<option value="https://">https</option>
+<option value="ftp://">ftp</option>
+<option value="file://">file</option>
+<option value="content://">net</option>
+<option value="url://">url</option>
+</select>
+        </div>
+    </div>
+    <script>
+        function performSearch() {
+            var searchInput = document.querySelector('.search-input').value;
+            var searchEngine = document.getElementById('search-engine').value;
+            var searchUrl = searchEngine + encodeURIComponent(searchInput);
+            window.location.href = searchUrl;
+        }
+    </script>
+<a href="index.html">Touch Me Exit</a>
+<a href="dedz.html">Read Details</a>
+</body>
+</html>

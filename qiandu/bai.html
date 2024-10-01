@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script>
+    <link rel='icon' href="https://image.api.losfer.cn/view.php/d7455cdbb3004cb71acf84b4b65643b0.jpg">
+    <link rel="stylesheet" href="style.css">
+    <title>十度搜索_冷掉牙</title>
+</head>
+
+<body>
+    <div id="float-words"></div>
+    <div class="mybaidu" id="mybaidu">
+        十度搜索_冷掉牙
+    </div>
+    </p>
+      <br /><h4><a href="index.html">点我返回</a></h4>
+<div class="myimg"><img src="https://image.api.losfer.cn/view.php/d7455cdbb3004cb71acf84b4b65643b0.jpg"/width="150px"></div>
+
+    <font style="color: #51F4cF;font-size: 24px;">
+        <script src="https://api.vvhan.com/api/ian?type=js"></script>
+        <script>
+            vhan()
+        </script>
+    </font>
+
+    <div class="mygq" style='font-size:20px;'>11</div>
+    <div class="mygs" style='font-size:20px;'></div>
+    <ul></ul><!--播放器的载体--><br>
+    <button class="btn">切换文案</button>
+    <p>&emsp;
+    <p>
+    <table>
+        <tr>
+            <td><button class="jubao" onclick="javascript:alert('我是不会管的')">举报</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" /></td>
+        </tr>
+        <td><button class="cuigen" onclick="javascript:alert('不想更新')">催更</button></td>
+        <tr>
+            <td><input type="text" /></td>
+        </tr>
+    </table>
+    <p>
+    <div style="font-size:12px;text-align:center;height:48px;line-height:48px;background:#c0baf0;color:#0afcff;position: relative;bottom:0;width:100%;">版权©为十度和千度，白度所有</div>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <p>&emsp;
+    <p>
+    <div style="font-size:12px;text-align:center;height:48px;line-height:48px;background:#00bff0;color:#ffffff;position: relative;bottom:-1900;width:100%;">版权©为梅布斯乔治所有</div>
+
+    <script>
+    //获取内存飘字的元素
+      var floatwords = document.querySelector("#float-words");
+      //用数组存要飘的字
+      var arr = [
+        "富强",
+        "民主",
+        "文明",
+        "和谐",
+        "自由",
+        "平等",
+        "公正",
+        "法治",
+        "爱国",
+        "敬业",
+        "诚信",
+        "友善",
+        "大家好",
+        "我是千度",
+        "不对",
+        "我是十度",
+        "心蚊(News)(肿阳(中央)新闻)：2024年，浙江省一名大学生创业，却跳水而亡",
+        "负墙",
+        "民煮",
+        "蚊名",
+        "核协",
+        "字油",
+        "瓶等",
+        "弓政",
+        "罚制",
+        "艾蝈",
+        "井业",
+        "成信",
+        "有扇",
+        "又是一天冷片(热点)！",
+        "心蚊(News)(肿阳(中央)新闻)：2021年，湖南省一名大学生考上清华，却自杀而亡",
+      ];
+      //定义数组的索引，并赋初值为0
+      var i = 0;
+      //添加点击事件
+      document.addEventListener("mousedown", function (e) {
+        //获取鼠标在页面上的坐标
+        let x = e.pageX;
+        let y = e.pageY;
+        //将内存飘字的元素的值附上鼠标坐标的值，并进行相应的修正
+        floatwords.style.left = x + "px";
+        floatwords.style.top = y + "px";
+        //将数组插入元素
+        floatwords.innerHTML = arr[i];
+        //下次点击取下一个文本
+        i++;
+        //如果文本取完则回到开头
+        if (i === arr.length) {
+          i = 0;
+        }
+      });
+        var wz = document.querySelector('.mybaidu'); //获取百度文字元素
+        var wztop = wz.offsetTop; //获取文字距离页面顶部的像素距离
+        document.addEventListener('scroll', function() { //给文档注册滚动事件
+            if (window.pageYOffset > wztop) { //文档页面卷去的距离大于6px时
+                wz.style.position = 'fixed'; //修改位置为固定定位
+                wz.style.backgroundColor = '#17BBFF';
+            } else {
+                wz.style.position = 'relative'; //否则修改位置为相对定位
+                wz.style.backgroundColor = '#74E8FF';
+            }
+        })
+
+
+        function mycolor() {
+            let color = "#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+            color = color.split("|"); /*分割成伪数组*/
+            document.getElementById("mybaidu").style.color = color[parseInt(Math.random() * color.length)];
+            //parseInt()向零取整随机的数充当数组的索引
+        }
+        setInterval("mycolor()", 200);
+        //200毫秒调用一次该函数
+    </script>
+    <script src='My.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+body {
+    -webkit-user-select: none;
+    -zom-user-select: none;
+    user-select: none //禁止鼠标选择文字
+}
+
+.mybaidu {
+    width: 360px;
+    height: 39px;
+    position: relative;
+    //相对定位，不会显示在最上层
+    font-size: 26px;
+    text-align: center;
+    background-color: #74E8FF;
+    top: 0px;
+}
+
+#float-words {
+    color: #5DFFF4;
+    position: absolute;
+    -webkit-animation: fun 3.5s;
+    -zom-animation: fun 3.5s;
+    animation-iteration-count: 114514; //动画循环次数
+}
+
+@-webkit-keyframes fun {
+    0% {
+        opacity: 0.2;
+        color: #ff0000;
+    }
+
+    25% {
+        opacity: 0.3;
+        color: #000FFF;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    75% {
+        opacity: 0.8;
+        color: #F717FF;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-zom-keyframes fun {
+    0% {
+        opacity: 0.1;
+    }
+
+    25% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    75% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+  @keyframes myframes {
+            0% {
+                box-shadow: 5px 5px 20px 5px #FFB88B;
+            }
+
+            25% {
+                box-shadow: 5px 5px 20px 5px #46D2FF;
+            }
+
+            50% {
+                box-shadow: 5px 5px 20px 5px #4AA2A2;
+            }
+
+            75% {
+                box-shadow: 5px 5px 20px 5px #178DFF;
+            }
+
+            100% {
+                box-shadow: 5px 5px 20px 5px #7A00FF;
+            }
+
+            /*头像呼吸灯动画,myframes*/
+        }
+
+        @-webkit-keyframes myframes {
+            0% {
+                box-shadow: 5px 5px 20px 5px #00FFDD;
+            }
+
+            25% {
+                box-shadow: 5px 5px 20px 5px #FF2E2E;
+            }
+
+            50% {
+                box-shadow: 5px 5px 20px 5px #4AA2A2;
+            }
+
+            75% {
+                box-shadow: 5px 5px 20px 5px #178DFF;
+            }
+
+            100% {
+                box-shadow: 5px 5px 20px 5px #7A00FF;
+            }
+
+            /*获得浏览器支持头像呼吸灯动画,myframes*/
+        }
+
+.myimg {
+    text-align: center;
+}
+
+img {
+    border-radius: 100px;
+    /*让头像变成圆的*/
+    border: 1px solid #FF1700;
+    /*头像的实体边框粗细*/
+    box-shadow: 5px 5px #79A798;
+    /*盒子的右下部分阴影*/
+    transition: transform 1s;
+    /*过渡改变的时间*/
+    animation: myframes 10s;
+    /*引用和执行动画的持续时间*/
+    -webkit-animation: myframes 10s
+        /*获得浏览器支持*/
+        animation-iteration-count: 50;
+    /*动画循环的次数为50*/
+    -webkit-animation-iteration-count: 50;
+    /*获得浏览器支持*/
+}
+
+img:hover {
+    transform: rotate(360deg);
+}

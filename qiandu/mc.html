@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐切换器</title>
+    <style>
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background-color: gray;
+            border-radius: 90px;
+            position: relative;
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: green;
+            position: absolute;
+            border-radius: 90px;
+        }
+        .play-pause {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .music-list {
+            display: none;
+            list-style-type: none;
+            padding: 0;
+            background-color: red;
+        }
+        .music-list li {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .music-list li:hover {
+            color: green;
+        }
+        .settings {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+  <h4><a href="index.html">点我返回</a></h4>
+    <div class="play-pause">
+        <button id="playPauseBtn">播放/暂停</button>
+        <button id="switchMusicBtn">切换音乐</button>
+        <button id="settingsBtn">设置</button>
+    </div>
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <ul class="music-list">
+        <li data-src="起风了.mp3">起风了</li>
+        <li data-src="西班牙斗牛舞.mp3">西班牙斗牛舞</li>
+        <li data-src="科目三一笑江湖.mp3">科目三一笑江湖</li>
+        <li data-src="孤勇者.mp3">孤勇者</li>
+        <li data-src="莫扎特k448钢琴曲.mp3">莫扎特k448钢琴曲</li>
+    </ul>
+    <div class="settings">
+        <label for="cornerRadius">圆角值：</label>
+        <input type="range" id="cornerRadius" min="0" max="100" value="90">
+        <br>
+        <label for="color">颜色：</label>
+        <select id="color">
+            <option value="red">红色</option>
+            <option value="yellow">黄色</option>
+            <option value="green">绿色</option>
+            <option value="blue">蓝色</option>
+            <option value="purple">紫色</option>
+            <option value="gray">灰色</option>
+        </select>
+    </div>
+    <audio id="audioPlayer" src="起风了.mp3"></audio>
+    <script>
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const switchMusicBtn = document.getElementById('switchMusicBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const progressBar = document.querySelector('.progress-bar');
+        const progress = document.querySelector('.progress');
+        const musicList = document.querySelector('.music-list');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const cornerRadiusInput = document.getElementById('cornerRadius');
+        const colorSelect = document.getElementById('color');
+        let isPlaying = false;
+        let currentSongIndex = 0;
+        const songs = Array.from(musicList.children).map(li => li.dataset.src);
+
+        function playPause() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '播放';
+            } else {
+                audioPlayer.play();
+                playPauseBtn.textContent = '暂停';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function switchMusic() {
+            audioPlayer.pause();
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.play();
+            playPauseBtn.textContent = '暂停';
+            isPlaying = true;
+        }
+
+        function updateProgress() {
+            const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progress.style.width = `${percentage}%`;
+        }
+
+        function applySettings() {
+            const cornerRadius = cornerRadiusInput.value;
+            const color = colorSelect.value;
+            progressBar.style.borderRadius = `${cornerRadius}px`;
+            progressBar.style.backgroundColor = color;
+        }
+
+        playPauseBtn.addEventListener('click', playPause);
+        switchMusicBtn.addEventListener('click', () => {
+            musicList.style.display = musicList.style.display === 'none' ? 'block' : 'none';
+        });
+        settingsBtn.addEventListener('click', () => {
+            document.querySelector('.settings').style.display = document.querySelector('.settings').style.display === 'none' ? 'block' : 'none';
+        });
+        cornerRadiusInput.addEventListener('input', applySettings);
+        colorSelect.addEventListener('change', applySettings);
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+    </script>
+</body>
+</html>

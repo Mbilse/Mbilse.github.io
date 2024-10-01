@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>动态进度条示例</title>
+    <style>
+        #progress-bar {
+            width: 100%;
+            background-color: #19f3f3;
+            position: relative;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+        }
+
+        #progress-bar-inner {
+            height: 25px;
+            width: 0;
+            background-color: #1C6F53;
+            position: absolute;
+            border-radius: 25px;
+            border: 1px solid #1C6F53;
+        }
+
+        #progress-text {
+            position: absolute;
+            left: 10px;
+            bottom: 50%;
+            transform: translateY(50%);
+            font-size: 25px;
+            color: pink;
+        }
+    </style>
+</head>
+<body>
+    <h1>下载进度</h1>
+    <div id="progress-bar">
+        <div id="progress-bar-inner"></div>
+        <br />
+        <span id="progress-text"></span>
+    </div>
+
+    <script>
+        function updateProgressBar(value) {
+            var progressBarInner = document.getElementById("progress-bar-inner");
+            progressBarInner.style.width = value + "%";
+            document.getElementById("progress-text").innerText = value + "%";
+        }
+
+        // 模拟进度更新
+        var progress = 0;
+        var interval = setInterval(function() {
+            progress += 1;
+            if (progress > 100) {
+                clearInterval(interval);
+            } else {
+                updateProgressBar(progress);
+            }
+        }, 90);
+    </script>
+</body>
+</html>

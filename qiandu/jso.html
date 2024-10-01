@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<html>
+<head>
+<title>计算器(科)</title>
+<style>
+input[type=button] {
+  width: 50px;
+  height: 50px;
+}
+</style>
+</head>
+<body>
+
+<h1><big>science calculator</big></h1>
+  <h4><a href="index.html">点我返回</a></h4>
+  <h4><a href="jst.html">点我切换</a></h4>
+  <h4><a href="jg.html">点我进入进制转换</a></h4>
+<input id="display" type="text" readonly>
+
+<br>
+
+<input type="button" value="1" onclick="addToDisplay('1')">
+<input type="button" value="2" onclick="addToDisplay('2')">
+<input type="button" value="3" onclick="addToDisplay('3')">
+<input type="button" value="+" onclick="addToDisplay('+')">
+<br>
+<input type="button" value="4" onclick="addToDisplay('4')">
+<input type="button" value="5" onclick="addToDisplay('5')">
+<input type="button" value="6" onclick="addToDisplay('6')">
+<input type="button" value="-" onclick="addToDisplay('-')">
+<br>
+<input type="button" value="7" onclick="addToDisplay('7')">
+<input type="button" value="8" onclick="addToDisplay('8')">
+<input type="button" value="9" onclick="addToDisplay('9')">
+<input type="button" value="*" onclick="addToDisplay('*')">
+<br>
+<input type="button" value="AC" onclick="clearDisplay()">
+<input type="button" value="0" onclick="addToDisplay('0')">
+<input type="button" value="=" onclick="calculate()">
+<input type="button" value="/" onclick="addToDisplay('/')">
+<br>
+<input type="button" value="(" onclick="addToDisplay('(')">
+<input type="button" value=")" onclick="addToDisplay(')')">
+<input type="button" value="^" onclick="addToDisplay('**')">
+<input type="button" value="sqrt" onclick="addToDisplay('Math.sqrt(')">
+<br>
+<input type="button" value="sin" onclick="addToDisplay('Math.sin(')">
+<input type="button" value="cos" onclick="addToDisplay('Math.cos(')">
+<input type="button" value="tan" onclick="addToDisplay('Math.tan(')">
+<input type="button" value="asin" onclick="addToDisplay('Math.asin(')">
+<br>
+<input type="button" value="acos" onclick="addToDisplay('Math.acos(')">
+<input type="button" value="atan" onclick="addToDisplay('Math.atan(')">
+<input type="button" value="rad" onclick="addToDisplay('Math.PI / 180')">
+<input type="button" value="deg" onclick="addToDisplay('180 / Math.PI')">
+<br>
+<input type="button" value="删除" onclick="deleteLastCharacter()">
+
+<script>
+function addToDisplay(value) {
+  document.getElementById('display').value += value;
+}
+
+function clearDisplay() {
+  document.getElementById('display').value = '';
+}
+
+function deleteLastCharacter() {
+  const currentValue = document.getElementById('display').value;
+  document.getElementById('display').value = currentValue.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    const result = eval(document.getElementById('display').value);
+    document.getElementById('display').value = result;
+  } catch (error) {
+    alert('算式级错误');
+  }
+}
+</script>
+
+</body>
+</html>

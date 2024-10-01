@@ -1,0 +1,1070 @@
+<html>
+<head>
+<title>输入法+保存器</title>
+<script>
+alert("是否启动服务");
+prompt("服务器端口号");
+alert("正在访问服务器");
+alert("访问成功!");
+alert("即将打开键盘");
+</script>
+</head>
+<style>
+    #confirm {
+        border-radius: 10px;
+        font-weight: bold;
+        font-size:50px;
+        display: none;
+        background-color: #FFFFFF;
+        border: 1px solid #aaa;
+        position: fixed;
+        width: 500px;
+        height:300px;
+        left: 50%;
+        margin-left: -230px;
+        padding: 6px 8px 8px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    #confirm button {
+        font-size:30px;
+        font-weight: bold;
+        position:absolute;
+        bottom:0;
+        margin-left: -40px;
+        justify-content:center;
+        align-items:center;
+        background-color: lightgrey;
+        display: inline-block;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        padding: 5px;
+        text-align: center;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #circle {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    #may {
+        white-space: nowrap; /* 防止文本换行 */  
+        overflow: hidden; /* 隐藏超出容器的文本 */  
+        text-overflow: ellipsis; /* 使用省略号表示被隐藏的文本 */
+    }
+</style>
+<body>
+
+<div id="confirm">
+ <br>
+ <div class="message" id="notificationM">功能暂未开启</div>
+ <button class="yes">确定</button>
+</div>
+
+<div id="circle"></div>
+<div id="o" onclick="open_w()" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">打开文件管理</div><br>
+<div id="typing">
+<div onclick="ok_f()" id="ok_f" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">保存内容</div>
+<br>
+<div contentEditable="false" style="border-radius:10px;width:auto;height:945px;font-size:50px;border:2px solid black;overflow-y: scroll;font-weight:450;" id="chat"></div>
+    <div id="typing_area">
+ <div style="text-align:center;width:auto;height:100px;background-color:lightgrey;">
+    <br>
+    <div id="may" style="z-index:1;font-weight:459;font-size:45px;" onclick="ok()">
+    </div>
+ </div>
+ <div id="button_area" style="background-color:lightgrey;">
+<center>
+<div id="div2" style="display:block;">
+<button onclick="addText('q','Q')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">Q</button>⠀
+<button onclick="addText('w','W')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">W</button>⠀
+<button onclick="addText('e','E')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">E</button>⠀
+<button onclick="addText('r','R')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">R</button>⠀
+<button onclick="addText('t','T')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">T</button>⠀
+<button onclick="addText('y','Y')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">Y</button>⠀
+<button onclick="addText('u','U')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">U</button>⠀
+<button onclick="addText('i','I')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">I</button>⠀
+<button onclick="addText('o','O')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">O</button>⠀
+<button onclick="addText('p','P')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:10px;">P</button>⠀
+<br><br>
+<button onclick="addText('a','A')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">A</button>⠀
+<button onclick="addText('s','S')" style="height:110px;width:75px;background-color:white;font-size:40px;border-radius:10px;">S</button>⠀
+<button onclick="addText('d','D')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">D</button>⠀
+<button onclick="addText('f','F')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">F</button>⠀
+<button onclick="addText('g','G')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">G</button>⠀
+<button onclick="addText('h','H')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">H</button>⠀
+<button onclick="addText('j','J')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">J</button>⠀
+<button onclick="addText('k','K')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">K</button>⠀
+<button onclick="addText('l','L')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">L</button>⠀
+<br><br>
+<button onclick="big()" style="height:110px;width:105px;background-color:grey;font-size:52px;border-radius:10px;" id="big">⬆</button>⠀
+<button onclick="addText('z','Z')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">Z</button>⠀
+<button onclick="addText('x','X')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">X</button>⠀
+<button onclick="addText('c','C')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">C</button>⠀
+<button onclick="addText('v','V')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">V</button>⠀
+<button onclick="addText('b','B')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">B</button>⠀
+<button onclick="addText('n','N')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">N</button>⠀
+<button onclick="addText('m','M')" style="height:110px;width:75px;background-color:white;font-size:45px;border-radius:10px;">M</button>⠀
+<button onclick="deleteText()" style="height:110px;width:170px;background-color:grey;font-size:45px;border-radius:10px;">&#9003</button>⠀
+<br><br>
+<button onclick="f()" style="height:120px;width:100px;background-color:white;font-size:45px;border-radius:10px;">Num</button>⠀
+<button onclick="addnewText(',','.')" style="height:120px;width:80px;background-color:white;font-size:40px;border-radius:10px;">,</button>⠀
+<button onclick="addSpace()" style="height:120px;width:550px;color:lightgrey;background-color:white;font-size:45px;border-radius:10px;">___空格___</button>⠀
+<button onclick="addNewLine()" style="height:120px;width:150px;background-color:grey;font-size:32px;border-radius:10px;">Enter</button>⠀
+<br>
+<br>
+</div>
+<div id="div1" style="display: none">
+<button onclick="addnewText('1','1.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">1</button>⠀
+<button onclick="addnewText('2','2.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">2</button>⠀
+<button onclick="addnewText('3','3.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">3</button>⠀
+<button onclick="addnewText('4','4.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">4</button>⠀
+<button onclick="addnewText('5','5.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">5</button>⠀
+<button onclick="addnewText('6','6.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">6</button>⠀
+<button onclick="addnewText('7','7.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">7</button>⠀
+<button onclick="addnewText('8','8.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">8</button>⠀
+<button onclick="addnewText('9','9.')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">9</button>⠀
+<button onclick="addnewText('0','0')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">0</button>⠀
+<br><br>
+<button onclick="addnewText('-','-')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">-</button>⠀
+<button onclick="addnewText('/','/')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">/</button>⠀
+<button onclick="addnewText(':',':')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">:</button>⠀
+<button onclick="addnewText('_','_')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">_</button>⠀
+<button onclick="addnewText('(','(')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">(</button>⠀
+<button onclick="addnewText(')',')')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">)</button>⠀
+<button onclick="addnewText('#','#')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">#</button>⠀
+<button onclick="addnewText('&','&')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">&</button>⠀
+<button onclick="addnewText('@','@')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">@</button>⠀
+<button onclick=addnewText('"','"') style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">"</button>⠀
+<br><br>
+<button onclick="fh()" style="height:115px;width:110px;background-color:grey;font-size:30px;border-radius:10px;" id="big">符</button>⠀
+<button onclick="addnewText('.','.')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">.</button>⠀
+<button onclick="addnewText(',',',')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">,</button>⠀
+<button onclick="addnewText('?','?')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">?</button>⠀
+<button onclick="addnewText('!','!')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">!</button>⠀
+<button onclick="addnewText('…','…')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">…</button>⠀
+<button onclick=addnewText("'","'") style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">'</button>⠀
+<button onclick="deleteText()" style="height:110px;width:170px;background-color:grey;font-size:45px;border-radius:10px;">&#9003</button>
+<br><br>
+<button onclick="f()" style="height:115px;width:100px;color:white;background-color:rgb(0, 210, 130);font-size:33px;border-radius:10px;">Back</button>⠀
+<button onclick="addk('⠀','⠀⠀⠀⠀')" style="color:lightgrey;height:115px;width:640px;background-color:white;font-size:45px;border-radius:10px;">___ 空格 ___</button>⠀
+<button onclick="addNewLine()" style="height:115px;width:150px;background-color:grey;font-size:32px;border-radius:10px;">Enter</button>⠀
+<br>
+<br>
+</div>
+<div id="div3" style="display: none">
+<button onclick="addnewText('[','[')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">[</button>⠀
+<button onclick="addnewText(']',']')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">]</button>⠀
+<button onclick="addnewText('{','{')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">{</button>⠀
+<button onclick="addnewText('}','}')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">}</button>⠀
+<button onclick="addnewText('÷','÷')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">÷</button>⠀
+<button onclick="addnewText('%','%')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">%</button>⠀
+<button onclick="addnewText('^','^')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">^</button>⠀
+<button onclick="addnewText('*','*')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">*</button>⠀
+<button onclick="addnewText('+','+')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">+</button>⠀
+<button onclick="addnewText('=','=')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">=</button>⠀
+<br><br>
+<button onclick="addnewText('\','\')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">\</button>⠀
+<button onclick="addnewText('|','|')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">|</button>⠀
+<button onclick="addnewText(';',';')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">;</button>⠀
+<button onclick="addnewText('¢','¢')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">¢</button>⠀
+<button onclick="addnewText('฿','฿')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">฿</button>⠀
+<button onclick="addnewText('€','€')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">€</button>⠀
+<button onclick="addnewText('£','£')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">£</button>⠀
+<button onclick="addnewText('$','$')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">$</button>⠀
+<button onclick="addnewText('¥','¥')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">¥</button>⠀
+<button onclick="addnewText('·','·')" style="height:110px;width:75px;background-color:white;font-size:50px;border-radius:12px;">·</button>⠀
+<br><br>
+<button onclick="fh()" style="height:110px;width:110px;background-color:grey;font-size:30px;border-radius:10px;" id="big">123</button>⠀
+<button onclick="addnewText('＜','＜')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;"><</button>⠀
+<button onclick="addnewText('＞','＞')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">></button>⠀
+<button onclick="addnewText('♀','♀')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">♀</button>⠀
+<button onclick="addnewText('♂','♂')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">♂</button>⠀
+<button onclick="addnewText('→','→')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">→</button>⠀
+<button onclick="addnewText('~','~')" style="height:110px;width:87px;background-color:white;font-size:50px;border-radius:12px;">~</button>⠀
+<button onclick="deleteText()" style="height:110px;width:170px;background-color:grey;font-size:45px;border-radius:10px;">&#9003</button>⠀
+<br>
+<button onclick="tool()" style="height:110px;width:230px;color:white;background-color:rgb(0, 210, 130);font-size:70px;border-radius:10px;">tool</button>⠀
+<button onclick="fhui()" style="height:110px;width:230px;color:white;background-color:rgb(0, 210, 130);font-size:70px;border-radius:10px;">←</button>⠀
+<button onclick="oo()" style="height:113px;width:250px;color:black;background-color:white;font-size:82px;border-radius:10px;">&#9000</button>⠀
+<br>
+<br>
+</div>
+<div id="div4" style="display:none;height:532px;">
+<button onclick="()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">mark</button>⠀
+<button onclick="()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">clear</button>⠀
+<button onclick="color()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">a-color</button>⠀
+<button onclick="h()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">high</button>⠀
+<button onclick="dis()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">display</button>⠀
+<button onclick="ok_f()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">save</button>⠀
+<button onclick="bcolor()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">b-color</button>⠀
+<input type="file" id="image-input" accept="image/*" style="display:none;">
+<button onclick="selectImage()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">picture</button>
+<button onclick="notification()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">none</button>⠀
+<button onclick="notification()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">none</button>⠀
+<button onclick="notification()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">none</button>⠀
+<button onclick="notification()" style="color:lightgrey;height:120px;width:200px;background-color:white;font-size:45px;border-radius:10px;">none</button>⠀
+<br><br>
+<button onclick="fhui()" style="height:110px;width:800px;color:white;background-color:rgb(0, 210, 130);font-size:70px;border-radius:10px;">←</button>⠀
+</div>
+</center>
+</div>
+</div>
+</div>
+</div>
+<div id="file" style="display:none;">
+<div onclick="dis()" id="dis" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">隐藏键盘</div>
+<br>
+<div onclick="set()" id="set" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">Settings</div>
+<br>
+<div onclick="d()" id="d" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">清空选中文件<div style="color:lightgrey;">无</div></div>
+<br>
+<div id="b1" style="font-weight:bold;border:2px solid black;border-radius:2px;" onclick="b1n()"><div style="font-size:30px;">文档 1</div><br><div style="font-size:25px;color:grey;text-align:center;width:97%;">双击打开</div></div>
+<div id="b2" style="font-weight:bold;border:2px solid black;border-radius:2px;" onclick="b2n()"><div style="font-size:30px;">文档 2</div><br><div style="font-size:25px;color:grey;text-align:center;width:97%;">双击打开</div></div>
+<div id="b3" style="font-weight:bold;border:2px solid black;border-radius:2px;" onclick="b3n()"><div style="font-size:30px;">文档 3</div><br><div style="font-size:25px;color:grey;text-align:center;width:97%;">双击打开</div></div>
+<div id="b4" style="font-weight:bold;border:2px solid black;border-radius:2px;" onclick="b4n()"><div style="font-size:30px;">文档 4</div><br><div style="font-size:25px;color:grey;text-align:center;width:97%;">双击打开</div></div>
+<div id="b5" style="font-weight:bold;border:2px solid black;border-radius:2px;" onclick="b5n()"><div style="font-size:30px;">文档 5</div><br><div style="font-size:25px;color:grey;text-align:center;width:97%;">双击打开</div></div>
+
+<br>
+<div onclick="re_b()" id="set" style="height:100px;font-weight:bold;border:2px solid black;border-radius:5px;font-size:45px;text-align:center;position:absolute;bottom:0;width:97%;display:flex;justify-content:center;align-items:center;">取消</div>
+
+</div>
+<div id="setting" style="display:none;">
+<div onclick="re()" id="re" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">返回上级</div>
+<br>
+<div onclick="h()" id="h" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">内容栏高度(隐藏键盘: 1636, 默认:945)<div style='color:lightgrey;'>945 px</div></div>
+<br>
+<div onclick="g()" id="g" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:35px;text-align:center;">文件预览(现在为:滚动到<span style='color:green;'>顶部</span>)</div>
+<br>
+<div onclick="die()" id="die" style="font-weight:bold;border:2px solid black;border-radius:5px;font-size:50px;text-align:center;color: red;position:absolute;bottom:0;width:97%;display:flex;justify-content:center;align-items:center;">恢复出厂设置</div>
+</body>
+      <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js">
+      </script>
+<script>
+// 初始化
+typ = 0;
+welcome = 1;
+if (welcome == 0) {
+    alert("欢迎使用该系统");
+}
+
+gun = "顶部";
+w = 0;
+var all_text = "";
+var chat_text = ""; 
+big_number = 0;
+b1t = "";
+b2t = "";
+b3t = "";
+b4t = "";
+b5t = "";
+var maxLength = 24; // 设置最大字符数
+
+// 文件初始化
+b5 = 0
+document.getElementById("b5").style.backgroundColor = "white";
+b1 = 0;
+document.getElementById("b1").style.backgroundColor = "white";
+b2 = 0;
+document.getElementById("b2").style.backgroundColor = "white";
+b3 = 0;
+document.getElementById("b3").style.backgroundColor = "white";
+b4 = 0;
+document.getElementById("b4").style.backgroundColor = "white";
+
+function notification(msg, myYes) {
+    var confirmBox = $("#confirm");
+    confirmBox.find(".message").text(msg);
+    confirmBox.find(".yes").unbind().click(function() {
+    confirmBox.hide();
+});
+confirmBox.find(".yes").click(myYes);
+confirmBox.show();
+}
+
+function selectImage() {
+  const input = document.getElementById('image-input');
+  const container = document.getElementById('chat');
+
+  input.onchange = function(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+      const img = document.createElement('img');
+      img.src = event.target.result;
+      img.style.maxWidth = '100%';
+      img.style.maxHeight = '100%';
+      container.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  input.click();
+}
+
+function bcolor() {
+    color = prompt("输入(英文)颜色");
+    if (confirm("确定要修改吗?")) {
+        document.getElementById("chat").style.backgroundColor = color;
+    }
+}
+
+function color() {
+    color = prompt("选择(英文)颜色");
+    if (confirm("确定要修改吗?")) {
+        document.getElementById("chat").style.color = color;
+    }
+}
+
+// 工具栏
+function tool() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    document.getElementById("div3").style.display = "none";
+    document.getElementById("div4").style.display = "block";
+}
+
+// 恢复出厂设置
+function die() {
+    if (confirm("是否恢复出厂设置?")) {
+        typ = 0;
+        if (welcome == 0) {
+            alert("欢迎使用该系统");
+        }
+        document.getElementById("div2").style.display = "block";
+        document.getElementById("div1").style.display = "none";
+        document.getElementById("div3").style.display = "none";
+        document.getElementById("div4").style.display = "none";
+        document.getElementById("h").innerHTML = "内容栏高度(隐藏键盘: 1636, 默认:945)<div style='color:lightgrey;'>945 px</div>";
+        document.getElementById("chat").style.height = 945;
+        gun = "顶部";
+        document.getElementById("g").innerHTML = "文件预览(现在为:滚动到<span style='color:green;'>顶部</span>)";
+		w = 0;
+		all_text = "";
+		chat_text = ""; 
+		big_number = 0;
+	    ttt = document.getElementById("big");
+        ttt.innerHTML = "⇧";
+        ttt.style.backgroundColor = "grey";
+		b1t = "";
+		b2t = "";
+		b3t = "";
+		b4t = "";
+		b5t = "";
+        var clickCount = 0;
+		//文件初始化
+		b5 = 0
+		document.getElementById("b5").style.backgroundColor = "white";
+		b1 = 0;
+		document.getElementById("b1").style.backgroundColor = "white";
+		b2 = 0;
+		document.getElementById("b2").style.backgroundColor = "white";
+		b3 = 0;
+		document.getElementById("b3").style.backgroundColor = "white";
+		b4 = 0;
+		document.getElementById("b4").style.backgroundColor = "white";
+        document.getElementById("chat").innerHTML = "";
+        document.getElementById("may").innerHTML = "";
+        document.getElementById("dis").innerHTML = "隐藏键盘";
+        document.getElementById("file").style.display = "none";
+		document.getElementById("setting").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        if (document.getElementById("ok_f").style.display = "none") {
+            document.getElementById("ok_f").style.display = "block";
+            document.getElementById("typing_area").style.display = "block";
+        }
+    } else {
+        alert("已取消");
+    }
+}
+
+// 取消 div 文件效果
+function re_b() {
+    if (1 == 1) {
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        document.getElementById("b2").style.backgroundColor = "white";
+        document.getElementById("b3").style.backgroundColor = "white";
+        document.getElementById("b4").style.backgroundColor = "white";
+        document.getElementById("b5").style.backgroundColor = "white";
+        document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    }
+}
+
+// 滚动栏
+function g() {
+    if (gun == "底部") {
+        gun = "顶部";
+        document.getElementById("g").innerHTML = "文件预览(现在为:滚动到<span style='color:green;'>顶部</span>)";
+} else {
+        gun = "底部";
+        document.getElementById("g").innerHTML = "文件预览(现在为:滚动到<span style='color:green;'>底部</span>)";
+    }
+}
+
+// 高度
+function h() {
+    num = prompt("高度:");
+    if (num != null) {
+        if (num != "") {
+            if (isNaN(num) == false) {
+                if (num.length < 7) {
+                    document.getElementById("chat").style.height  = num;
+                    document.getElementById("h").innerHTML = "内容栏高度(隐藏键盘: 1636, 默认:945)<div style='color:lightgrey;'>" + num + " px</div>";
+                } else {
+                    alert("数值过大");
+                }
+            } else {
+                num = num.slice(0, 5) + "...";
+                text = '" ' + num + ' "并不是有效的数值';
+                alert(text);
+            }
+        }
+    }
+}
+
+// 返回上级按钮
+function re() {
+    document.getElementById("file").style.display = "block";
+    document.getElementById("setting").style.display = "none";
+}
+
+// 设置
+function set() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    document.getElementById("file").style.display = "none";
+    document.getElementById("setting").style.display = "block";
+    b1 = 0;
+    b2 = 0;  
+    b3 = 0;
+    b4 = 0;
+    b5 = 0;
+    document.getElementById("b1").style.backgroundColor = "white";
+    document.getElementById("b2").style.backgroundColor = "white";
+    document.getElementById("b3").style.backgroundColor = "white";
+    document.getElementById("b4").style.backgroundColor = "white";
+    document.getElementById("b5").style.backgroundColor = "white";
+}
+
+// 预览效果
+function dis() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    if (typ == 0) {
+        document.getElementById("dis").innerHTML = "<div style='color:green'>已将键盘隐藏</div>";
+        document.getElementById("typing_area").style.display = "none";
+        document.getElementById("chat").style.height = "1636px";
+        document.getElementById("h").innerHTML = "内容栏高度(隐藏键盘: 1636, 默认:945)<div style='color:lightgrey;'>1636 px</div>";
+        document.getElementById("file").style.display = "none";
+        document.getElementById("ok_f").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        document.getElementById("o").innerHTML = "Open文件管理";
+    } else {
+        document.getElementById("dis").innerHTML = "隐藏KeyBoard";
+        document.getElementById("typing_area").style.display = "block";
+        document.getElementById("chat").style.height = "945px";
+        document.getElementById("h").innerHTML = "内容栏高度(隐藏键盘: 1636, 默认:945)<div style='color:lightgrey;'>945 px</div>";
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        document.getElementById("ok_f").style.display = "block";
+        document.getElementById("o").innerHTML = "打开文件管理";   
+    }
+    if (typ > 1) {
+        typ = 0;
+    } else {
+        typ ++;
+    }
+}
+        
+// 删除文件内容
+function d() {
+    if (b1 == 1) {
+        re_b();
+        if (b1t != "") {
+            b1 = 0;
+            b1t = b1t.replace(/<br>/g, '').replace(/ /g, '').slice(0, 10); 
+            document.getElementById("d").innerHTML = "<div style='color:green;'>已删除</div><div style='color:lightgrey;'>内容: " + b1t + "</div>";
+            b1t = "";
+            document.getElementById("b1").style.backgroundColor = "white";
+        } else {
+            document.getElementById("d").innerHTML = "<div style='color:red;'>文件内没有内容</div>";
+        }
+    } else if(b2 == 1) {
+        re_b();
+        if (b2t != "") {
+            b2 = 0;
+            b2t = b2t.replace(/<br>/g, '').replace(/ /g, '').slice(0, 10);
+            document.getElementById("d").innerHTML = "<div style='color:green;'>已删除</div><div style='color:lightgrey;'>内容:吧" + b2t + "</div>";
+            b2t = "";
+            document.getElementById("b2").style.backgroundColor = "white";
+        } else {
+            document.getElementById("d").innerHTML = "<div style='color:red;'>文件内没有内容</div>";
+        }
+    } else if(b3 == 1) {
+        re_b();
+        if (b3t != "") {
+            b3 = 0;
+            b3t = b3t.replace(/<br>/g, '').replace(/ /g, '').slice(0, 10);
+            document.getElementById("d").innerHTML = "<div style='color:green;'>已删除</div><div style='color:lightgrey;'>内容:" + b3t + "</div>";
+            b3t = "";
+            document.getElementById("b3").style.backgroundColor = "white";
+        } else {
+            document.getElementById("d").innerHTML = "<div style='color:red;'>文件内没有内容</div>";
+        }
+    } else if(b4 == 1) {
+        re_b();
+        if (b4t != "") {
+            b4 = 0;
+            b4t = b4t.replace(/<br>/g, '').replace(/ /g, '').slice(0, 10);
+            document.getElementById("d").innerHTML = "<div style='color:green;'>已删除</div><div style='color:lightgrey;'>内容: " + b4t + "</div>";
+            b4t = "";
+            document.getElementById("b4").style.backgroundColor = "white";
+        } else {
+            document.getElementById("d").innerHTML = "<div style='color:red;'>文件内没有内容</div>";
+        }
+    } else if(b5 == 1) {
+        re_b();
+        if (b5t != "") {
+            b5 = 0;
+            b5t = b5t.replace(/<br>/g, '').replace(/ /g, '').slice(0, 10);
+            document.getElementById("d").innerHTML = "<div style='color:green;'>已删除</div><div style='color:lightgrey;'>内容: " + b5t + "</div>";
+            b5t = "";
+            document.getElementById("b5").style.backgroundColor = "white";
+        } else {
+            document.getElementById("d").innerHTML = "<div style='color:red;'>文件内没有内容</div>";
+        }
+    } else {
+        document.getElementById("d").innerHTML = "<div style='color:red;'>没有选定文件</div>";
+    }
+}
+
+// 外设
+function oo() {
+    text = prompt("输入内容:");
+    if (text == "/c") {
+        chat_text = "";
+        document.getElementById("chat").innerHTML = chat_text;
+    } else if(text == "/copy") {
+        chat = "" + chat_text;
+        copyToClipboard(chat);
+        alert("复制成功");
+    } else if(text == "/n") {
+        t = prompt("落款内容:");
+        text = "<div style='text-align:right;color:grey;font-size:30px;'>" + t + "</div>";
+        chat_text += text;
+        document.getElementById("chat").innerHTML = chat_text;
+    } else if(text == "/hl") {
+        t = prompt("标题内容:");
+        text = "<div style='text-align:center;font-size:45px;font-weight:bold;'>" + t + "</div>";
+        chat_text += text;
+        document.getElementById("chat").innerHTML = chat_text;
+    } else if(text == "/help") {
+        text = "/c 清空内容; /copy 复制内容板内容; /n 落款; /hl 大字标题";
+        alert(text);
+    } else if(text != null) {
+        chat_text += text;
+        document.getElementById("chat").innerHTML = chat_text;
+    }
+    const myDiv = document.getElementById('chat');
+    myDiv.scrollTop = myDiv.scrollHeight;
+}
+
+// 保存ӨX4FDhYpl4PNobnWΦ
+function ok_f() {
+    if (chat_text != "") {
+        file_s = prompt("内容保存至文件1-5编号");
+        if (file_s == 1) {
+            b1t = chat_text;
+            document.getElementById("ok_f").innerHTML = "<div style='color:green;'>保存成功至 文件 1</div>";
+        } else if (file_s == 2) {
+            b2t = chat_text;
+            document.getElementById("ok_f").innerHTML = "<div style='color:green;'>保存成功至 文件 2</div>";
+        } else if (file_s == 3) {
+            b3t = chat_text;
+            document.getElementById("ok_f").innerHTML = "<div style='color:green;'>保存成功至 文件 3</div>";
+        } else if (file_s == 4) {
+            b4t = chat_text;
+            document.getElementById("ok_f").innerHTML = "<div style='color:green;'>保存成功至 文件 4</div>";
+        } else if (file_s == 5) {
+            b5t = chat_text;
+            document.getElementById("ok_f").innerHTML = "<div style='color:green;'>保存成功至 文件 5</div>";
+        } else if(file_s > 5) {
+            document.getElementById("ok_f").innerHTML = "<div style='color:red;'>文件值太大了</div>";
+        } else if (file_s === null) {
+            document.getElementById("ok_f").innerHTML = "<div style='color:red;'>已取消</div>";
+        } else if (file_s === "") {
+            document.getElementById("ok_f").innerHTML = "<div style='color:red;'>已取消</div>";
+        } else {
+            document.getElementById("ok_f").innerHTML = "<div style='color:red;'>未知文件名</div>";
+        }
+    }
+}
+
+// 文件 1
+function b1n() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    b1 += 1;
+    if (b1 == 1) {
+        document.getElementById("b1").style.backgroundColor = "lightgrey";
+        b2 = 0;
+        document.getElementById("b2").style.backgroundColor = "white";
+        b3 = 0;
+        document.getElementById("b3").style.backgroundColor = "white";
+        b4 = 0;
+        document.getElementById("b4").style.backgroundColor = "white";
+        b5 = 0;
+        document.getElementById("b5").style.backgroundColor = "white";
+    }
+    if (b1 == 2) {
+        document.getElementById("o").innerHTML = "打开文件管理";
+        document.getElementById("b1").style.backgroundColor = "white";
+        chat_text = b1t;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        if (gun == "底部") {
+            const myDiv = document.getElementById('chat');
+            myDiv.scrollTop = myDiv.scrollHeight;
+        } else {
+            var div = document.getElementById("chat");
+            div.scrollTop = 0;
+        }
+        if (document.getElementById("ok_f").style.display = "block") {
+            dis()
+        }
+    }
+}
+
+// 文件 2
+function b2n() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    b2 += 1;
+    if (b2 == 1) {
+        document.getElementById("b2").style.backgroundColor = "lightgrey";
+        b1 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        b3 = 0;
+        document.getElementById("b3").style.backgroundColor = "white";
+        b4 = 0;
+        document.getElementById("b4").style.backgroundColor = "white";
+        b5 = 0;
+        document.getElementById("b5").style.backgroundColor = "white";
+    }
+    if (b2 == 2) {
+        document.getElementById("o").innerHTML = "打开文件管理";
+        document.getElementById("b2").style.backgroundColor = "white";
+        chat_text = b2t;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        if (gun == "底部") {
+            const myDiv = document.getElementById('chat');
+            myDiv.scrollTop = myDiv.scrollHeight;
+        } else {
+            var div = document.getElementById("chat");
+            div.scrollTop = 0;
+        }
+        if (document.getElementById("ok_f").style.display = "block") {
+            dis()
+        }
+    }
+}
+
+// 文件 3
+function b3n() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    b3 += 1;
+    if (b3 == 1) {
+        document.getElementById("b3").style.backgroundColor = "lightgrey";
+        b1 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        b2 = 0;
+        document.getElementById("b2").style.backgroundColor = "white";
+        b4 = 0;
+        document.getElementById("b4").style.backgroundColor = "white";
+        b5 = 0;
+        document.getElementById("b5").style.backgroundColor = "white";
+    }
+    if (b3 == 2) {
+        document.getElementById("o").innerHTML = "打开文件管理";
+        document.getElementById("b3").style.backgroundColor = "white";
+        chat_text = b3t;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        if (gun == "底部") {
+            const myDiv = document.getElementById('chat');
+            myDiv.scrollTop = myDiv.scrollHeight;
+        } else {
+            var div = document.getElementById("chat");
+            div.scrollTop = 0;
+        }
+        if (document.getElementById("ok_f").style.display = "block") {
+            dis()
+        }
+    }
+}
+
+// 文件 4
+function b4n() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    b4 += 1;
+    if (b4 == 1) {
+        document.getElementById("b4").style.backgroundColor = "lightgrey";
+        b2 = 0;
+        document.getElementById("b2").style.backgroundColor = "white";
+        b3 = 0;
+        document.getElementById("b3").style.backgroundColor = "white";
+        b1 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        b5 = 0;
+        document.getElementById("b5").style.backgroundColor = "white";
+    }
+    if (b4 == 2) {
+        document.getElementById("o").innerHTML = "打开文件管理";
+        document.getElementById("b4").style.backgroundColor = "white";
+        chat_text = b4t;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        if (gun == "底部") {
+            const myDiv = document.getElementById('chat');
+            myDiv.scrollTop = myDiv.scrollHeight;
+        } else {
+            var div = document.getElementById("chat");
+            div.scrollTop = 0;
+        }
+        if (document.getElementById("ok_f").style.display = "block") {
+            dis()
+        }
+    }
+}
+
+// 文件 5
+function b5n() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    b5 += 1;
+    if (b5 == 1) {
+        document.getElementById("b5").style.backgroundColor = "lightgrey";
+        b1 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        b2 = 0;
+        document.getElementById("b2").style.backgroundColor = "white";
+        b3 = 0;
+        document.getElementById("b3").style.backgroundColor = "white";
+        b4 = 0;
+        document.getElementById("b4").style.backgroundColor = "white";
+    }
+    if (b5 == 2) {
+        document.getElementById("o").innerHTML = "打开文件管理";
+        document.getElementById("b5").style.backgroundColor = "white";
+        chat_text = b5t;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("file").style.display = "none";
+        document.getElementById("typing").style.display = "block";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        if (gun == "底部") {
+            const myDiv = document.getElementById('chat');
+            myDiv.scrollTop = myDiv.scrollHeight;
+        } else {
+            var div = document.getElementById("chat");
+            div.scrollTop = 0;
+        }
+        if (document.getElementById("ok_f").style.display = "block") {
+            dis()
+        }
+    }
+}
+
+// 打开文件管理
+function open_w() {
+    document.getElementById("d").innerHTML = "清空选中文件<div style='color:lightgrey;'>无</div>";
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    if (w == 0) {
+        var typing_t = document.getElementById("typing");
+        var file_t = document.getElementById("file");
+        typing.style.display = "none";
+        file_t.style.display = "block";
+        document.getElementById("o").innerHTML = "返回编辑区";
+    } else {
+        var typing_t = document.getElementById("typing");
+        var file_t = document.getElementById("file");
+        typing.style.display = "block";
+        file_t.style.display = "none";
+        document.getElementById("o").innerHTML = "打开文件管理";
+        b1 = 0;
+        b2 = 0;  
+        b3 = 0;
+        b4 = 0;
+        b5 = 0;
+        document.getElementById("b1").style.backgroundColor = "white";
+        document.getElementById("b2").style.backgroundColor = "white";
+        document.getElementById("b3").style.backgroundColor = "white";
+        document.getElementById("b4").style.backgroundColor = "white";
+        document.getElementById("b5").style.backgroundColor = "white";
+        document.getElementById("setting").style.display = "none";
+    }
+    w ++;
+    if (w > 1) {
+        w = 0;
+    }
+}
+
+// 大写
+function big() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    big_number ++;
+    if (big_number == 2) {
+        big_number = 0;
+    }
+    if (big_number == 1) {
+        var ttt = document.getElementById("big");
+        ttt.innerHTML = "⬆";
+        ttt.style.backgroundColor = "white";
+    } else {
+        var ttt = document.getElementById("big");
+        ttt.innerHTML = "⇧";
+        ttt.style.backgroundColor = "grey";
+    }
+}
+
+// 在 may 处添加预计文字
+function addText(text,b) {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    if (all_text.length < 25) {
+        if (big_number == 0) {
+            all_text += text;
+            document.getElementById("may").innerHTML = all_text;
+        } else {
+            all_text += b;
+            document.getElementById("may").innerHTML = all_text;
+        }
+    }
+    var div = document.getElementById('may');
+    var longText = document.getElementById("may").textContent; // 获取文本内容
+    var shortText = longText.length > maxLength ? longText.substring(0, maxLength) : longText;
+    div.textContent = shortText;
+}
+
+// 直接在 chat 添加文字
+function addnewText(text,b) {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    if (big_number == 0) {
+        chat_text += all_text + text;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("may").innerHTML = "";
+        all_text = "";
+    } else {
+        chat_text += all_text + b;
+        document.getElementById("chat").innerHTML = chat_text;
+        document.getElementById("may").innerHTML = "";
+        all_text = "";
+    }
+}
+
+// 恢复
+function fh() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    var divfh = document.getElementById("div3");
+    var divf = document.getElementById("div1");
+    if (divfh.style.display == "none") {
+        divfh.style.display = "block";
+        divf.style.display = "none";
+    } else {
+        divfh.style.display = "none";
+        divf.style.display = "block";
+    }
+}
+
+// 添加单空格
+function addSpace() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    chat_text += all_text + " ";
+    document.getElementById("chat").innerHTML = chat_text;
+    document.getElementById("may").innerHTML = "";
+    all_text = "";
+    const myDiv = document.getElementById('chat');
+    myDiv.scrollTop = myDiv.scrollHeight;
+}
+
+// 换行
+function addNewLine() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    chat_text += all_text + "<br>";
+    document.getElementById("chat").innerHTML = chat_text;
+    document.getElementById("may").innerHTML = "";
+    all_text = "";
+    const myDiv = document.getElementById('chat');
+    myDiv.scrollTop = myDiv.scrollHeight;
+}
+
+// 添加空格或 TAB
+function addk(t, d) {  
+    document.getElementById("ok_f").innerHTML = "保存内容";  
+    if (big_number == 0) {  
+        chat_text += all_text + t;  
+        document.getElementById("chat").innerHTML = chat_text;  
+        document.getElementById("may").innerHTML = "";  
+        all_text = "";  
+    } else {  
+        chat_text += all_text + d;  
+        document.getElementById("chat").innerHTML = chat_text;  
+        document.getElementById("may").innerHTML = "";  
+        all_text = "";  
+    }  
+    const myDiv = document.getElementById('chat');  
+    myDiv.scrollTop = myDiv.scrollHeight;  
+}
+
+// 删除键  
+function deleteText() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    if(all_text != "") {
+        all_text = all_text.slice(0, -1);
+        document.getElementById("may").innerHTML = all_text;
+    } else {
+        deletet();
+    }
+    var div = document.getElementById('may');
+    var longText = document.getElementById("may").textContent; // 获取文本内容
+    var shortText = longText.length > maxLength ? longText.substring(0, maxLength) + '...' : longText;
+    div.textContent = shortText;
+}
+
+//
+function deletet() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    var chatDiv = document.getElementById("chat");
+    var chatText = chatDiv.innerHTML;
+    chatText = chatText.slice(0, -1);
+    chatDiv.innerHTML = chatText;
+    chat_text = chatText;
+}
+
+function f() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    var divf = document.getElementById("div1");
+    var divfh = document.getElementById("div3");
+    var divs = document.getElementById("div2");
+    if (divf.style.display == "none") {
+        divf.style.display = "block";
+        divs.style.display = "none";
+        divfh.style.display = "none";
+    } else {
+        divf.style.display = "none";
+        divs.style.display = "block";
+        divfh.style.display = "none";
+    }
+}
+
+function fhui() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    document.getElementById("div1").style.display = "none";
+    document.getElementById("div3").style.display = "none";
+    document.getElementById("div2").style.display = "block";
+    document.getElementById("div4").style.display = "none";
+}
+
+document.onselectstart=new Function('event.returnValue=false;');
+document.body.onselectstart = function() {
+    self.event.returnValue=false
+};
+
+function ok() {
+    document.getElementById("ok_f").innerHTML = "保存内容";
+    chat_text += all_text;
+    document.getElementById("chat").innerHTML = chat_text;
+    document.getElementById("may").innerHTML = "";
+    all_text = "";
+    const myDiv = document.getElementById('chat');
+    myDiv.scrollTop = myDiv.scrollHeight;
+}
+
+    function copyToClipboard(text) {  
+        var textArea = document.createElement("textarea");  
+        textArea.value = text;  
+        document.body.appendChild(textArea);  
+        textArea.focus();  
+        textArea.select();  
+      
+        try {  
+            var successful = document.execCommand('copy');  
+            var msg = successful ? 'successful' : 'unsuccessful';  
+            console.log('Copying text command was ' + msg);  
+        } catch (err) {  
+            console.error('Oops, unable to copy', err);  
+        }  
+      
+        document.body.removeChild(textArea);  
+    }  
+
+document.addEventListener('click', function(event) {
+    var circle = document.getElementById('circle');
+    circle.style.left = (event.clientX - 50) + 'px';
+    circle.style.top = (event.clientY - 30) + 'px';
+    circle.style.opacity = '1';
+    setTimeout(function() {
+    circle.style.opacity = '0';
+    }, 300);
+});
+
+    var myDiv = document.getElementById('chat');
+    var clickCount = 0;
+
+    myDiv.addEventListener('click', function() {
+      clickCount++;
+      if (clickCount === 1) {
+        setTimeout(function() {
+          if (clickCount === 1) {
+            // 单击事件
+            
+          }
+        }, 300);
+      } else if (clickCount === 2) {
+        // 双击事件
+        ok_f();
+      }
+     setTimeout(function() {clickCount = 0;}, 700);
+    });
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编码转换器</title>
+</head>
+<body>
+    <h1>编码转换器</h1>
+    <label for="inputText">这里输入文本：</label>
+    <textarea id="inputText" rows="4" cols="50"></textarea><br>
+    <label for="from">从：</label>
+    <select id="from">
+        <option value="none">无</option>
+        <option value="base64">Base64</option>
+        <option value="base32">Base32</option>
+        <option value="sha1">SHA1</option>
+        <option value="sha256">SHA256</option>
+        <option value="text">文本</option>
+        <option value="ascii">ASCII</option>
+    </select>
+    <br />
+    <br />
+    <label for="to">到：</label>
+    <select id="to">
+        <option value="none">无</option>
+        <option value="base64">Base64</option>
+        <option value="base32">Base32</option>
+        <option value="sha1">SHA1</option>
+        <option value="sha256">SHA256</option>
+        <option value="text">文本</option>
+        <option value="ascii">ASCII</option>
+    </select>
+    <button onclick="convert()">转换</button>
+    <h2>转换结果：</h2>
+    <textarea id="outputText" rows="4" cols="50" readonly></textarea>
+
+    <script>
+        function convert() {
+            const inputText = document.getElementById('inputText').value;
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            let outputText = '';
+
+            if (from === 'base64') {
+                outputText = atob(inputText);
+            } else if (from === 'base32') {
+                outputText = atob(inputText).replace(/=+$/, '').replace(/\+/g, '').replace(/\//g, '');
+            } else if (from === 'sha1') {
+                outputText = sha1(inputText);
+            } else if (from === 'sha256') {
+                outputText = sha256(inputText);
+            } else if (from === 'text') {
+                outputText = inputText;
+            } else if (from === 'ascii') {
+                outputText = fromAscii(inputText);
+            }
+
+            if (to === 'base64') {
+                outputText = btoa(outputText);
+            } else if (to === 'base32') {
+                outputText = btoa(outputText).replace(/=+$/, '').replace(/\+/g, '').replace(/\//g, '');
+            } else if (to === 'sha1') {
+                outputText = sha1(outputText);
+            } else if (to === 'sha256') {
+                outputText = sha256(outputText);
+            } else if (to === 'text') {
+                outputText = outputText;
+            } else if (to === 'ascii') {
+                outputText = toAscii(outputText);
+            }
+
+            document.getElementById('outputText').value = outputText;
+        }
+
+        function sha1(str) {
+            return crypto.subtle.digest('SHA-1', new TextEncoder().encode(str)).then(buffer => {
+                return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            });
+        }
+
+        function sha256(str) {
+            return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buffer => {
+                return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            });
+        }
+
+        function fromAscii(str) {
+            return str.split(' ').map(code => String.fromCharCode(parseInt(code))).join('');
+        }
+
+        function toAscii(str) {
+            return str.split('').map(char => char.charCodeAt(0)).join(' ');
+        }
+    </script>
+</body>
+</html>

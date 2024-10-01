@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟</title>
+    <h2><div>北</div><div>京</div><div>时</div><div>间：</h2>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #a2f2a1;
+        }
+        .clock {
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+        }
+        .digital-clock {
+            font-size: 48px;
+        }
+        .analog-clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 5px solid black;
+            border-radius: 50%;
+        }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            transform-origin: bottom;
+            background-color: black;
+        }
+        .hour-hand {
+            width: 6px;
+            height: 60px;
+            left: calc(50% - 3px);
+        }
+        .minute-hand {
+            width: 4px;
+            height: 80px;
+            left: calc(50% - 2px);
+        }
+        .second-hand {
+            width: 2px;
+            height: 90px;
+            background-color: red;
+            left: calc(50% - 1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="digital-clock" id="digitalClock"></div>
+        <div class="analog-clock">
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand minute-hand" id="minuteHand"></div>
+            <div class="hand second-hand" id="secondHand"></div>
+        </div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            // Update digital clock
+            document.getElementById('digitalClock').innerText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Update analog clock hands
+            const hourHand = document.getElementById('hourHand');
+            const minuteHand = document.getElementById('minuteHand');
+            const secondHand = document.getElementById('secondHand');
+
+            const hourDeg = (hours % 12) * 30 + minutes * 0.5;
+            const minuteDeg = minutes * 6 + seconds * 0.1;
+            const secondDeg = seconds * 6;
+
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            secondHand.style.transform = `rotate(${secondDeg}deg)`;
+        }
+
+        setInterval(updateClock, 1000); // Update the clock every second
+    </script>
+</body>
+</html>

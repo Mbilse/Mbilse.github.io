@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapple</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+                @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 200% 200%;
+            animation: gradientAnimation 20s linear infinite;
+            animation: gradientBG 15s ease infinite;
+            transition: opacity 0.5s;
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: opacity 0.5s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 50px auto 20px;
+            text-align: center;
+           
+        }
+        .content h1 {
+            margin: 0;
+            padding: 10px;
+            color: white;
+            font-size: 24px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+       .content h1 {
+            margin: 0;
+            padding: 20px;
+            color: white;
+            font-size: 2em;
+        }
+        .content p {
+            color: white;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #a1fa19;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #c5f6c1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1 id="demoTitle">Demo 1</h1>
+    <p>This is a Colourful demo<br />
+      <a href="web.html">take web page>>></a></p>
+     <font color =white><label for="demo temp">Demo temp：</label>
+        <select id="dt" name="dt">
+            <option value="none">default</option>
+            <option value="0.2s">0.2s</option>
+            <option value="0.5s">0.5s</option>
+            <option value="1s">1s</option>
+            <option value="3s">3s</option>
+            <option value="5s">5s</option>
+        </select>
+        <br />
+        <br />
+        <label for="user">User：</label>
+        <select id="u" name="u">
+            <option value="1">User 1</option>
+            <option value="2">User 2</option>
+            <option value="3">User 3</option>
+            <option value="4">User 4</option>
+        </select>
+        <br />
+    <br />
+    </font>
+    <div class="dropdown">
+        <button class="dropbtn">Demo Mode</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="changeDemo(1)">Demo 1</a>
+            <a href="#" onclick="changeDemo(2)">Demo 2</a>
+            <a href="#" onclick="changeDemo(3)">Demo 3</a>
+            <a href="#" onclick="changeDemo(4)">Demo 4</a>
+          <!-- Add more demos as needed -->
+        </div>
+    </div>
+</div>
+
+<div class="background"></div>
+
+<script>
+    var currentDemo = 1; // Start with Demo 1
+
+    function changeDemo(demoNumber) {
+        var colorSets = [
+            ['#FF4E50', '#F9D443'], // Demo 1
+            ['#36D5AC', '#3686E5'], // Demo 2
+            ['#FAABAC', '#5FCAD1'],  // Demo 3
+            ['#AACAE3', '#B3A6E7'],  // Demo 4
+            
+            // Add more color sets as needed
+        ];
+        var background = document.querySelector('.background');
+        var colors = colorSets[demoNumber - 1];
+        background.style.backgroundImage = 'linear-gradient(to right, ' + colors.join(', ') + ')';
+        document.getElementById('demoTitle').innerText = 'Demo ' + demoNumber;
+        document.title = 'Demo ' + demoNumber;
+    }
+
+    changeDemo(currentDemo); // Initialize with the first demo gradient
+</script>
+
+</body>
+</html>

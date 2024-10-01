@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>进制转换器</title>
+    <style>
+        input {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>进制转换器</h1>
+    <h4><a href="index.html">点我返回</a></h4>
+    <form id="converterForm">
+    <h4><a href="jst.html">点我切换</a></h4>
+        <label for="number">输入数字：</label>
+        <input type="text" id="number" name="number">
+        <br><br>
+        <label for="fromBase">从：</label>
+        <select id="fromBase" name="fromBase">
+            <option value="2">二进制</option>
+            <option value="8">八进制</option>
+            <option value="10" selected>十进制</option>
+            <option value="16">十六进制</option>
+        </select>
+        <br><br>
+        <label for="toBase">转换为：</label>
+        <select id="toBase" name="toBase">
+            <option value="2">二进制</option>
+            <option value="8">八进制</option>
+            <option value="10">十进制</option>
+            <option value="16">十六进制</option>
+        </select>
+        <br><br>
+        <button type="button" onclick="convert()">转换</button>
+    </form>
+    <br>
+    <p id="result"></p>
+    <script>
+        function convert() {
+            const number = document.getElementById("number").value;
+            const fromBase = parseInt(document.getElementById("fromBase").value);
+            const toBase = parseInt(document.getElementById("toBase").value);
+            let result;
+
+            if (fromBase === 10) {
+                result = parseInt(number, fromBase).toString(toBase);
+            } else {
+                const decimalNumber = parseInt(number, fromBase);
+                result = decimalNumber.toString(toBase);
+            }
+
+            document.getElementById("result").innerHTML = "结果：" + result;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户切换</title>
+    <style>
+        .user {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: inline-block;
+            margin-right: 10px;
+            background-image: linear-gradient(to right, black 50%, white 50%);
+        }
+    </style>
+</head>
+<body>
+    <select id="userSelect" onchange="switchUser()">
+        <option value="get user...">No sign</option>
+        <option value="Administrator">Administrator</option>
+        <option value="User">User</option>
+        <option value="Guest">Guest</option>
+        <option value="VMuser">VMuser</option>
+    </select>
+    <div id="Administrator" class="user" style="background-color: green;">
+        <h2><span class="avatar"></span>Administrator</h2>
+        <p>性别：男</p>
+        <p>管理员</p>
+    </div>
+    <div id="User" class="user" style="background-color: red;">
+        <h2><span class="avatar"></span>User</h2>
+        <p>性别：男</p>
+        <p>普通用户</p>
+    </div>
+    <div id="Guest" class="user" style="background-color: pink;">
+        <h2><span class="avatar"></span>Guest</h2>
+        <p>性别：未知</p>
+        <p>来宾用户</p>
+    </div>
+    <div id="VMuser" class="user" style="background-color: gray;">
+        <h2><span class="avatar"></span>VMuser</h2>
+        <p>性别：女</p>
+        <p>虚拟用户</p>
+    </div>
+    <label for="password">密码：</label>
+    <input type="password" id="password">
+    <button onclick="login()">登录</button>
+    <br />
+      <a href="lostd.html">忘记密码</a>
+      <a href="index.html">点我返回</a>
+    <script>
+        function switchUser() {
+            var users = document.getElementsByClassName("user");
+            var selectedUser = document.getElementById("userSelect").value;
+            for (var i = 0; i < users.length; i++) {
+                users[i].classList.remove("active");
+            }
+            document.getElementById(selectedUser).classList.add("active");
+        }
+        function login() {
+            var activeUser = document.querySelector(".user.active");
+            var passwordInput = document.getElementById("password");
+            var password = passwordInput.value;
+            if (activeUser) {
+                var userPassword = "";
+                switch (activeUser.id) {
+                    case "Administrator":
+                        userPassword = "123456";
+                        break;
+                    case "User":
+                        userPassword = "111111";
+                        break;
+                    case "VMuser":
+                        userPassword = "666666";
+                        break;
+                }
+                if (password === userPassword) {
+                    alert("密码正确，欢迎： " + activeUser.querySelector("h2").textContent);
+                    alert("正在准备桌面");
+                    window.location.href = "doc.html";
+
+
+                } else {
+                    alert("密码错误");
+                }
+            } else {
+                alert("请选择一个用户登录！");
+            }
+        }
+    </script>
+
+</body>
+</html>

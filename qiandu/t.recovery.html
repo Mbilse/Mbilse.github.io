@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恢复模式</title>
+      <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <h1>恢复模式</h1>
+    <h2>recovery</h2>
+    <h3>下滑进入</h3>
+    <h4>for ohs</h4>
+    <form action="#" method="post">
+    <input type="bu" value="搜索设置">
+    <br />
+   
+    <br />
+    WLAN 
+    <br />  
+      
+    <label class="switch">
+        <input type="checkbox" id="mySwitch">
+        <span class="slider"></span>
+    </label>
+    <br />
+    蓝牙
+      <br />  
+     
+        <label class="switch">
+        <input type="checkbox" id="mySwitch">
+        <span class="slider"></span>
+    </label>
+    <br />
+    飞行模式 
+    <br />
+  
+      
+    <label class="switch">
+        <input type="checkbox" id="mySwitch">
+        <span class="slider"></span>
+    </label>
+    <br />
+    多用户
+    <br />
+    <label class="switch">
+        <input type="checkbox" id="mySwitch">
+        <span class="slider"></span>
+    </label>
+    <br />
+    root
+    <br />  
+      
+    <label class="switch">
+        <input type="checkbox" id="mySwitch">
+        <span class="slider"></span>
+    </label>
+    <br />
+   
+    帐号:
+             <input type="user"></input>
+             </div>            
+            <div>
+             密码:
+             <input type="password"></input>
+             </div>
+   音量 <input type="range" id="volume">
+   <br />
+   亮度 <input type="range" id="sun">
+    <br />
+  <input type="checkbox" id="yes">我同意并接受格机风险 
+  <br />
+        <label for="modsetting">模式设置：</label>
+        <select id="um" name="usermod">
+            <option value="user">用户</option>
+            <option value="root">根</option>
+            <option value="m1">模式1</option>
+            <option value="m2">模式2</option>
+            <option value="m3">模式3</option>
+        </select>
+          <br />
+             <label for="fruits">API接口：</label> 
+                <select id="fruits" name="fruits">   
+             <option value="int">默认</option>     
+               <option value="none">无</option> 
+                <option value="1">1</option>      
+                <option value="2">2</option> 
+                <option value="3">3</option> 
+                <option value="4">4</option> 
+                <option value="5">5</option> 
+                <option value="6">6</option>      
+                <option value="7">7</option> 
+                <option value="8">8</option> 
+                <option value="9">9</option> 
+                <option value="10">10</option> 
+                <option value="11">11</option>     
+                <option value="12">12</option> 
+                <option value="13">13</option> 
+                <option value="14">14</option> 
+                <option value="15">15</option> 
+                <option value="16">16</option>      
+                <option value="17">17</option> 
+                <option value="18">18</option> 
+                <option value="19">19</option> 
+                <option value="20">20</option> 
+                <option value="21">21</option> 
+                <option value="22">22</option> 
+                <option value="23">23</option>
+                <option value="24">24</option> 
+                <option value="25">25</option> 
+                   </select>
+                   <br />
+                    <label for="tapi">two API：</label>    
+             <select id="tapi" name="tapi">       
+        <option value="none">none</option>  
+      <option value="Mods">Mods</option>        
+       <option value="map">Map</option>       
+         <option value="language">Language</option>     
+         <option value="home">Home</option>   
+           <option value="page">Page</option> 
+        <option value="dock">Dock</option>         
+           <option value="file">File</option> 
+     <option value="shell">Shell</option> 
+  <option value="bash">Bash</option> 
+ <option value="Kali">Kali</option>    
+<option value="window">Window</option>
+<option value="sdk">SDK</option>
+<option value="ver">Version</option>
+<option value="git">Git</option>
+<option value="dos">Dos</option>
+<option value="user">User</option>
+
+                     </select>
+                    <br />
+                        <label for="ayu">API转存方式：</label>
+        <select id="ayu" name="ayu">
+            <option value="none">无</option>
+            <option value="html">网页</option>
+            <option value="yun">云端</option>
+            <option value="phone">本地</option>
+            <option value="self">API</option>
+            <option value="http">外网</option>
+            <option value="https">暗网</option>
+        </select>
+        <br />
+            <label for="volsetting">介入功能：</label>
+        <select id="tool" name="tl">
+            <option value="none">无</option>
+            <option value="api">API</option>
+            <option value="aedit">API Editor</option>
+            <option value="atool">API Tool</option>
+            <option value="sys">System</option>
+            <option value="Ts">Translate</option>
+        </select>
+        <br />
+            <label for="apisdk">API SDK：</label>
+        <select id="as" name="as">
+            <option value="none">未知</option>
+            <option value="new">New</option>
+            <option value="he">Have</option>
+            <option value="all">All</option>
+            <option value="1.0">1.0</option>
+            <option value="2.0">2.0</option>
+            <option value="3.0">3.0</option>
+            <option value="4.0">4.0</option>
+            <option value="s">Edit</option>
+            
+        </select>
+        <br />
+                <input type="button" value="Code">
+                <input type="button" value="Project">
+                <input type="button" value="tool">
+             <br />
+             <input type="checkbox" id="ynapi">云端API转存
+             <br />
+             <input type="checkbox" id="API">API 
+             <br />
+        <label for="volsetting">声道选项：</label>
+        <select id="bt" name="blue+">
+            <option value="none">双声道</option>
+            <option value="bluetooth">蓝牙</option>
+            <option value="phone">扬声器</option>
+            <option value="left">左</option>
+            <option value="medium">中</option>
+            <option value="right">右</option>
+        </select>
+        <br />
+       声道位置  <input type="range" id="relo">
+       <br />
+        <input type="submit" value="演示声音">
+       <br />
+        <input type="submit" value="恢复出厂设置">
+        <input type="submit" value="应用此设置">
+    </form>
+</body>
+</html>

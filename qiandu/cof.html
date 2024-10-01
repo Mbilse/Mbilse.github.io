@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色预览器</title>
+    <style>
+        #color-preview {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>颜色预览器</h1>
+    <h2>认识三原色</h2>
+    <h3>--by 梅布斯乔治</h3>
+    <h4>版权归©梅布斯乔治所有</h4>
+    <h5>版权归© 路克詹姆斯所有</h5>
+    <h6>点击下面按钮，选择颜色</h6>
+    <div><big> 下滑👇开始<big></div>
+      <h4><a href="index.html">点我返回</a></h4>  
+      <h4><a href="col.html">点我切换</a></h4>
+         <div>.</div>
+    <input type="color" id="color-picker" onchange="updateColorPreview()">
+    <div id="color-preview"></div>
+
+    <script>
+        function updateColorPreview() {
+            const colorPicker = document.getElementById('color-picker');
+            const colorPreview = document.getElementById('color-preview');
+            colorPreview.style.backgroundColor = colorPicker.value;
+        }
+    </script>
+</body>
+</html>

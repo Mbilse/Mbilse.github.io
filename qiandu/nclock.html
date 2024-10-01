@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<html>
+<head>
+    <title>时间查看器</title>
+    <style>
+        #time {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<h1>当前时间</h1>
+    <div id="time"></div>
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            document.getElementById('time').innerHTML = year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes + ':' + seconds;
+        }
+
+        setInterval(updateTime, 1000); // 每隔1秒更新一次时间
+    </script>
+    
+</body>
+</html>

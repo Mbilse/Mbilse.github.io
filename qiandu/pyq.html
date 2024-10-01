@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>朋友圈</title>
+  <style>
+    .chat {
+      width: 932px;
+      height: 180px;
+      border: 2px solid #ccc;
+      padding: 10px;
+      background-color: lightgrey;
+      color: white;
+    }
+    #w {
+        width: 70px;
+        height: 45px;
+        background-color: green;
+        color: white;
+    }
+    #a {
+        background-color: white;
+        width: 50px;
+        height: 50px;
+    }
+  </style>
+</head>
+<body>
+<input id="a" type="button" value="╳" onclick="window.location.href='fx.html'" />
+
+  <div class="chat" id="chat"></div>
+  <script>
+    var chat = document.getElementById("chat");
+    var newM = document.createElement("div");
+    newM.innerHTML = "<center><strong><big><big><big><h1>朋友圈</center>";
+    chat.appendChild(newM);
+  </script>
+<br><br><br>
+<center>
+<input id="w" type="button" value="返回" onclick="window.location.href='fx.html'" />
+</center>
+</body>
+</html>

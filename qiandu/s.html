@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <!-- 引入Font Awesome的CSS链接 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS样式 */
+        .search-button {
+            border: none;
+            color: black;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .search-icon {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search</h1>
+    <form action="https://yandex.com/search/?text=" method="get">
+        <label for="search-input">press</label>
+        <input type="text" id="search-input" name="q" required>
+        <button class="search-button" type="submit">
+            <i class="fa fa-search search-icon"></i>
+        </button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>滑动滑块</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .slider-container {
+    width: 200px;
+    margin: 50px auto;
+    text-align: center;
+  }
+
+  .slider {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  p {
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+<h1>滑动滑块到200值</h1>
+<h2>去往<a href="https://time.is/">time.is</a>的中转站<h2>
+<div class="slider-container">
+  <input type="range" min="0" max="200" value="0" class="slider" id="mySlider">
+  <p>Value(值): <span id="demo">0</span></p>
+</div>
+
+<script>
+document.getElementById('mySlider').addEventListener('input', function() {
+  var value = this.value;
+  document.getElementById('demo').innerHTML = value;
+  
+
+  if (value >= 200) {
+    window.location.href = 'https://time.is/'; // 替换为你想要跳转的URL
+  }
+});
+
+</script>
+  
+</body>
+</html>
