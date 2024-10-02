@@ -1,6 +1,5 @@
 - 👋 Hi, I’m @Mbilse
-此仓库仅是我无意做的
-This repo is not working
+This repo is  working
 by 梅布斯乔治
 实名:(张晓雨)
 帐号有:
@@ -9,3 +8,5 @@ by 梅布斯乔治
 Telegram用户名:张 晓雨
 如代码有bug,请用
 E-mail:mbilse001@outlook.com
+我会第一时间回复
+谢谢！
