@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的朋友</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  .button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+</style>
+</head>
+<body>
+
+  <h1>我的朋友</h1>
+  <h2>梅布斯乔治的小站</h2>
+  
+
+<div class="button-container">
+  <button class="button" onclick="location.href='https://tjy-gitnub.github.io/'">谭景元</button>
+  <button class="button" onclick="location.href='https://kuaishou.cn/profile/3xttubsz5drw6kk'">一个军迷</button>
+  <button class="button" onclick="location.href='https://kuaishou.cn/profile/3xj5sx4gz2tztss'">Rock小</button>
+  <button class="button" onclick="location.href='https://github.com/Mbilse/Mbilse.github.io'">看看仓库</button>
+  <button class="button" onclick="location.href='m.html'">更多</button>
+  <button class="button" onclick="location.href='index.html'">返回</button>
+</div>
+
+</body>
+</html>
