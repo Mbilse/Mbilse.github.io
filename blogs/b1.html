@@ -1,0 +1,91 @@
+<h1>文章1-刷入Linux</h1>
+<a href="https://mbilse.github.io/blog.html">回家</a>
+预备操作
+
+本教程为卡刷方式。
+
+准备刷机工具adb和fastboot。
+
+sudo apt-get install android-tools-adb android-tools-fastboot　　　　 //安装adb和fastboot工具包
+ 
+
+解锁
+
+说明：
+
+华为和三星手机需要解锁操作。
+
+不需要解锁的手机可跳过此步骤。
+
+
+首先从官网获取手机解锁码。
+
+将手机用usb连接上电脑，并处于开机状态。
+
+sudo adb reboot-bootloader　　　　 //重启手机进入fastboot模式
+sudo fastboot oem unlock 1234567812345678　　　　 //解锁
+sudo fastboot oem get-bootinfo 　　　　//判断解锁是否成功，成功则显示unlocked
+sudo fastboot reboot　　　　 //重启手机
+
+如果是第一次执行此命令，可能会遇到< waiting for device >提示停止不动的状态
+
+原因是手机驱动问题。
+
+解决方法整理如下：
+
+1. 查看手机驱动具体的usbid。
+
+可以在终端输入lsusb命令查看到。通过拔下再插上数据线，比较两次命令差异得出结果。
+
+我的华为手机的usbid为18d1，再将步骤2中的内容替换成你的手机的usbid号。
+
+2. 进入到/etc/udev/rules.d/目录，新建一个文件，我的文件名为：53-android.rules。在文件中输入以下内容：
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0fff", MDOE="0666"
+
+3，赋予文件可读权限。　
+
+sudo chmod a+r /etc/udev/rules.d/53-android.rules
+sudo service udev restart 
+ 
+
+Root
+
+不同的手机root的方式不同。
+
+可以采用windows下第三方制作的root工具包，再修改其命令，使其在ubuntu下运行。
+
+刷入recovery
+
+将手机用usb连接手机，并处于开机状态。
+
+sudo adb reboot-bootloader 　　　　 //重启手机进入fastboot模式
+ 
+
+进入到下载的recovery.img所在的文件夹。
+
+sudo fastboot flash recovery recovery.img　　　　 //写入recovery.img（会擦除官方recovery）
+sudo fastboot reboot 　　　　 //重启手机
+sudo adb reboot recovery　　　　 //手机进入recovery模式
+（注：有些recovery.img不会擦除官方recovery，根据下载的recovery说明使用判断。
+
+用下面的命令替换以上部分。
+
+sudo fastboot boot recovery.img　　　　 //写入recovery后自动进入recovery模式
+
+）
+
+
+刷入Rom
+
+刷入recovery后就很简单了。
+
+ 
+
+将rom文件copy到sd卡中。
+
+手机进入recovery模式。
+
+选择sd卡中的rom文件进行更新即可。
+
+ 
