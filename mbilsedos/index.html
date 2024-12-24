@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" width="device-width" initial-scale="1.0">
+  
+  <title>DOS</title>
+  <style>
+  /* 整体DOS控制台样式 */
+.dos-console {
+  border: 2px solid gray;
+  border-radius: 5px;
+  background-color: black;
+  color: green;
+  font-family: Consolas, monospace;
+  margin: 50px auto;
+  box-sizing: border-box;
+}
+
+/* 控制台头部样式 */
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkgray;
+  color: black;
+  padding: 5px 10px;
+}
+
+/* 控制台标题样式 */
+.console-title {
+  font-weight: bold;
+}
+
+/* 控制台控制按钮样式 */
+.console-controls span {
+  margin-right: 5px;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* 红色关闭按钮样式 */
+.console-controls.red {
+  background-color: #ff5f56;
+}
+
+/* 黄色最小化按钮样式 */
+.console-controls.yellow {
+  background-color: #ffbd2e;
+}
+
+/* 绿色最大化按钮样式 */
+.console-controls.green {
+  background-color: #27c93f;
+}
+
+/* 控制台主体部分样式 */
+.console-body {
+  height: calc(100% - 30px); /* 减去头部高度 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 命令输出区域样式 */
+.console-output {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 命令输入区域样式 */
+.console-input {
+  display: flex;
+  align-items: center;
+  hight: 50px
+  padding: 10px;
+  border-top: 1px solid gray;
+}
+
+.console-input input {
+  flex: 1;
+  background-color: black;
+  border: none;
+  color: green;
+  padding: 4px;
+  outline: none;
+}
+
+.console-input button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="dos-console">
+    <div class="console-header">
+      <span class="console-title">Script-Shell</span>
+      <div class="console-controls">
+        <span class="control-close red"></span>
+        <span class="control-minimize yellow"></span>
+        <span class="control-maximize green"></span>
+      </div>
+    </div>
+    <div class="console-body">
+      <div class="console-output">
+        <p id="msg">C:\Users\Admin>dir</p>
+      </div>
+      <div class="console-input">
+        <input type="text" placeholder="在此输入命令..." id="command-input">
+        <button id="enter-button">回车</button>
+      </div>
+    </div>
+  </div>
+  <!-- 添加一个隐藏的input元素用于文件选择 -->
+  <input type="file" id="file-selector" style="display: none;">
+  <script>
+  // 用于存储从文件中读取的命令和对应返回结果的对象
+const commandMap = {};
+
+// 读取command.txt文件内容并解析
+fetch('./commands.txt')
+ .then(response => response.text())
+ .then(text => {
+    const lines = text.split('\n');
+    lines.forEach(line => {
+      const parts = line.split(':');
+      if (parts.length === 2) {
+        const command = parts[0].trim();
+        const result = parts[1].trim();
+        commandMap[command] = result;
+      }
+    });
+  })
+ .catch(error => console.error('Error reading command.txt file:', error));
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const commandInput = document.getElementById('command-input');
+  const enterButton = document.getElementById('enter-button');
+  const consoleOutput = document.querySelector('.console-output');
+  const dosConsole = document.querySelector('.dos-console');
+  init();
+
+  enterButton.addEventListener('click', handleCommand);
+  commandInput.addEventListener('keydown', function (event) {
+    if (event.keyCode === 13) {
+      handleCommand();
+    }
+  });
+  
+  
+
+  function handleCommand() {
+    const inputCommand = commandInput.value.trim();
+    let outputMessage = '';
+    if (inputCommand === 'help' || inputCommand === '?' || inputCommand === '？') {
+      outputMessage = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BenDOS     帮助列表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>===================================<br>· color - 更改控制台颜色<br>· return - 复读机，复读你的内容<br>· contact - 联系作者(虽然好像github可以直接issue';
+    } else if (commandMap.hasOwnProperty(inputCommand)) {
+      outputMessage = commandMap[inputCommand];
+    } else if (inputCommand.startsWith('color ')) {
+      const colorCodes = inputCommand.split(' ')[1];
+      if (colorCodes.length === 2) {
+        const backgroundColorCode = colorCodes[1];
+        const foregroundColorCode = colorCodes[0];
+        const backgroundColor = getColorFromCode(backgroundColorCode);
+        const foregroundColor = getColorFromCode(foregroundColorCode);
+        if (backgroundColor && foregroundColor) {
+          dosConsole.style.backgroundColor = backgroundColor;
+          consoleOutput.style.color = foregroundColor;
+          commandInput.style.color = foregroundColor;
+          outputMessage = '颜色已改变.';
+        } else {
+          outputMessage = '未知的颜色代码.';
+        }
+      } else {
+        outputMessage = '颜色命令格式无效.使用 “color [fb]”，其中 f 是前景，b 是背景颜色代码.';
+      }
+    } else if (inputCommand === 'colorclear') {
+        dosConsole.style.backgroundColor = 'black';
+        consoleOutput.style.color = 'green';
+        commandInput.style.color = 'green';
+        outputMessage = '控制台风格已重置';
+    } else if (inputCommand === 'awa') {
+      outputMessage = 'Ciallo～ (∠・ω< )⌒☆';
+    } else if (inputCommand === '原神启动') {
+      window.open('genshin.html')
+      outputMessage = '启动~'
+    } else if (inputCommand === 'color') {
+      outputMessage = '您可以使用 “color [fb]”来修改控制台风格，其中 f 是前景，b 是背景颜色代码.'
+    } else if (inputCommand === 'return') {
+      outputMessage = '请输入内容.格式“return [contect].'
+    } else if (inputCommand.startsWith('return ')) {
+      const retMsg = inputCommand.split(' ')[1];
+      outputMessage = retMsg;
+    } else if (inputCommand.startsWith('contact')) {
+      outputMessage = 'Blog:Benxpawa.github.io<br>QQ:807684480<br>Mail:Benxp@foxmail.com'
+    } else if(inputCommand === 'dir') {
+      // 获取当前日期
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const hours = String(currentDate.getHours()).padStart(2, '0');
+      const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+      const amPm = currentDate.getHours() < 12? 'AM' : 'PM';
+      outputMessage = `${year}/${month}/${day}  ${hours}:${minutes} ${amPm}    <DIR>          BenDOS<br>${day}/${month}/${year}  ${hours}:${minutes} ${amPm}    <DIR>          &copy Copyrights 2024 BenDOS.All Rights Reserved. `;
+    } else if (inputCommand.startsWith('start ')) {
+      const filePath = inputCommand.split(' ')[1];
+      // 尝试在浏览器中打开文件（这里仅适用于能在浏览器直接访问的资源，如网页链接等，本地文件访问受浏览器安全策略限制）
+      window.open(filePath);
+      outputMessage = `Trying to open ${filePath}...`;
+    } else if(inputCommand === '') {
+        outputMessage = '';
+    } else {
+      outputMessage = `'${inputCommand}'不是内部命令也不是外部程序，输入help或?来打印帮助`;
+    }
+    const newOutputLine = document.createElement('p');
+    newOutputLine.textContent = `Cmd \\home\\>${inputCommand}`;
+    const resultOutputLine = document.createElement('p');
+    // 将outputMessage中的换行标签替换为HTML中的换行元素，以便正确显示换行效果
+    resultOutputLine.innerHTML = outputMessage.replace(/<br>/g, '<br>');
+    consoleOutput.appendChild(newOutputLine);
+    consoleOutput.appendChild(resultOutputLine);
+    commandInput.value = '';
+
+    const scrollableElement = consoleOutput.scrollHeight > consoleOutput.clientHeight
+   ? consoleOutput
+      : consoleOutput.firstElementChild;
+    scrollableElement.scrollTop = scrollableElement.scrollHeight;
+  }
+
+  function getColorFromCode(code) {
+    const colors = {
+      '0': 'black',
+      '1': 'blue',
+      '2': 'green',
+      '3': 'lightgreen',
+      '4': 'red',
+      '5': 'purple',
+      '6': 'yellow',
+      '7': 'white',
+      '8': 'gray',
+      '9': 'lightblue',
+      'A': 'lightgreen',
+      'B': 'lightaqua',
+      'C': 'lightred',
+      'D': 'lightpurple',
+      'E': 'lightyellow',
+      'F': 'brightwhite'
+    };
+    return colors[code.toUpperCase()]? `rgb(${getRGBFromColorName(colors[code.toUpperCase()])})` : null;
+  }
+
+  function getRGBFromColorName(colorName) {
+    const colorMap = {
+      'black': '0,0,0',
+      'blue': '0,0,255',
+      'green': '0,128,0',
+      'lightgreen': '128,255,128',
+      'red': '255,0,0',
+      'purple': '128,0,128',
+      'yellow': '255,255,0',
+      'white': '255,255,255',
+      'gray': '128,128,128',
+      'lightblue': '128,128,255',
+      'lightaqua': '128,255,255',
+      'lightred': '255,128,128',
+      'lightpurple': '255,128,255',
+      'lightyellow': '255,255,128',
+      'brightwhite': '255,255,255'
+    };
+    return colorMap[colorName];
+  }
+})
+
+// 设置尺寸
+    document.addEventListener('DOMContentLoaded', function () {
+      const dosConsole = document.querySelector('.dos-console');
+      dosConsole.style.width = '1200px';
+      dosConsole.style.height = '950px';
+    });
+    
+function init() {
+    //更新控制台信息
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const hours = String(currentDate.getHours()).padStart(2, '0');
+      const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+      const amPm = currentDate.getHours() < 12? 'AM' : 'PM';
+      outputMessage = `${year}/${month}/${day}  ${hours}:${minutes} ${amPm}    <DIR>          Script-Shell<br>${day}/${month}/${year}  ${hours}:${minutes} ${amPm}     <br>Version5.0.0    <br><br>&copy Copyrights 2024 Mbilse.All Rights Reserved. `;
+  var pElement = document.getElementById('msg');
+  pElement.innerHTML = outputMessage;
+  }
+    
+</script>
+</body>
+
+</html>
