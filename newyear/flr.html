@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新年快乐</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .text {
+            font-size: 25px;
+            
+            top: 10px;
+        }
+        .text::after {
+            content: "❤️";
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to {
+                color: transparent;
+            }
+            50% {
+                color: white;
+            }
+        }
+        iframe {
+            width: 90%;
+            height: 70%;
+            border: none;
+            position: relative;
+            top: 50px;
+        }
+        .bottom-text {
+            position: absolute;
+            bottom: 20px;
+            font-size: 80px;
+            color: red;
+            font-family: 'FangSong', sans-serif;
+            font-weight: bold;
+        }
+                .bottom-t {
+            position: absolute;
+            bottom: 5px;
+            font-size: 20px;
+            color: red;
+            font-family: 'FangSong', sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<audio id="audio_music" src="https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7170534431801838367.mp3" loop></audio>
+    <div class="text" id="text"></div>
+    <iframe src="http://8.dw0.cn/30" frameborder="0"></iframe>
+    <div class="bottom-text">2025</div>
+    <div class="bottom-t">新的一年，愿大家开开心心</div>
+
+    <script>
+        const textElement = document.getElementById('text');
+        const textSequence = [
+            { text: "2025,", delay: 200 },
+            { text: "2025,zhu", delay: 200 },
+            { text: "2025,祝", delay: 200 },
+            { text: "2025,祝da'jia", delay: 200 },
+            { text: "2025,祝大家", delay: 200 },
+            { text: "2025,祝大家xin'nian", delay: 200 },
+            { text: "2025,祝大家新年", delay: 200 },
+            { text: "2025,祝大家新年kuai'le", delay: 200 },
+            { text: "2025,祝大家新年快乐", delay: 200 },
+            { text: "2025,祝大家新年快乐！", delay: 200 },
+            { text: "2025,祝大家新年快乐！ -----  Happy new year!   🧨🧧 ", delay: 200 }
+        ];
+        let index = 0;
+
+        function type() {
+            if (index < textSequence.length) {
+                let currentText = textSequence[index].text;
+                let currentContent = textElement.textContent;
+                let nextCharIndex = currentContent.length;
+
+                function typeNextChar() {
+                    if (nextCharIndex < currentText.length) {
+                        textElement.textContent = currentText.slice(0, nextCharIndex + 1);
+                        nextCharIndex++;
+                        setTimeout(typeNextChar, 150); // 控制逐字输出的速度
+                    } else {
+                        index++;
+                        setTimeout(type, textSequence[index - 1].delay);
+                    }
+                }
+
+                typeNextChar();
+            }
+        }
+
+        type();
+    </script>
+    <script>
+    document.addEventListener('click', function() {
+        document.getElementById('audio_music').play();
+    }, { once: true });
+</script>
+
+
+</body>
+</html>
