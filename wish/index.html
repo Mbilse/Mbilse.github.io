@@ -256,7 +256,7 @@ let hasShownFireworks = false; // 添加一个标志变量，用于检查是否�
 
 function updateCountdown() {
     const now = new Date();
-    const newYear = new Date('2025-01-28T22:00:00');
+    const newYear = new Date('2025-01-28T21:00:00');
     const timeLeft = newYear - now;
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -296,6 +296,18 @@ function updateMarket() {
             `;
             wishesList.appendChild(li);
         });
+        if (timeLeft <= 0 && !hasShownFireworks) {
+    document.getElementById('fireworksIframe').style.display = 'block';
+    document.getElementById('fireworksIframe').src = 'http://8.dw0.cn/30/';
+    hasShownFireworks = true;
+
+    // 显示祝福卡片
+    const blc = document.createElement('div');
+    blc.className = 'welcome-card'; // 使用欢迎卡片的样式
+    blc.textContent = '新年快乐，祝你梦想成真！';
+    document.body.appendChild(blc);
+}
+
     }
 }
 
