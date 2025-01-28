@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨年许愿池</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffcc00;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #ff0000;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
+#market {
+    margin-bottom: 20px;
+    display: none;
+    background-color: #ffcc00;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#market h2 {
+    margin-top: 0;
+}
+
+#market ul {
+    list-style: none;
+    padding: 0;
+}
+
+#market li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+#market li.empty {
+    color: #ccc;
+}
+
+#countdown {
+    margin-bottom: 20px;
+}
+
+#fireworksIframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+}
+
+#toggleMarket {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#toggleMarket:hover {
+    background-color: #cc0000;
+}
+.welcome-card {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    transition: opacity 1s, transform 1s; /* 添加过渡效果 */
+    opacity: 1; /* 初始不透明度 */
+}
+
+.welcome-card.fade-out {
+    opacity: 0; /* 虚化效果 */
+    transform: translate(-50%, -60%); /* 向下移动 */
+}
+
+
+</style>
+<div class="welcome-card">
+    欢迎来到新年许愿池！
+</div>
+
+
+    <div class="container">
+        <h1>许愿池</h1>
+        <form id="wishForm">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="content">内容：</label>
+            <textarea id="content" name="content" required></textarea>
+            <br>
+            <button type="submit">许愿</button>
+        </form>
+        <a href="#" id="toggleMarket">打开/关闭小市场</a>
+        <div id="market" class="market-card">
+            <h2>小市场</h2>
+            <button onclick="ax()" value="清空">清空</button>
+            <ul id="wishesList"></ul>
+        </div>
+        <div id="countdown">
+            <h3>许愿在(时间)后兑换</h3>
+            <p id="time" style="font-size: 20px;">时间：农历2025年1月1日9点整</p>
+            <p id="newTime" style="font-size: 20px;"></p>
+        </div>
+        
+        <iframe id="fireworksIframe" src="" style="display: none;"></iframe>
+    </div>
+    <script>
+    document.getElementById('wishForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const content = document.getElementById('content').value;
+    const wishesList = document.getElementById('wishesList');
+    const li = document.createElement('li');
+    li.textContent = `${username}: ${content}`;
+    wishesList.appendChild(li);
+    alert('许愿成功，祝你梦想成真');
+    document.getElementById('username').value = '';
+    document.getElementById('content').value = '';
+
+    // 保存到本地存储
+    let wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+    wishes.push({ username, content });
+    localStorage.setItem('wishes', JSON.stringify(wishes));
+
+    // 更新小市场内容
+    updateMarket();
+});
+
+
+
+function updateCountdown() {
+    const now = new Date();
+    const newYear = new Date('2025-01-29T09:00:00');
+    const timeLeft = newYear - now;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    document.getElementById('newTime').textContent = `倒计时：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+    document.getElementById('time').textContent = `当前时间：${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    if (timeLeft <= 0) {
+        if (document.getElementById('fireworksIframe').src === '') {
+            document.getElementById('fireworksIframe').src = 'http://8.dw0.cn/30/';
+        }
+        document.getElementById('fireworksIframe').style.display = 'block';
+    }
+}
+
+function updateMarket() {
+    const wishesList = document.getElementById('wishesList');
+    wishesList.innerHTML = '';
+    const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+    if (wishes.length === 0) {
+        const li = document.createElement('li');
+        li.classList.add('empty');
+        li.textContent = '还没有愿望...';
+        wishesList.appendChild(li);
+    } else {
+        wishes.forEach(wish => {
+            const li = document.createElement('li');
+            li.innerHTML = `用户：${wish.username}<br>愿望：${wish.content}`;
+            wishesList.appendChild(li);
+        });
+    }
+}
+
+document.getElementById('toggleMarket').addEventListener('click', function(event) {
+    event.preventDefault();
+    const market = document.getElementById('market');
+    if (market.style.display === 'none') {
+        market.style.display = 'block';
+    } else {
+        market.style.display = 'none';
+    }
+});
+
+function updateCountdown() {
+    const now = new Date();
+    const newYear = new Date('2025-01-29T09:00:00');
+    const timeLeft = newYear - now;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    document.getElementById('newTime').textContent = `倒计时：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+    if (timeLeft <= 0) {
+        document.getElementById('fireworksIframe').style.display = 'block';
+        document.getElementById('fireworksIframe').src = 'http://8.dw0.cn/30/';
+    }
+}
+
+setInterval(updateCountdown, 1000);
+
+// 初始化小市场内容
+updateMarket();
+let hasShownFireworks = false; // 添加一个标志变量，用于检查是否已经显示过烟花
+
+function updateCountdown() {
+    const now = new Date();
+    const newYear = new Date('2025-01-29T09:00:00');
+    const timeLeft = newYear - now;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    document.getElementById('newTime').textContent = `倒计时：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+    document.getElementById('time').textContent = `当前时间：${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    if (timeLeft <= 0 && !hasShownFireworks) { // 检查是否已经显示过烟花
+        document.getElementById('fireworksIframe').style.display = 'block';
+        document.getElementById('fireworksIframe').src = 'http://8.dw0.cn/30/';
+        hasShownFireworks = true; // 设置标志变量为 true，表示已经显示过烟花
+    }
+}
+
+setInterval(updateCountdown, 1000);
+function ax(){
+document.getElementById('wishesList').innerHTML = '';
+
+}
+function updateMarket() {
+    const wishesList = document.getElementById('wishesList');
+    wishesList.innerHTML = '';
+    const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+    if (wishes.length === 0) {
+        const li = document.createElement('li');
+        li.classList.add('empty');
+        li.textContent = '还没有愿望...';
+        wishesList.appendChild(li);
+    } else {
+        wishes.forEach((wish, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                用户：${wish.username}<br>
+                愿望：${wish.content}<br>
+                点赞数：${wish.likes || 0}
+                <button onclick="likeWish(${index})">点赞</button>
+            `;
+            wishesList.appendChild(li);
+        });
+    }
+}
+
+function likeWish(index) {
+    let wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+    if (!wishes[index].likes) {
+        wishes[index].likes = 0;
+    }
+    wishes[index].likes += 1;
+    localStorage.setItem('wishes', JSON.stringify(wishes));
+    updateMarket();
+}
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const welcomeCard = document.querySelector('.welcome-card');
+        welcomeCard.classList.add('fade-out');
+    }, 1000); // 1秒后触发虚化效果
+});
+
+    </script>
+</body>
+</html>
