@@ -168,7 +168,7 @@
   <button class="button" onclick="location.href='mydpy.html'">友情链接</button>
   <button class="button" onclick="location.href='more.html'">更多</button>
   <button class="button" onclick="location.href='settings'">设置</button>
-  <button onclick="toggleFullscreen()">全屏</button>
+  
   <button class="button" onclick="promptForColor()">输入口令</button>
 </div>
   <div class="hovi"><a href="https://git.io/typing-svg"><img src="https://profile-counter.glitch.me/mbilse/count.svg" /></a></div>
@@ -254,6 +254,24 @@ function promptForColor() {
       buttons.forEach(btn => {
         btn.style.borderRadius = '0px'; // 矩形
       });
+      break;
+      case 'full':
+      // 进入全屏模式
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(err => {
+          // 处理无法进入全屏的情况，例如用户拒绝或API不可用
+          console.error(`无法进入全屏模式: ${err.message}`);
+        });
+      }
+      break;
+    case 'normal':
+      // 退出全屏模式
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(err => {
+          // 处理无法退出全屏的情况
+          console.error(`无法退出全屏模式: ${err.message}`);
+        });
+      }
       break;
     default:
       alert('无效的口令！');
