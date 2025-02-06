@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .header h1, .header h2, .header h3 {
+            margin: 0 10px;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 3px;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: gray;
+            font-size: 18px;
+        }
+        .footer a {
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <h1>设置</h1>
+    <div class="button-container">
+        <button class="button" onclick="location.href='https://Mbilse.github.io/en/'">切换英文</button>
+        <button class="button" onclick="location.href='https://mbilse.github.io/'">切换中文</button>
+        <button class="button" onclick="location.href='about:blank'">禁用启动</button>
+        <button class="button" onclick="copyText('full')">全屏命令</button>
+        <button class="button" onclick="copyText('normal')">退出命令</button>
+        <button class="button" onclick="copyText('color000000')">默认背景</button>
+        <button class="button" onclick="copyText('color000001')">蓝色背景</button>
+        <button class="button" onclick="copyText('color000002')">绿色背景</button>
+        <button class="button" onclick="copyText('color000003')">红色背景</button>
+        <button class="button" onclick="copyText('wpe000000')">选择背景</button>
+        <button class="button" onclick="copyText('b-color000000')">按钮黑色</button>
+        <button class="button" onclick="copyText('b-color000001')">按钮蓝色</button>
+        <button class="button" onclick="copyText('b-color000002')">按钮绿色</button>
+        <button class="button" onclick="copyText('b-color000003')">按钮红色</button>
+        <button class="button" onclick="copyText('b-color000004')">按钮灰色</button>
+        <button class="button" onclick="copyText('z-color000000')">文字黑色</button>
+        <button class="button" onclick="copyText('z-color000001')">文字蓝色</button>
+        <button class="button" onclick="copyText('z-color000002')">文字绿色</button>
+        <button class="button" onclick="copyText('z-color000003')">文字红色</button>
+        <button class="button" onclick="copyText('z-color000004')">文字灰色</button>
+        <button class="button" onclick="copyText('z-color000005')">文字白色</button>
+        <button class="button" onclick="copyText('dgm000000')">按钮圆形</button>
+        <button class="button" onclick="copyText('dgm000001')">按钮圆方</button>
+        <button class="button" onclick="copyText('dgm000002')">按钮方形</button>
+                <button class="button" onclick="copyText('---Download-logs---2025----0083320Bytes of database')">下载完整</button>
+                <button class="button" onclick="location.href='https://mbilse.github.io/index.html'">恢复出厂</button>
+        <button class="button" onclick="location.href='https://mbilse.github.io/index.html'">返回</button>
+        
+    </div>
+    <div class="footer">
+        Copyright Mbilse 2025 | <a href=" ">梅布斯</a>
+    </div>
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`已复制: ${text}`);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+    </script>
+</body>
+  </html>
+  
