@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>二维码生成器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    #qrcode {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #downloadBtn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>二维码生成器</h1>
+    <div class="form-group">
+      <label for="text">输入文字：</label>
+      <input type="text" id="text" placeholder="请输入要生成二维码的内容">
+    </div>
+    <div class="form-group">
+      <label for="bgColor">背景颜色：</label>
+      <input type="color" id="bgColor" value="#ffffff">
+    </div>
+    <div class="form-group">
+      <label for="qrColor">二维码颜色：</label>
+      <input type="color" id="qrColor" value="#000000">
+    </div>
+    <div class="form-group">
+      <label for="opacity">透明度：</label>
+      <input type="range" id="opacity" min="0" max="1" step="0.1" value="1">
+      <span id="opacityValue">1.0</span>
+    </div>
+    <div class="form-group">
+      <label for="errorCorrection">容错率：</label>
+      <select id="errorCorrection">
+        <option value="L">低（L）</option>
+        <option value="M" selected>中（M）</option>
+        <option value="Q">高（Q）</option>
+        <option value="H">最高（H）</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="qrSize">二维码图片大小（px）：</label>
+      <input type="number" id="qrSize" value="200" min="100" max="500">
+    </div>
+    <div class="form-group">
+      <label for="moduleSize">每个像素格大小：</label>
+      <input type="number" id="moduleSize" value="4" min="1" max="10">
+    </div>
+    <div class="form-group">
+      <label for="cornerRadius">每个像素格圆角：</label>
+      <input type="range" id="cornerRadius" min="0" max="10" step="1" value="0">
+      <span id="cornerRadiusValue">0</span>
+    </div>
+    <div class="form-group">
+      <label for="logoPath">Logo图片路径：</label>
+      <input type="text" id="logoPath" placeholder="输入Logo图片的URL">
+    </div>
+    <div class="form-group">
+      <label for="logoUpload">Logo图片上传：</label>
+      <input type="file" id="logoUpload" accept="image/*">
+    </div>
+    <button id="generateBtn">生成二维码</button>
+    <div id="qrcode"></div>
+    <button id="downloadBtn">下载二维码</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script>
+  const generateBtn = document.getElementById('generateBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+const qrcodeDiv = document.getElementById('qrcode');
+const textInput = document.getElementById('text');
+const bgColorInput = document.getElementById('bgColor');
+const qrColorInput = document.getElementById('qrColor');
+const opacityInput = document.getElementById('opacity');
+const errorCorrectionSelect = document.getElementById('errorCorrection');
+const opacityValueSpan = document.getElementById('opacityValue');
+const qrSizeInput = document.getElementById('qrSize');
+const moduleSizeInput = document.getElementById('moduleSize');
+const cornerRadiusInput = document.getElementById('cornerRadius');
+const cornerRadiusValueSpan = document.getElementById('cornerRadiusValue');
+const logoPathInput = document.getElementById('logoPath');
+const logoUploadInput = document.getElementById('logoUpload');
+
+// 更新透明度显示值
+opacityInput.addEventListener('input', () => {
+  opacityValueSpan.textContent = opacityInput.value;
+});
+
+// 更新圆角显示值
+cornerRadiusInput.addEventListener('input', () => {
+  cornerRadiusValueSpan.textContent = cornerRadiusInput.value;
+});
+
+generateBtn.addEventListener('click', () => {
+  const text = textInput.value;
+  const bgColor = bgColorInput.value;
+  const qrColor = qrColorInput.value;
+  const opacity = parseFloat(opacityInput.value);
+  const errorCorrectionLevel = errorCorrectionSelect.value;
+  const qrSize = parseInt(qrSizeInput.value) || 200; // 默认200px
+  const moduleSize = parseInt(moduleSizeInput.value) || 4; // 默认4
+  const cornerRadius = parseFloat(cornerRadiusInput.value) || 0; // 默认0
+
+  // 清空之前的二维码
+  qrcodeDiv.innerHTML = '';
+
+  if (text) {
+    const qrcode = new QRCode(qrcodeDiv, {
+      text: text,
+      width: qrSize,
+      height: qrSize,
+      colorDark: qrColor,
+      colorLight: bgColor,
+      correctLevel: QRCode.CorrectLevel[errorCorrectionLevel]
+    });
+
+    const qrCanvas = qrcodeDiv.querySelector('canvas');
+    const ctx = qrCanvas.getContext('2d');
+
+    // 设置透明度
+    ctx.globalAlpha = opacity;
+
+    // 绘制圆角
+    if (cornerRadius > 0) {
+      const imageData = ctx.getImageData(0, 0, qrSize, qrSize);
+      const data = imageData.data;
+      for (let y = 0; y < qrSize; y++) {
+        for (let x = 0; x < qrSize; x++) {
+          const index = (y * qrSize + x) * 4;
+          if (isInCorner(x, y, qrSize, moduleSize, cornerRadius)) {
+            data[index + 3] = 0; // 设置透明
+          }
+        }
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    // 嵌入Logo
+    const logoFile = logoUploadInput.files[0]; // 获取上传的Logo文件
+    const logoPath = logoPathInput.value; // 获取Logo路径
+    let logoSrc = logoPath;
+
+    if (logoFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        logoSrc = reader.result;
+        drawLogo(logoSrc, qrCanvas, qrSize);
+      };
+      reader.readAsDataURL(logoFile); // 读取文件并设置为Logo图片的源
+    } else if (logoPath) {
+      drawLogo(logoSrc, qrCanvas, qrSize);
+    }
+  }
+});
+
+function drawLogo(logoSrc, qrCanvas, qrSize) {
+  const img = new Image();
+  img.src = logoSrc;
+  img.onload = () => {
+    const ctx = qrCanvas.getContext('2d');
+    const logoSize = qrSize / 5; // Logo大小为二维码的1/5
+    const logoX = (qrSize - logoSize) / 2;
+    const logoY = (qrSize - logoSize) / 2;
+    ctx.drawImage(img, logoX, logoY, logoSize, logoSize);
+  };
+}
+
+downloadBtn.addEventListener('click', () => {
+  const qrCanvas = qrcodeDiv.querySelector('canvas');
+  if (qrCanvas) {
+    const url = qrCanvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'qrcode.png';
+    a.click();
+  }
+});
+
+// 辅助函数：判断是否在圆角范围内
+function isInCorner(x, y, qrSize, moduleSize, cornerRadius) {
+  const halfModule = moduleSize / 2;
+  const radius = cornerRadius * moduleSize;
+  const centerX = qrSize / 2;
+  const centerY = qrSize / 2;
+
+  const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+  return distance > (qrSize / 2 - radius);
+}
+
+  </script>
+  </body>
+  </html>
