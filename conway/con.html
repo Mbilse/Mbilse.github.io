@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>康威的生命游戏</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(50, 10px);
+            grid-template-rows: repeat(50, 10px);
+        }
+        .cell {
+            width: 50px;
+            height: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        .cell.alive {
+            background-color: black;
+        }
+        h1{
+        bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Conway's Game of Life</h1>
+    <div class="grid" id="grid"></div>
+    <script>
+        const grid = document.getElementById('grid');
+        const rows = 50;
+        const cols = 50;
+        const cells = [];
+
+        // 初始化网格
+        for (let row = 0; row < rows; row++) {
+            cells[row] = [];
+            for (let col = 0; col < cols; col++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.addEventListener('click', () => toggleCell(row, col));
+                grid.appendChild(cell);
+                cells[row][col] = { isAlive: false, element: cell };
+            }
+        }
+
+        function toggleCell(row, col) {
+            cells[row][col].isAlive = !cells[row][col].isAlive;
+            cells[row][col].element.classList.toggle('alive');
+        }
+
+        function countNeighbors(row, col) {
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue;
+                    const newRow = row + i;
+                    const newCol = col + j;
+                    if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                        if (cells[newRow][newCol].isAlive) count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        function updateGrid() {
+            const newCells = [];
+            for (let row = 0; row < rows; row++) {
+                newCells[row] = [];
+                for (let col = 0; col < cols; col++) {
+                    const neighbors = countNeighbors(row, col);
+                    if (cells[row][col].isAlive) {
+                        newCells[row][col] = neighbors === 2 || neighbors === 3;
+                    } else {
+                        newCells[row][col] = neighbors === 3;
+                    }
+                }
+            }
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    cells[row][col].isAlive = newCells[row][col];
+                    cells[row][col].element.classList.toggle('alive', newCells[row][col]);
+                }
+            }
+        }
+
+        // 添加按钮控制
+        const controlPanel = document.createElement('div');
+controlPanel.style.position = 'fixed'; /* 修改为固定定位 */
+controlPanel.style.bottom = '50px'; /* 距离底部20px */
+controlPanel.style.left = '50%'; /* 水平居中 */
+controlPanel.style.transform = 'translateX(-50%)'; /* 水平居中 */
+controlPanel.style.padding = '10px';
+controlPanel.style.background = '#fff';
+controlPanel.style.borderRadius = '10px';
+controlPanel.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+
+
+        const startButton = document.createElement('button');
+        startButton.textContent = '开始';
+        startButton.addEventListener('click', () => {
+            interval = setInterval(updateGrid, 100);
+        });
+
+        const stopButton = document.createElement('button');
+        stopButton.textContent = '停止';
+        stopButton.addEventListener('click', () => {
+            clearInterval(interval);
+        });
+
+        const clearButton = document.createElement('button');
+        clearButton.textContent = '清除';
+        clearButton.addEventListener('click', () => {
+            clearInterval(interval);
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    cells[row][col].isAlive = false;
+                    cells[row][col].element.classList.remove('alive');
+                }
+            }
+        });
+
+        controlPanel.appendChild(startButton);
+        controlPanel.appendChild(stopButton);
+        controlPanel.appendChild(clearButton);
+        document.body.appendChild(controlPanel);
+
+        let interval;
+                const randomizeButton = document.createElement('button');
+        randomizeButton.textContent = '自动';
+        randomizeButton.addEventListener('click', () => {
+            randomizeGrid();
+        });
+
+        const fillButton = document.createElement('button');
+        fillButton.textContent = '全部';
+        fillButton.addEventListener('click', () => {
+            fillGrid();
+        });
+
+        controlPanel.appendChild(randomizeButton);
+        controlPanel.appendChild(fillButton);
+        function randomizeGrid() {
+            clearInterval(interval); // 停止当前动画
+            const aliveCount = Math.floor(Math.random() * 1000); // 随机生成1000以内的活细胞数量
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    cells[row][col].isAlive = false;
+                    cells[row][col].element.classList.remove('alive');
+                }
+            }
+            for (let i = 0; i < aliveCount; i++) {
+                const randomRow = Math.floor(Math.random() * rows);
+                const randomCol = Math.floor(Math.random() * cols);
+                cells[randomRow][randomCol].isAlive = true;
+                cells[randomRow][randomCol].element.classList.add('alive');
+            }
+        }
+
+        function fillGrid() {
+            clearInterval(interval); // 停止当前动画
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    cells[row][col].isAlive = true;
+                    cells[row][col].element.classList.add('alive');
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
