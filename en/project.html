@@ -1,0 +1,89 @@
+<!DOCTYPE html> 
+ <html lang="en"> 
+ <head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <title>我的展示台</title> 
+ <style> 
+   body { 
+     margin: 0; 
+     padding: 0; 
+     display: flex; 
+     flex-direction: column; 
+     align-items: center; 
+     justify-content: center; 
+     height: 100vh; 
+     background-color: #f0f0f0; 
+     font-family: Arial, sans-serif; 
+   } 
+   .header { 
+     display: flex; 
+     flex-direction: row; 
+     justify-content: center; 
+     width: 100%; 
+     margin-bottom: 40px; 
+   } 
+   .header h1, .header h2, .header h3 { 
+     margin: 0 10px; 
+   } 
+   .button-container { 
+     display: grid; 
+     grid-template-columns: repeat(3, 1fr); 
+     grid-gap: 10px; 
+   } 
+   .button { 
+     background-color: #3498db; 
+     color: white; 
+     border: none; 
+     padding: 16px; 
+     text-align: center; 
+     text-decoration: none; 
+     display: inline-block; 
+     font-size: 16px; 
+     margin: 4px 2px; 
+     cursor: pointer; 
+     border-radius: 10px; 
+     transition: background-color 0.3s; 
+   } 
+   .button:hover { 
+     background-color: #2980b9; 
+   } 
+     .footer { 
+             position: fixed; /* 固定在页面底部 */ 
+             bottom: 0; /* 距离底部0 */ 
+             width: 100%; /* 宽度为100% */ 
+             text-align: center; /* 水平居中 */ 
+             color: gray; /* 设置文字颜色为灰色 */ 
+             font-size: 18px; /* 可选：设置文字大小 */ 
+   } 
+   .footer a{ 
+     color: cyan; 
+   } 
+ </style> 
+ </head> 
+ <body> 
+  
+   <h1>My Project</h1> 
+   <h2>Mbilse's website</h2> 
+   <h3>Some big and small projects</h3> 
+  
+  
+ <div class="button-container"> 
+   <button class="button" onclick="location.href='https://Mbilse.github.io/qiandu/'">Qiandu</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/tapple/'">Tapple</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/aideguang'">Aideguang</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/mbilsedos'">DOS</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/copilot'">Copilot</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/newyear'">Newyear</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/host.md'">Readme</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/wish'">许愿池</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/mofang'">魔方</button> 
+   <button class="button" onclick="location.href='https://mbilse.github.io/conway'">Conway</button> 
+   <button class="button" onclick="location.href='index.html'">Exit</button> 
+   <button class="button" onclick="location.href='../code.html'">More</button> 
+ </div> 
+ <div class="footer"> 
+         Copyright Mbilse 2025 | <a href=" ">梅布斯</a> 
+ </div> 
+ </body> 
+     </html>
