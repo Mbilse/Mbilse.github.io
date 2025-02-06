@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的小站</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  .button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+  .footer {
+            position: fixed; /* 固定在页面底部 */
+            bottom: 0; /* 距离底部0 */
+            width: 100%; /* 宽度为100% */
+            text-align: center; /* 水平居中 */
+            color: gray; /* 设置文字颜色为灰色 */
+            font-size: 14px; /* 可选：设置文字大小 */
+            padding: 10px 0; /* 可选：添加上下内边距 */
+            background-color: #f8f8f8; /* 可选：添加背景颜色 */
+  }
+  .footer a{
+    color: cyan;
+   
+  }
+</style>
+</head>
+<body>
+
+  <h1>更多代码成品</h1>
+  
+  
+
+
+<div class="button-container">
+  <button class="button" onclick="location.href='https://mbilse.github.io/qrcode'">二维码生成</button>
+  <button class="button" onclick="location.href='index.html'">返回</button>
+
+  
+</div>
+<div class="footer">
+        Copyright Mbilse 2025 | <a href="">梅布斯</a>
+</div>
+</body>
+  </html>
