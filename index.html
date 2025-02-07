@@ -273,6 +273,18 @@ function promptForColor() {
         });
       }
       break;
+      case 'reset':
+      localStorage.removeItem('bodyColor');
+  localStorage.removeItem('buttonColor');
+  localStorage.removeItem('buttonBgColor');
+  localStorage.removeItem('buttonShape');
+  document.body.style.backgroundColor = '#f0f0f0'; // 默认背景颜色
+  document.querySelectorAll('.button').forEach(btn => {
+    btn.style.backgroundColor = '#3498db'; // 默认按钮背景颜色
+    btn.style.color = 'white'; // 默认按钮文字颜色
+    btn.style.borderRadius = '10px'; // 默认按钮形状
+  });
+      break;
     default:
       alert('无效的口令！');
   }
@@ -293,6 +305,56 @@ function promptForColor() {
         console.log("当前浏览器不支持全屏");
     }
   }
+  // 从localStorage加载设置
+function loadSettings() {
+  const bodyColor = localStorage.getItem('bodyColor');
+  const buttonColor = localStorage.getItem('buttonColor');
+  const buttonBgColor = localStorage.getItem('buttonBgColor');
+  const buttonShape = localStorage.getItem('buttonShape');
+
+  if (bodyColor) {
+    document.body.style.backgroundColor = bodyColor;
+  }
+  if (buttonColor) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.color = buttonColor;
+    });
+  }
+  if (buttonBgColor) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.backgroundColor = buttonBgColor;
+    });
+  }
+  if (buttonShape) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.borderRadius = buttonShape;
+    });
+  }
+}
+
+// 保存设置到localStorage
+function saveSettings(colorType, colorValue) {
+  if (colorType === 'bodyColor') {
+    localStorage.setItem('bodyColor', colorValue);
+    document.body.style.backgroundColor = colorValue;
+  } else if (colorType === 'buttonColor') {
+    localStorage.setItem('buttonColor', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.color = colorValue;
+    });
+  } else if (colorType === 'buttonBgColor') {
+    localStorage.setItem('buttonBgColor', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.backgroundColor = colorValue;
+    });
+  } else if (colorType === 'buttonShape') {
+    localStorage.setItem('buttonShape', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.borderRadius = colorValue;
+    });
+  }
+}
+  
 </script>
 
 </body>
