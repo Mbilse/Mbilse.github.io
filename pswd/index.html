@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网页加密器</title>
+</head>
+<body>
+  <h1>从前端加密你的私人网页</h1>
+  <form>
+    <p>文件：<input type="file" id="file" accept="text/html" required/></p>
+    <p>密码：<input type="password" id="password" required placeholder="加密密码"></p>
+    <p>提示文字：<input type="text" id="tsc" placeholder="密码界面的提示文字（可选）"></p>
+    <button>加密</button>
+  </form>
+  <p>其它服务：<a href="">解密网页</a> <a href="">修改密码</a></p>
+</body>
+<script src="./aes.js"></script>
+<script src="./index.js"></script>
+</html>
