@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Symbols List</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="./index.css">
+  <style id="c"></style>
+</head>
+<body>
+  <nav>
+    <div class="c">
+      <input type="checkbox" name="fill">
+      <label for="fill">FILL</label>
+    </div>
+    <div class="c">
+      <input type="range" name="wght" min="100" max="700" value="400">
+      <label for="wght">WGHT:<span></span></label>
+    </div>
+    <div class="c">
+      <input type="range" name="opzt" min="20" max="48" value="48">
+      <label for="opzt">OPSZ:<span></span></label>
+    </div>
+    <div class="c">
+      <input type="range" name="grad" min="-50" max="200" value="0">
+      <label for="grad">GRAD:<span></span></label>
+    </div>
+  </nav>
+  <ul class="iconlist"></ul>
+  <h2>Usage</h2>
+  <p>See <a href="https://developers.google.cn/fonts/docs/material_symbols" target="_blank" rel="noopener noreferrer">Material Symbols Guide</a></p>
+  <script src="./index.js"></script>
+</body>
+</html>
