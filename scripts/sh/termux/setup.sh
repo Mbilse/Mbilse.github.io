@@ -10,3 +10,6 @@ apt install c-script
 apt install yazi
 apt install vim
 apt install nodejs
+apt install proot-distro
+proot-distro install ubuntu
+proot-distro login ubuntu
