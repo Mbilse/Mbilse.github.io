@@ -1,0 +1,55 @@
+body{
+    font-family: Segoe UI Semibold;
+    font-size: 20px;
+    background: #f5f5f5;
+    line-height: 35px;
+  }
+  textarea{
+    font-family: Segoe UI;
+    font-size: 20px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .notice{
+    overflow: scroll;
+    position: absolute;
+    padding: 5px;
+    top: 0%;
+    right: 0;
+    height: 100%;
+    width: 35%;
+    display: none;
+    border: 5px solid #07d;
+    background: #fff;
+    word-break:break-all
+  }
+    .notice-mp{
+    overflow: scroll;
+    position: absolute;
+    padding: 5px;
+    top: 0%;
+    left: 0;
+    height: 100%;
+    width: 98%;
+    display: none;
+    border: 5px solid #07d;
+    font-size: 18px;
+    line-height: 23px;
+    background: #fff;
+    word-break:break-all
+  }
+    button{
+    padding: 10px;
+    color: #fff;
+    border: 2px solid #07d;
+    border-radius: 5px;
+    font-weight: bold;
+    background: #07d;
+  }
+  button:hover {
+    background: #15b;
+}
+li{
+  line-height: 120%;
+}
