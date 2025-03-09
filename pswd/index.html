@@ -22,7 +22,7 @@
   <hr />
   <form>
     <p>html文件：<input type="file" id="file" accept="text/html" required/></p>
-    <p>网页密码：<input type="password" id="password" required placeholder="加密密码"></p>
+    <p>网页密码：<input type="password" id="password" required placeholder="加密密码"><button onclick="look()">显示/隐藏</button></p>
     <p>提示文字：<input type="text" id="tsc" placeholder="密码界面的提示文字"></p>
     「开始加密」功能：<button>开始加密</button>
     <p>此用户的Ray ID:36y9c3i4e6C3f</p>
@@ -34,6 +34,16 @@
   
   
 </body>
+  <script>
+    function look(){
+if (password.type=="password"){
+password.type="text"
+}
+else{
+password.type="password"
+}
+    }
+  </script>
 <script src="./aes.js"></script>
 <script src="./index.js"></script>
 </html>
