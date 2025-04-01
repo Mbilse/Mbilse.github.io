@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>星际清明留言瓶</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a1a1a, #2d3436);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: '楷体', cursive;
+            overflow: hidden;
+        }
+
+        .galaxy-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* 星空特效 */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            animation: twinkle 1.5s infinite;
+        }
+
+        /* 量子留言板 */
+        .quantum-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #00ff9d;
+            box-shadow: 0 0 30px #00ff9d33;
+            transform-style: preserve-3d;
+            position: relative;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .quantum-message:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+            box-shadow: 0 0 50px #00ff9d66;
+        }
+
+        /* 全息文字 */
+        .hologram-text {
+            color: transparent;
+            background: linear-gradient(45deg, #00ff9d, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 10px #00ff9d66;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        /* 时空漩涡 */
+        .wormhole {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #00ff9d 0% 15%,
+                transparent 30% 70%,
+                #00ff9d 85% 100%
+            );
+            animation: spin 20s linear infinite;
+            position: absolute;
+            filter: blur(30px);
+            opacity: 0.3;
+        }
+
+        /* 灵魂粒子特效 */
+        .spirit-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: float 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-100px) scale(0.5); opacity: 0.3; }
+            100% { transform: translateY(-200px) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 生成随机星空 -->
+    <script>
+        for(let i=0; i<100; i++){
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random()*100 + 'vw';
+            star.style.top = Math.random()*100 + 'vh';
+            star.style.animationDelay = Math.random()*1.5 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <div class="galaxy-container">
+        <div class="wormhole"></div>
+        
+        <div class="quantum-message">
+            <h2 class="hologram-text">🪐 星际思念传输站 🚀</h2>
+            <p class="hologram-text">📡 正在连接量子纠缠频道...<br>
+            🌌 坐标：清明宇宙-思念星云<br>
+            💌 留言内容：<br>
+            "穿越十一维时空的思念<br>
+            正在以光年为单位向你奔去<br>
+            在黑洞的视界边缘<br>
+            我们终将以量子态重逢"</p>
+        </div>
+
+        <!-- 生成灵魂粒子 -->
+        <script>
+            for(let i=0; i<50; i++){
+                const particle = document.createElement('div');
+                particle.className = 'spirit-particle';
+                particle.style.left = Math.random()*100 + 'vw';
+                particle.style.animationDelay = Math.random()*5 + 's';
+                document.body.appendChild(particle);
+            }
+        </script>
+    </div>
+</body>
+</html>
