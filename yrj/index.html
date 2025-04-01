@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>系统安全警告⚠️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        #warning {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        .matrix span {
+            color: #0f0;
+            opacity: 0;
+            animation: matrix 1s linear forwards;
+        }
+
+        .cat-invasion {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+        }
+
+        .cat {
+            width: 100px;
+            animation: rotate 0.5s infinite linear;
+            filter: hue-rotate(0deg);
+        }
+
+        @keyframes matrix {
+            to {
+                opacity: 1;
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.5); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .alert {
+            position: fixed;
+            width: 300px;
+            animation: alert 0.2s infinite;
+        }
+
+        @keyframes alert {
+            0% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="warning">
+        <h1>⚠️ 喵星人入侵警告 ⚠️</h1>
+        <p>检测到异常猫薄荷信号！</p>
+        <button onclick="startApocalypse()">立即防御</button>
+    </div>
+
+    <audio id="alarm" src="https://ppt-mp3cdn.hrxz.com/d/file/filemp3/hrxz.com-kbfcjoihuzu25494.mp3"></audio>
+
+    <script>
+        function startApocalypse() {
+            const warning = document.getElementById('warning');
+            warning.innerHTML = '<h1>防御失败！😾</h1><p>系统已被喵星人控制</p>';
+            document.body.style.background = '#ff00ff';
+            document.title = "喵喵喵喵喵！";
+
+            // 创建代码雨
+            const matrix = document.createElement('div');
+            matrix.className = 'matrix';
+            document.body.appendChild(matrix);
+
+            // 创建猫猫入侵效果
+            const invasion = document.createElement('div');
+            invasion.className = 'cat-invasion';
+            document.body.appendChild(invasion);
+
+            // 生成特效元素
+            setInterval(() => {
+                // 代码雨字符
+                const span = document.createElement('span');
+                span.textContent = String.fromCharCode(0x2580 + Math.random() * 33);
+                matrix.appendChild(span);
+
+                // 随机猫猫图片
+                if(Math.random() > 0.5) {
+                    const cat = new Image();
+                    cat.className = 'cat';
+                    cat.src = `https://placekitten.com/${100 + Math.random()*200}/${100 + Math.random()*200}`;
+                    cat.style.transform = `rotate(${Math.random()*360}deg)`;
+                    invasion.appendChild(cat);
+                }
+            }, 50);
+
+            // 添加警报动画
+            const alert = new Image();
+            alert.className = 'alert';
+            alert.src = 'https://i.giphy.com/media/JIX9t2j0ZTN9S/giphy.webp';
+            document.body.appendChild(alert);
+
+            // 触发音效
+            document.getElementById('alarm').play();
+
+            // 鼠标干扰
+            document.addEventListener('mousemove', (e) => {
+                invasion.style.transform = `translate(${e.clientX/20}px, ${e.clientY/20}px)`;
+            });
+
+            // 最终提示
+            setTimeout(() => {
+                const msg = document.createElement('div');
+                msg.innerHTML = '<h2 style="color:red">想要解除？<br>快速点击屏幕999次！</h2>';
+                msg.style.position = 'fixed';
+                msg.style.background = 'yellow';
+                document.body.appendChild(msg);
+            }, 5000);
+
+            // 疯狂颜色模式逻辑
+            let colorInterval = null;
+            let isColorChanging = false;
+            const crazyColors = ['#ff0000', '#ffff00', '#00ff00'];
+
+            function startCrazyMode() {
+                if (!isColorChanging) {
+                    isColorChanging = true;
+                    colorInterval = setInterval(() => {
+                        const randomColor = crazyColors[Math.floor(Math.random() * crazyColors.length)];
+                        document.body.style.background = randomColor;
+                    }, 50);
+                }
+            }
+
+            function stopCrazyMode() {
+                clearInterval(colorInterval);
+                isColorChanging = false;
+                document.body.style.background = '#ff00ff';
+            }
+
+            // 键盘事件
+            document.addEventListener('keydown', (e) => {
+                if (e.shiftKey) startCrazyMode();
+            });
+
+            document.addEventListener('keyup', (e) => {
+                if (!e.shiftKey) stopCrazyMode();
+            });
+
+            // 移动端长按
+            let longPressTimer;
+            document.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                longPressTimer = setTimeout(startCrazyMode, 800);
+            });
+
+            document.addEventListener('touchend', () => {
+                clearTimeout(longPressTimer);
+                stopCrazyMode();
+            });
+
+            document.addEventListener('touchmove', () => {
+                clearTimeout(longPressTimer);
+            });
+        }
+    </script>
+</body>
+</html>
