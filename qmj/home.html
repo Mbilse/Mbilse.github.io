@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>量子时空通信系统</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0a0a12, #2d3436);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        /* 星空特效 */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            animation: twinkle 1.5s infinite;
+        }
+
+        /* 赛博信封容器 */
+        .cyber-envelope {
+            position: relative;
+            width: 600px;
+            padding: 2rem;
+            background: rgba(0, 20, 30, 0.9);
+            border: 2px solid #00ff9d;
+            box-shadow: 0 0 50px #00ff9d33;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 1;
+        }
+
+        /* 输入容器 */
+        .input-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .cyber-header {
+            position: relative;
+            padding: 1rem;
+            border: 1px solid #00ffff;
+            background: linear-gradient(45deg, #001219, #00394d);
+        }
+
+        /* 全息文字效果 */
+        .hologram-label {
+            color: #00ff9d;
+            text-shadow: 0 0 10px #00ff9d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 输入框样式 */
+        .cyber-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #00ffff;
+            color: #00ff9d;
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .cyber-input::placeholder {
+            color: #00ff9d66;
+            font-style: italic;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-bottom-color: #ff00ff;
+            box-shadow: 0 0 15px #ff00ff33;
+        }
+
+        /* 留言框 */
+        .message-box {
+            height: 150px;
+            border: 2px solid #00ffff;
+            background: rgba(0, 50, 70, 0.3);
+            color: #00ff9d;
+            padding: 1rem;
+            resize: none;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        /* 发送按钮 */
+        .send-button {
+            align-self: flex-end;
+            background: #00ff9d;
+            border: none;
+            padding: 1rem 2rem;
+            color: #002b36;
+            font-weight: bold;
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-button:hover {
+            background: #ff00ff;
+            box-shadow: 0 0 30px #ff00ff66;
+        }
+
+        /* 错误提示 */
+        .error-message {
+            color: #ff0066;
+            text-shadow: 0 0 10px #ff0066;
+            font-size: 0.8rem;
+            position: absolute;
+            right: 0;
+            bottom: -1.2rem;
+            display: none;
+        }
+
+        /* 字数统计 */
+        .message-counter {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: #00ffff;
+            font-size: 0.8rem;
+        }
+
+        /* 数据流特效 */
+        .data-stream {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 5px,
+                #00ff9d22 5px,
+                #00ff9d22 10px
+            );
+            animation: stream 20s linear infinite;
+            pointer-events: none;
+        }
+
+        /* 动画效果 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes stream {
+            from { background-position: 0 0; }
+            to { background-position: 0 100vh; }
+        }
+
+        @keyframes borderGlow {
+            0% { filter: hue-rotate(0deg) blur(20px); }
+            100% { filter: hue-rotate(360deg) blur(20px); }
+        }
+
+        /* 全息投影边框 */
+        .cyber-envelope::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            background: linear-gradient(45deg, #00ff9d, #ff00ff, #00ffff);
+            z-index: -1;
+            animation: borderGlow 4s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <script>
+        // 生成随机星星
+        for(let i=0; i<100; i++){
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random()*100 + 'vw';
+            star.style.top = Math.random()*100 + 'vh';
+            star.style.animationDelay = Math.random()*1.5 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <!-- 主表单 -->
+    <div class="cyber-envelope">
+        <div class="data-stream"></div>
+        
+        <!-- 发件人 -->
+        <div class="input-container">
+            <div class="cyber-header">
+                <div class="hologram-label">🛸 发件人星系坐标</div>
+                <input type="text" class="cyber-input" 
+                       placeholder="例：思念发射站-第7空间站" 
+                       id="sender" required>
+            </div>
+            <div class="error-message" id="senderError">坐标不能为空！</div>
+        </div>
+
+        <!-- 收件人 -->
+        <div class="input-container">
+            <div class="cyber-header">
+                <div class="hologram-label">🪐 收件人时空坐标</div>
+                <input type="text" class="cyber-input" 
+                       placeholder="例：XX的平行宇宙-记忆星云" 
+                       id="receiver" required>
+            </div>
+            <div class="error-message" id="receiverError">频率识别失败！</div>
+        </div>
+
+        <!-- 主题 -->
+        <div class="input-container">
+            <div class="cyber-header">
+                <div class="hologram-label">🔮 量子纠缠主题</div>
+                <input type="text" class="cyber-input" 
+                       placeholder="例：【超时空思念数据包】" 
+                       id="subject" required>
+            </div>
+            <div class="error-message" id="subjectError">波长超出范围！</div>
+        </div>
+
+        <!-- 留言内容 -->
+        <div class="input-container">
+            <div class="cyber-header" style="height: 200px;">
+                <div class="hologram-label">💾 留言全息影像</div>
+                <textarea class="message-box" id="message" 
+                          placeholder="输入你的量子讯息...
+如：>📡 正在建立量子连接...
+🌌 当前时空曲率：清明节气标准值
+💬 思念脉冲内容：
+在四维空间折叠的瞬间
+我们的记忆以弦振动的形式
+在暗物质海洋中产生共鸣
+即使熵增不可逆
+这份数据将永远存储在
+宇宙的量子硬盘之中" 
+                          maxlength="200" required></textarea>
+                <div class="message-counter" id="counter">0/200</div>
+            </div>
+            <div class="error-message" id="messageError">信息量不足！</div>
+        </div>
+
+        <!-- 发送按钮 -->
+        <button class="send-button" onclick="validateForm()">
+            🚀 启动曲率传送
+        </button>
+    </div>
+
+    <script>
+        // 输入验证功能
+        function validateForm() {
+            let isValid = true;
+            
+            const validateField = (elementId, errorId, message) => {
+                const field = document.getElementById(elementId);
+                if(!field.value.trim()) {
+                    showError(field, errorId, message);
+                    isValid = false;
+                }
+            };
+
+            validateField('sender', 'senderError', '坐标不能为空！');
+            validateField('receiver', 'receiverError', '频率识别失败！');
+            validateField('subject', 'subjectError', '波长超出范围！');
+            
+            const message = document.getElementById('message');
+            if(message.value.length < 10) {
+                showError(message, 'messageError', '至少需要10个量子字符');
+                isValid = false;
+            }
+
+            if(isValid) {
+                sendMessage({
+                    sender: document.getElementById('sender').value,
+                    receiver: document.getElementById('receiver').value,
+                    subject: document.getElementById('subject').value,
+                    message: message.value
+                });
+            }
+        }
+
+        // 显示错误提示
+        function showError(input, errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            input.style.borderBottomColor = '#ff0066';
+            
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+                input.style.borderBottomColor = '#00ffff';
+            }, 3000);
+        }
+
+        // 实时字数统计
+        document.getElementById('message').addEventListener('input', function(e) {
+            const counter = document.getElementById('counter');
+            counter.textContent = `${e.target.value.length}/200`;
+            counter.style.color = e.target.value.length > 180 ? '#ff0066' : '#00ffff';
+        });
+
+        // 发送功能
+        function sendMessage(data) {
+            const button = document.querySelector('.send-button');
+            button.innerHTML = '🌌 正在扭曲时空...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                console.log('量子传送数据：', data);
+                button.innerHTML = '✅ 传送完成！';
+                button.style.background = '#00ffff';
+                createParticleExplosion();
+                
+                setTimeout(() => {
+                    button.innerHTML = '🚀 启动曲率传送';
+                    button.style.background = '#00ff9d';
+                    button.disabled = false;
+                }, 3000);
+            }, 2000);
+        }
+
+        // 粒子爆炸效果
+        function createParticleExplosion() {
+            for(let i=0; i<50; i++){
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random()*6+4}px;
+                    height: ${Math.random()*6+4}px;
+                    background: ${Math.random() > 0.5 ? '#00ff9d' : '#ff00ff'};
+                    border-radius: 50%;
+                    animation: explode 1s ease-out;
+                `;
+                
+                particle.style.left = `${Math.random()*100}%`;
+                particle.style.top = `${Math.random()*100}%`;
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+    </script>
+</body>
+  </html>
