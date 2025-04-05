@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>梅布斯的小站 | Home</title>
@@ -143,6 +144,26 @@
             color: gray; /* 设置文字颜色为灰色 */
             font-size: 18px; /* 可选：设置文字大小 */
   }
+  #chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 10px;  /* 控制图标大小 */
+            color: #666;      /* 图标颜色 */
+            cursor: pointer;
+            text-decoration: none;
+            /* 确保图标精确尺寸 */
+            width: 10px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;   /* 确保在最上层 */
+    }
+  /* 悬停效果 */
+        #chat-icon:hover {
+            color: #333;
+        }
   .footer a{
     color: cyan;
   }
@@ -177,6 +198,8 @@
   <div class="footer">
         Copyright Mbilse 2025 | <a href=" ">梅布斯</a>
   </div>
+      <a href="ds.html" id="chat-icon" title="进入讨论">
+        <span class="material-icons">forum</span>
 <script>
 function changeColor(color) {
   const colors = {
