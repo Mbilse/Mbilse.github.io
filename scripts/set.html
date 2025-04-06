@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mbilse Care设置</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* 默认背景颜色 */
+    font-family: Arial, sans-serif;
+  }
+  。header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  。header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  </style>
+  </head>
+  
+<body>
+<h2>Mbilse Care设置</h2>
+邮箱:<input type="email" placeholder="someone@mbilse.com"/>
+Mbilse用户名(可选):<input type="text"/>
+<input type="submit" value="下一步"/>
+<br />
+<br />
+<br />
+选择Mbilse服务运行底层:
+<div>
+安装在Github:<input type="radio" name="dc" value="安装在Github" checked/>
+安装在Shell:
+<input type="radio" name="dc" value="安装在Shell" />
+</div>
+<div>输入服务器端口:<input type="text" placeholder="例如8.8.8.8:18276"/></div>
+<div>依赖版本:<input type="range" max="5" min="1" value="2"/></div>
+<div>公开此用户:<input type="checkbox" checked/></div>
+<div> 服务到:
+<select id="下拉1">
+                <option value="option1">默认连接到Shell</option>
+                 <option value="option2">默认使用cdn源</option>
+                 <option value="option3">使用网站mbilse.github.io</option>
+                 <option value="option4">不搭建服务</option>
+                 </select>
+                 </div>
+                 
+
+<input type="submit" onclick="window.location.href='https://mbilse.github.io'" value="Commit Changes"/>
+<br />
+<br />
+<h3 style="color:red;">Danger Zone(危险区域)</h3>
+<div style="color:red;">禁用此用户:<input type="checkbox"/></div>
+<div style="color:red;">更改可见性:<input type="checkbox"/>(打勾为私,不打为公)</div>
+
+</body>
+</html>
