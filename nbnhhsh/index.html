@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>能不能好好说话？</title>
+	<link rel="stylesheet" href="document.css">
+	<meta name="viewport" content="width=device-width,user-scalable=0">
+	<meta name="description" content="拼音首字母缩写释义工具">
+</head>
+<body>
+	<div id="el">
+		<textarea v-model.trim="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
+		<div class="nbnhhsh-box nbnhhsh-box-doc">
+			<div class="nbnhhsh-loading" v-if="loading">
+				加载中…
+			</div>
+			<div class="nbnhhsh-tag-list" v-else-if="tags.length">
+				<div class="nbnhhsh-tag-item" v-for="tag in tags">
+					<h4>{{tag.name}}</h4>
+					<div class="nbnhhsh-tran-list" v-if="tag.trans">
+						<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
+							{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
+						</span>
+					</div>
+					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
+						无对应文字
+					</div>
+					<div v-else-if="tag.inputting && tag.inputting.length !==0">
+						<div class="nbnhhsh-inputting-list">
+							<h5>有可能是</h5>
+							<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
+						</div>
+					</div>
+					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
+						尚未录入，我来提交对应文字
+					</div>
+					<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+				</div>
+			</div>
+			<div class="nbnhhsh-loading" v-else-if="text">
+				没有匹配到拼音首字母缩写
+			</div>
+		</div>
+	</div>
+	<div class="content-box">
+
+		<h2>为什么做这东西？</h2>
+		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让更多人能勉强理解这一门另类沟通方式、做了这一个划词转义工具。</p>
+
+		<h2>什么是用户脚本？</h2>
+		<p>用户脚本是一段代码，它们能够优化您的网页浏览体验。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。</p>
+		<p>用户脚本管理器安装过程可参考 <a href="https://greasyfork.org/zh-CN/#home-step-1" target="_blank">https://greasyfork.org/</a> 首页的，<b>安装一个用户脚本管理器</b> 章节</p>
+
+		<h2>如何安装网页划词释义用户脚本？</h2>
+		<p>安装好用户脚本管理器之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
+		<blockquote>
+			<p>脚本版本目前会在 <b>微博</b>、<b>贴吧</b>、<b>哔哩哔哩</b> 页面下运行，划词时会提交所选文字以用于转义。</p>
+		</blockquote>
+
+		<h2>如何在更多网站上使用这个用户脚本？</h2>
+		<p>在对应的用户脚本配置里可以设置 <b>用户匹配</b>，添加对应 URL 规则即可。</p>
+
+		<h2>贡献词条</h2>
+		<p>在每一个词条右上角都有 <code>+</code> 图标的按钮，点击可以提交对应文字，审核后会整理录入。</p>
+
+		<h2>给个人网站添加划词转义？</h2>
+		<p>在需要划词转义的页面 <code>&lt;/body&gt;</code> 前，添加如下代码即可。</p>
+		<pre>&lt;script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://lab.magiconch.com/nbnhhsh/nbnhhsh.user.js"&gt;&lt;/script&gt;</pre>
+
+		<h2>打赏</h2>
+		<p>
+			<img src="sponsor.png" alt="支付宝打赏">
+		</p>
+
+		<h2>仓库地址</h2>
+		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
+
+		<h2>GreasyFork</h2>
+		<p><a href="https://greasyfork.org/zh-CN/scripts/398555" target="_blank">https://greasyfork.org/scripts/398555</a></p>
+
+	</div>
+
+	<script src="/vue.2.6.11.min.js"></script>
+	<script src="nbnhhsh.user.js"></script>
+	<script>
+		let guessTimer;
+		const app = new Vue({
+			el,
+			data: {
+				text:'',
+				tags:[],
+				waiting:false,
+				loading:false,
+			},
+			methods: {
+				...Nbnhhsh,
+				nbnhhsh(){
+					// app.tags = [];
+					// app.waiting = true;
+
+					clearTimeout(guessTimer);
+					guessTimer = setTimeout(_=>{
+						let text = this.text;
+
+						// app.waiting = false;
+
+						if(!text || !/[a-z0-9]{2,}/i.test(text)) return app.tags = [];
+
+						app.loading = true;
+						this.guess(text,data=>{
+							app.loading = false;
+							if(!data.length){
+								app.show = false;
+							}else{
+								app.tags = data;
+							}
+						});
+					},400);
+
+					// location.hash = text?'#/text/'+encodeURIComponent(text):'';
+				}
+			}
+		});
+
+		const searchStringArray = location.hash.substr(2).split('/');
+
+		const Search = {};
+
+		for(let i = 0;i<searchStringArray.length;i+=2){
+			Search[decodeURIComponent(searchStringArray[i])] = decodeURIComponent(searchStringArray[i+1]);
+		}
+
+
+		app.text = Search.text || '';
+
+		app.nbnhhsh();
+
+
+		const loadScript = (src,onLoad=_=>{},el) =>{
+			el = document.createElement('script');
+			el.src = src;
+			el.onload = onLoad;
+			document.body.appendChild(el);
+		};
+
+		window._hmt = [];
+		const gtmId = 'G-13BQC1VDD8';
+		window.dataLayer = [
+			['js', new Date()],
+			['config', gtmId]
+		];
+		window.gtag = function(){dataLayer.push(arguments)};
+		setTimeout(_=>{
+			loadScript('https://hm.baidu.com/hm.js?f4e477c61adf5c145ce938a05611d5f0');
+			loadScript('https://www.googletagmanager.com/gtag/js?id='+gtmId);
+			loadScript('https://sdk.51.la/js-sdk-pro.min.js',_=>{
+				LA.init({id: "JgPCvOAtY0gH7fbQ",ck: "JgPCvOAtY0gH7fbQ",autoTrack:true,hashMode:true})
+			})
+		},1400);
+	</script>
+</body>
+</html>
