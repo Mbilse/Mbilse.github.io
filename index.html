@@ -200,10 +200,12 @@
   
   <button class="button" onclick="promptForColor()">输入口令</button>
 </div>
+<div id="mousePointer" style="position: absolute; font-size: 15px; color: black; pointer-events: none;"><img src="https://img-bsy.txrpic.com/preview/Element/00/00/83/95/E-839576-222B70CBA.png?imageMogr2/quality/90/thumbnail/320x%3E" hight="15px" width="15px"></img></div>
   <div class="hovi"><a href="https://git.io/typing-svg"><img src="https://profile-counter.glitch.me/mbilse/count.svg" /></a></div>
   <div class="footer">
         Copyright Mbilse 2025 | <a href=" ">梅布斯</a>
   </div>
+
       <a href="ds.html" id="chat-icon" title="进入讨论">
         <span class="material-icons">forum</span>
 <script>
@@ -434,7 +436,12 @@ function saveSettings(colorType, colorValue) {
         tipBox.style.top = '10px';
     }, 50); // 延迟50ms后开始动画，避免初始状态的闪烁
 })();
-
+document.addEventListener('mousemove', function(event) {
+  var mousePointer = document.getElementById('mousePointer');
+  mousePointer.style.left = event.pageX + 'px'; // 更新鼠标箭头的位置
+  mousePointer.style.top = event.pageY + 'px';
+});
+}
 </script>
 
 </body>
