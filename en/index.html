@@ -1,299 +1,450 @@
-<!DOCTYPE html> 
- <html lang="en"> 
- <head> 
- <meta charset="UTF-8"> 
- <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
- <title>Mbilse's Website | Home</title> 
- <style> 
-   body { 
-     margin: 0; 
-     padding: 0; 
-     display: flex; 
-     flex-direction: column; 
-     align-items: center; 
-     justify-content: center; 
-     height: 100vh; 
-     background-color: #f0f0f0; /* 默认背景颜色 */ 
-     font-family: Arial, sans-serif; 
-   } 
-   .header { 
-     display: flex; 
-     flex-direction: row; 
-     justify-content: center; 
-     width: 100%; 
-     margin-bottom: 40px; 
-   } 
-   .header h1, .header h2, .header h3 { 
-     margin: 0 10px; 
-   } 
-   .button-container { 
-     display: grid; 
-     grid-template-columns: repeat(4, 1fr); 
-     grid-gap: 10px; 
-     margin-bottom: 20px; 
-   } 
-   .button { 
-     background-color: #3498db; 
-     color: white; 
-     border: none; 
-     padding: 20px; 
-     text-align: center; 
-     text-decoration: none; 
-     display: inline-block; 
-     font-size: 16px; 
-     margin: 4px 2px; 
-     cursor: pointer; 
-     border-radius: 10px; 
-     transition: background-color 0.3s; 
-   } 
-   .button:hover { 
-     background-color: #2980b9; 
-   } 
-   body { 
-     margin: 0; 
-     padding: 0; 
-     display: flex; 
-     flex-direction: column; 
-     align-items: center; 
-     justify-content: center; 
-     height: 100vh; 
-     background-color: #f0f0f0; /* 默认背景颜色 */ 
-     font-family: Arial, sans-serif; 
-   } 
-   .header { 
-     display: flex; 
-     flex-direction: row; 
-     justify-content: center; 
-     width: 100%; 
-     margin-bottom: 40px; 
-   } 
-   .header h1, .header h2, .header h3 { 
-     margin: 0 10px; 
-   } 
-   .button-container { 
-     display: grid; 
-     grid-template-columns: repeat(3, 1fr); 
-     grid-gap: 10px; 
-   } 
-   .button { 
-     background-color: #3498db; 
-     color: white; 
-     border: none; 
-     padding: 20px; 
-     text-align: center; 
-     text-decoration: none; 
-     display: inline-block; 
-     font-size: 16px; 
-     margin: 4px 2px; 
-     cursor: pointer; 
-     border-radius: 10px; 
-     transition: background-color 0.3s; 
-   } 
-   .button:hover { 
-     background-color: #2980b9; 
-   } 
-   body { 
-     margin: 0; 
-     padding: 0; 
-     display: flex; 
-     flex-direction: column; 
-     align-items: center; 
-     justify-content: center; 
-     height: 100vh; 
-     background-color: #f0f0f0; 
-     font-family: Arial, sans-serif; 
-   } 
-   .header { 
-     display: flex; 
-     flex-direction: row; 
-     justify-content: center; 
-     width: 100%; 
-     margin-bottom: 40px; 
-   } 
-   .header h1, .header h2, .header h3 { 
-     margin: 0 10px; 
-   } 
-   .button-container { 
-     display: grid; 
-     grid-template-columns: repeat(3, 1fr); 
-     grid-gap: 10px; 
-   } 
-   .button { 
-     background-color: #3498db; 
-     color: white; 
-     border: none; 
-     padding: 20px; 
-     text-align: center; 
-     text-decoration: none; 
-     display: inline-block; 
-     font-size: 16px; 
-     margin: 4px 2px; 
-     cursor: pointer; 
-     border-radius: 10px; 
-     transition: background-color 0.3s; 
-   } 
-   .button:hover { 
-     background-color: #2980b9; 
-   } 
-   .footer { 
-             position: fixed; /* 固定在页面底部 */ 
-             bottom: 0; /* 距离底部0 */ 
-             width: 100%; /* 宽度为100% */ 
-             text-align: center; /* 水平居中 */ 
-             color: gray; /* 设置文字颜色为灰色 */ 
-             font-size: 18px; /* 可选：设置文字大小 */ 
-   } 
-   .footer a{ 
-     color: cyan; 
-   } 
-   .hovi{ 
-  
-     display: none; 
-   } 
- </style> 
-   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
- </head> 
- <body> 
-  
-   <h1>Welcome to my website👋</h1> 
-   <h2>by Mbilse</h2> 
-   <h3>name🙋:Zhang Xiaoyu</h3> 
-  
-  
- <div class="button-container"> 
-   <button class="button" onclick="location.href='project.html'">project</button> 
-   <button class="button" onclick="location.href='../README.md'">Readme</button> 
-   <button class="button" onclick="location.href='https://github.com/Mbilse'">Home</button> 
-   <button class="button" onclick="location.href='https://github.com/Mbilse/Mbilse.github.io'">Repo</button> 
-   <button class="button" onclick="location.href='../mydpy.html'">Friend</button> 
-   <button class="button" onclick="location.href='../more.html'">More</button> 
-   <button class="button" onclick="location.href='../settings'">Settings</button> 
-  
-   <button class="button" onclick="promptForColor()">Code</button> 
- </div> 
-   <div class="hovi"><a href="https://git.io/typing-svg"><img src="https://profile-counter.glitch.me/mbilse/count.svg" /></a></div> 
-   <div class="footer"> 
-         Copyright Mbilse 2025 | <a href=" ">梅布斯</a> 
-   </div> 
- <script> 
- function changeColor(color) { 
-   const colors = { 
-     'gray': '#f0f0f0', 
-     'blue': '#3498db', 
-     'green': '#2ecc71', 
-     'red': '#e74c3c' 
-   }; 
-   document.body.style.backgroundColor = colors[color]; 
- } 
-  
- function promptForColor() { 
-   const buttons = document.querySelectorAll('.button'); 
-   const colorCode = prompt('Paste Commands：'); 
-   switch (colorCode) { 
-     case 'color000000': 
-       changeColor('gray'); 
-       break; 
-     case 'color000001': 
-       changeColor('blue'); 
-       break; 
-     case 'color000002': 
-       changeColor('green'); 
-       break; 
-     case 'color000003': 
-       changeColor('red'); 
-       break; 
-           case 'b-color000000': 
-       buttons.forEach(btn => btn.style.backgroundColor = '#000000'); // 黑色 
-       break; 
-     case 'b-color000001': 
-       buttons.forEach(btn => btn.style.backgroundColor = '#3498db'); // 蓝色 
-       break; 
-     case 'b-color000002': 
-       buttons.forEach(btn => btn.style.backgroundColor = '#2ecc71'); // 绿色 
-       break; 
-     case 'b-color000003': 
-       buttons.forEach(btn => btn.style.backgroundColor = '#e74c3c'); // 红色 
-       break; 
-       case 'wpe000000': 
-       // 选择颜色作为背景 
-       const color = prompt('color(English)or16 bit：'); 
-       document.body.style.background = color; 
-       break; 
-           case 'b-color000004': 
-       buttons.forEach(btn => btn.style.backgroundColor = '#f0f0f0'); // 灰色 
-       break; 
-       case 'z-color000000': 
-       buttons.forEach(btn => btn.style.color = '#000000'); // 黑色 
-       break; 
-            case 'z-color000004': 
-       buttons.forEach(btn => btn.style.color = '#f0f0f0'); // 灰色 
-       break; 
-            case 'z-color000005': 
-       buttons.forEach(btn => btn.style.color = '#ffffff'); // 白色 
-       break; 
-     case 'z-color000001': 
-       buttons.forEach(btn => btn.style.color = '#3498db'); // 蓝色 
-       break; 
-     case 'z-color000002': 
-       buttons.forEach(btn => btn.style.color = '#2ecc71'); // 绿色 
-       break; 
-     case 'z-color000003': 
-       buttons.forEach(btn => btn.style.color = '#e74c3c'); // 红色 
-       break; 
-          case 'dgm000000': 
-       buttons.forEach(btn => { 
-         btn.style.borderRadius = '50%'; // 圆形 
-       }); 
-       break; 
-     case 'dgm000001': 
-       buttons.forEach(btn => { 
-         btn.style.borderRadius = '10px'; // 圆角矩形 
-       }); 
-       break; 
-     case 'dgm000002': 
-       buttons.forEach(btn => { 
-         btn.style.borderRadius = '0px'; // 矩形 
-       }); 
-       break; 
-       case 'full': 
-       // 进入全屏模式 
-       if (document.documentElement.requestFullscreen) { 
-         document.documentElement.requestFullscreen().catch(err => { 
-           // 处理无法进入全屏的情况，例如用户拒绝或API不可用 
-           console.error(`无法进入全屏模式: ${err.message}`); 
-         }); 
-       } 
-       break; 
-     case 'normal': 
-       // 退出全屏模式 
-       if (document.exitFullscreen) { 
-         document.exitFullscreen().catch(err => { 
-           // 处理无法退出全屏的情况 
-           console.error(`无法退出全屏模式: ${err.message}`); 
-         }); 
-       } 
-       break; 
-     default: 
-       alert('无效的口令！'); 
-   } 
- } 
-   function toggleFullscreen() { 
-     // 执行一下启动全屏，再执行一次退出全屏 
-     try { 
-         if (document.fullscreenElement) { 
-             if (document.exitFullscreen) { 
-                 document.exitFullscreen(); 
-             } 
-         } else { 
-             if (document.documentElement.requestFullscreen) { 
-                 document.documentElement.requestFullscreen(); 
-             } 
-         } 
-     } catch (err) { 
-         console.log("当前浏览器不支持全屏"); 
-     } 
-   } 
- </script> 
-  
- </body> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mbilse's website | Home</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* 默认背景颜色 */
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+  }
+  .button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* 默认背景颜色 */
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  .button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .header h1, .header h2, .header h3 {
+    margin: 0 10px;
+  }
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  .button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+  .footer {
+            position: fixed; /* 固定在页面底部 */
+            bottom: 0; /* 距离底部0 */
+            width: 100%; /* 宽度为100% */
+            text-align: center; /* 水平居中 */
+            color: gray; /* 设置文字颜色为灰色 */
+            font-size: 18px; /* 可选：设置文字大小 */
+  }
+  #chat-icon {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            font-size: 10px;  /* 控制图标大小 */
+            color: #666;      /* 图标颜色 */
+            cursor: pointer;
+            text-decoration: none;
+            /* 确保图标精确尺寸 */
+            width: 10px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;   /* 确保在最上层 */
+    }
+  /* 悬停效果 */
+        #chat-icon:hover {
+            color: #333;
+        }
+  .footer a{
+    color: cyan;
+  }
+  .hovi{
+
+    display: none;
+  }
+#mousePointer {
+  position: absolute;
+  font-size: 24px; /* 设置字体大小 */
+  color: black; /* 设置颜色 */
+  pointer-events: none; /* 防止鼠标箭头元素影响其他元素的点击事件 */
+  left:0;
+  top:0;
+}
+</style>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <h1>Welcome to my Website!👏</h1>
+  <h2>by Mbilse</h2>
+  <h3>Name🙋: Zhang Xiaoyu</h3>
+
+
+<div class="button-container">
+  <button class="button" onclick="location.href='project.html'">Project</button>
+  <button class="button" onclick="location.href='README.md'">Readme</button>
+  <button class="button" onclick="location.href='https://github.com/Mbilse'">Home</button>
+  <button class="button" onclick="location.href='https://github.com/Mbilse/Mbilse.github.io'">Repository</button>
+  <button class="button" onclick="location.href='mydpy.html'">Friend</button>
+  <button class="button" onclick="location.href='more.html'">More</button>
+  <button class="button" onclick="location.href='settings'">Settings</button>
+
+
+
+  <button class="button" onclick="promptForColor()">Code</button>
+</div>
+<div id="mousePointer" style="position: absolute; font-size: 15px; color: black; pointer-events: none;"><img src="https://img-bsy.txrpic.com/preview/Element/00/00/83/95/E-839576-222B70CBA.png?imageMogr2/quality/90/thumbnail/320x%3E" hight="15px" width="15px"></img></div>
+  <div class="hovi"><a href="https://git.io/typing-svg"><img src="https://profile-counter.glitch.me/mbilse/count.svg" /></a></div>
+  <div class="footer">
+        Copyright Mbilse 2025 | <a href=" ">梅布斯</a>
+  </div>
+
+      <a href="ds.html" id="chat-icon" title="进入讨论">
+        <span class="material-icons">forum</span>
+<script>
+function changeColor(color) {
+  const colors = {
+    'gray': '#f0f0f0',
+    'blue': '#3498db',
+    'green': '#2ecc71',
+    'red': '#e74c3c'
+  };
+  document.body.style.backgroundColor = colors[color];
+}
+
+function promptForColor() {
+  const buttons = document.querySelectorAll('.button');
+  const colorCode = prompt('Please Paste the website settings code：');
+  switch (colorCode) {
+    case 'color000000':
+      changeColor('gray');
+      break;
+    case 'color000001':
+      changeColor('blue');
+      break;
+    case 'color000002':
+      changeColor('green');
+      break;
+    case 'color000003':
+      changeColor('red');
+      break;
+          case 'b-color000000':
+      buttons.forEach(btn => btn.style.backgroundColor = '#000000'); // 黑色
+      break;
+    case 'b-color000001':
+      buttons.forEach(btn => btn.style.backgroundColor = '#3498db'); // 蓝色
+      break;
+    case 'b-color000002':
+      buttons.forEach(btn => btn.style.backgroundColor = '#2ecc71'); // 绿色
+      break;
+    case 'b-color000003':
+      buttons.forEach(btn => btn.style.backgroundColor = '#e74c3c'); // 红色
+      break;
+      case 'wpe000000':
+      // 选择颜色作为背景
+      const color = prompt('color(English)or 16int：');
+      document.body.style.background = color;
+      break;
+          case 'b-color000004':
+      buttons.forEach(btn => btn.style.backgroundColor = '#f0f0f0'); // 灰色
+      break;
+      case 'z-color000000':
+      buttons.forEach(btn => btn.style.color = '#000000'); // 黑色
+      break;
+           case 'z-color000004':
+      buttons.forEach(btn => btn.style.color = '#f0f0f0'); // 灰色
+      break;
+           case 'z-color000005':
+      buttons.forEach(btn => btn.style.color = '#ffffff'); // 白色
+      break;
+    case 'z-color000001':
+      buttons.forEach(btn => btn.style.color = '#3498db'); // 蓝色
+      break;
+    case 'z-color000002':
+      buttons.forEach(btn => btn.style.color = '#2ecc71'); // 绿色
+      break;
+    case 'z-color000003':
+      buttons.forEach(btn => btn.style.color = '#e74c3c'); // 红色
+      break;
+         case 'dgm000000':
+      buttons.forEach(btn => {
+        btn.style.borderRadius = '50%'; // 圆形
+      });
+      break;
+    case 'dgm000001':
+      buttons.forEach(btn => {
+        btn.style.borderRadius = '10px'; // 圆角矩形
+      });
+      break;
+    case 'dgm000002':
+      buttons.forEach(btn => {
+        btn.style.borderRadius = '0px'; // 矩形
+      });
+      break;
+      case 'full':
+      // 进入全屏模式
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(err => {
+          // 处理无法进入全屏的情况，例如用户拒绝或API不可用
+          console.error(`无法进入全屏模式: ${err.message}`);
+        });
+      }
+      break;
+    case 'normal':
+      // 退出全屏模式
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(err => {
+          // 处理无法退出全屏的情况
+          console.error(`无法退出全屏模式: ${err.message}`);
+        });
+      }
+      break;
+      case 'reset':
+      localStorage.removeItem('bodyColor');
+  localStorage.removeItem('buttonColor');
+  localStorage.removeItem('buttonBgColor');
+  localStorage.removeItem('buttonShape');
+  document.body.style.backgroundColor = '#f0f0f0'; // 默认背景颜色
+  document.querySelectorAll('.button').forEach(btn => {
+    btn.style.backgroundColor = '#3498db'; // 默认按钮背景颜色
+    btn.style.color = 'white'; // 默认按钮文字颜色
+    btn.style.borderRadius = '10px'; // 默认按钮形状
+  });
+      break;
+    default:
+      alert('Command not found！');
+  }
+}
+  function toggleFullscreen() {
+    // 执行一下启动全屏，再执行一次退出全屏
+    try {
+        if (document.fullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        } else {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        }
+    } catch (err) {
+        console.log("This browser is not have fullscreen.");
+    }
+  }
+  // 从localStorage加载设置
+function loadSettings() {
+  const bodyColor = localStorage.getItem('bodyColor');
+  const buttonColor = localStorage.getItem('buttonColor');
+  const buttonBgColor = localStorage.getItem('buttonBgColor');
+  const buttonShape = localStorage.getItem('buttonShape');
+
+  if (bodyColor) {
+    document.body.style.backgroundColor = bodyColor;
+  }
+  if (buttonColor) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.color = buttonColor;
+    });
+  }
+  if (buttonBgColor) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.backgroundColor = buttonBgColor;
+    });
+  }
+  if (buttonShape) {
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.borderRadius = buttonShape;
+    });
+  }
+}
+
+// 保存设置到localStorage
+function saveSettings(colorType, colorValue) {
+  if (colorType === 'bodyColor') {
+    localStorage.setItem('bodyColor', colorValue);
+    document.body.style.backgroundColor = colorValue;
+  } else if (colorType === 'buttonColor') {
+    localStorage.setItem('buttonColor', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.color = colorValue;
+    });
+  } else if (colorType === 'buttonBgColor') {
+    localStorage.setItem('buttonBgColor', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.backgroundColor = colorValue;
+    });
+  } else if (colorType === 'buttonShape') {
+    localStorage.setItem('buttonShape', colorValue);
+    document.querySelectorAll('.button').forEach(btn => {
+      btn.style.borderRadius = colorValue;
+    });
+  }
+}
+  (function() {
+    'use strict';
+
+    // 创建提示框
+    const tipBox = document.createElement('div');
+    tipBox.style.position = 'fixed';
+    tipBox.style.top = '50%'; // 初始位置在中间
+    tipBox.style.left = '50%';
+    tipBox.style.transform = 'translate(-50%, 0)'; // 水平居中
+    tipBox.style.backgroundColor = '#333333';
+    tipBox.style.color = '#ffffff';
+    tipBox.style.padding = '10px 20px';
+    tipBox.style.borderRadius = '5px';
+    tipBox.style.zIndex = '999999';
+    tipBox.style.textAlign = 'center';
+    tipBox.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // 添加过渡效果和弹性动画
+
+    const tipText = document.createElement('span');
+    tipText.textContent = 'Hello！';
+    tipText.style.marginRight = '10px';
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Got it';
+    closeButton.style.backgroundColor = '#0078D7';
+    closeButton.style.color = '#ffffff';
+    closeButton.style.border = 'none';
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.borderRadius = '7px';
+    closeButton.style.cursor = 'pointer';
+
+    closeButton.addEventListener('click', () => {
+        // 点击确定后虚化隐藏并向下移动
+        tipBox.style.opacity = '0';
+        tipBox.style.transform = 'translate(-50%, 0)'; // 保持水平居中
+        tipBox.style.top = '30%'; // 向下移动到中间位置
+        tipBox.style.pointerEvents = 'none'; // 防止再次点击
+    });
+
+    tipBox.appendChild(tipText);
+    tipBox.appendChild(closeButton);
+
+    document.body.appendChild(tipBox);
+
+    // 动画效果：从中间往上滑到距顶10px位置并渐显
+    setTimeout(() => {
+        tipBox.style.opacity = '1';
+        tipBox.style.top = '10px';
+    }, 50); // 延迟50ms后开始动画，避免初始状态的闪烁
+})();
+document.addEventListener('mousemove', function(event) {
+  var mousePointer = document.getElementById('mousePointer');
+  mousePointer.style.left = event.pageX + 'px'; // 更新鼠标箭头的位置
+  mousePointer.style.top = event.pageY + 'px';
+});
+
+</script>
+
+</body>
  </html>
