@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全警告 - 检测到不良内容</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #fff5f5;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .warning-header {
+            text-align: center;
+            padding: 2rem;
+            background-color: #dc3545;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .redirect-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2rem 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .redirect-button:hover {
+            background-color: #bb2d3b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+        }
+
+        .explanation-text {
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 1.5rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .search-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 480px) {
+            .warning-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .redirect-button {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="warning-header">
+        <h1>⚠️ 警告，小心涉黄页面！</h1>
+    </header>
+
+    <main class="main-content">
+        <a href="https://mbilse.github.io" class="redirect-button">
+            立即访问安全页面
+        </a>
+        
+        <p class="explanation-text">
+            您看到此页面是因为您启用了监测涉黄内容的油猴脚本，
+            而您在访问网站时被重定向到涉黄网站，被我们监测到了，
+            您才会被重定向到本页面。
+        </p>
+    </main>
+
+    <div class="search-container">
+        <form class="search-form" action="https://www.bing.com/search" method="GET" target="_blank">
+            <input 
+                type="search" 
+                name="q"
+                class="search-input"
+                placeholder="通过Bing安全搜索..."
+                required
+            >
+            <button type="submit" class="search-button">搜索</button>
+        </form>
+    </div>
+</body>
+</html>
