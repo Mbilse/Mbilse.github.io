@@ -7,8 +7,10 @@
 I'm actively in:
 
   
--[x] Mbilse website
--[] Mbilse X-Shizuku 
+- [ ] Mbilse website
+- [x] Mbilse X-Shizuku 
+  
+
 - 👋 Hi, I’m @Mbilse
 - 👀 I’m interested in ...
 - 🌱 I’m currently learning
