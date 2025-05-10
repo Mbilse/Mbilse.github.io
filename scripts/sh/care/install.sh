@@ -88,6 +88,10 @@ Mbilse Account
 Mbilse WebSever" > list.txt
 sleep 2.1
 printf "#"
+touch init.txt
+echo "MBILSE CARE INIT" > init.txt
+date >> init.txt
+
 sleep 1.8
 printf "#"
 sleep 1.2
