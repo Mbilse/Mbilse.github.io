@@ -1,0 +1,8 @@
+awim.king="awimer"
+api.keys="none"
+bin.keysoft="keysoft"
+bin.keys="000001"
+clip.start="new"
+clip.setup="author"
+clip.storebin="yes"
+clip.install="installed"
