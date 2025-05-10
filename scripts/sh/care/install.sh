@@ -10,7 +10,8 @@ sleep 1
 echo "
 Waiting for headers..."
 sleep 1.36
-sleep 0.01
+printf "progress:"
+sleep 0.1
 printf "#"
 sleep 1
 printf "#"
