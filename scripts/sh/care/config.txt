@@ -1,3 +1,4 @@
+awim.kernel="mbilsecare"
 awim.king="awimer"
 api.keys="none"
 api.name="none.none.com"
