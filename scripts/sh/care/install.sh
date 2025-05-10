@@ -1,3 +1,4 @@
+echo ""
 echo "Loading... 
 "
 sleep 1
@@ -9,6 +10,29 @@ sleep 1
 echo "
 Waiting for headers..."
 sleep 1.36
+sleep 0.01
+printf "#"
+sleep 1
+printf "#"
+sleep 0.6
+printf "#"
+sleep 0.5
+printf "#"
+sleep 0.4
+printf "#"
+sleep 1
+printf "#"
+sleep 0.5
+printf "#"
+sleep 0.8
+printf "#"
+sleep 0.5
+printf "#"
+sleep 1.4
+printf "#"
+
+echo ""
+sleep 0.5
 echo "
 installing..."
 sleep 0.3
