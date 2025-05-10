@@ -14,4 +14,15 @@ sleep 1.3
 printf "#"
 sleep 1.6
 printf "#"
+sleep 0.7
+printf "#"
+sleep 2.3
+printf "#"
+sleep 1.8
+printf "#"
+sleep 1.2
+printf "#"
+
+echo ""
+
 
