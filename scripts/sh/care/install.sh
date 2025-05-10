@@ -90,7 +90,7 @@ sleep 2.1
 printf "#"
 touch init.txt
 echo "MBILSE CARE INIT" > init.txt
-date >> init.txt
+date "+%Y%m%d%H%M" >> init.txt
 
 sleep 1.8
 printf "#"
