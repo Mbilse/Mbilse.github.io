@@ -40,11 +40,44 @@ sleep 0.3
 printf "progress:"
 sleep 0.4
 printf "#"
+cd
 sleep 1.3
 printf "#"
 sleep 1.6
+mkdir "MbilseCare" > /dev/null 2>&1
 printf "#"
+touch config.txt
 sleep 0.7
+echo "awim.kernel=\"mbilsecare\"
+awim.king=\"awimer\"
+api.keys=\"none\"
+api.name=\"none.none.com\"
+app.build=\"001\"
+app.install=\"grand\"
+bin.keysoft=\"keysoft\"
+bin.keys=\"000001\"
+board.id=\"455570\"
+board.rel=\"Mbilse\"
+clip.start=\"new\"
+clip.setup=\"author\"
+clip.storebin=\"yes\"
+clip.install=\"installed\"
+classic.pin=\"245548\"
+classic.project=\"new\"
+dele.run=\"done\"
+http.lan=\"unknown\"
+http.ur=\"https://mbilse.github.io\"
+http.porxy=\"00168\"
+http.port=\"8080\"
+project.name=\"myproject\"
+project.id=\"000001\"
+system.project=\"new\"
+system.version=\"12.9.0\"
+system.osname=\"MbilseOS\"
+system.ostype=\"64bit\"
+user.name=\"Mbilse\"
+user.email=\"mbilse001@outlook.com\"
+" > config.txt
 printf "#"
 sleep 2.1
 printf "#"
