@@ -17,3 +17,5 @@ npm install typescript
 apt install proot-distro
 proot-distro install ubuntu
 proot-distro login ubuntu
+proot-distro install debian
+proot-distro login debian
