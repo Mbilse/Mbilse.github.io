@@ -80,6 +80,12 @@ user.name=\"Mbilse\"
 user.email=\"mbilse001@outlook.com\"
 " > config.txt
 printf "#"
+touch list.txt
+echo "MbilseCare installed applications list
+---
+Mbilse Care
+Mbilse Account
+Mbilse WebSever" > list.txt
 sleep 2.1
 printf "#"
 sleep 1.8
