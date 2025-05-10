@@ -46,6 +46,7 @@ printf "#"
 sleep 1.6
 mkdir "MbilseCare" > /dev/null 2>&1
 printf "#"
+cd ./MbilseCare
 touch config.txt
 sleep 0.7
 echo "awim.kernel=\"mbilsecare\"
