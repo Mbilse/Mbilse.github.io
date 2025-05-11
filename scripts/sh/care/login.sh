@@ -12,14 +12,14 @@ case $username in
 Mbilse)
 ;;
 esac
-sleep 0.5
+sleep 7
 printf "Password:"
 read password
 case $password in
 Mbilse)
 ;;
 esac
-sleep 0.5
+sleep 7
 touch userdata.txt
 echo "Username:$username
 Password:$password" > userdata.txt
