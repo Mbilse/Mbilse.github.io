@@ -6,12 +6,6 @@ cd ./LoginData
 # Login
 echo " "
 sleep 0.5
-printf "Username:"
-read username
-sleep 7
-printf "Password:"
-read password
-sleep 7
 touch userdata.txt
 echo "Username:$username
 Password:$password" > userdata.txt
