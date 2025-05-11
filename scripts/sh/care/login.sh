@@ -8,11 +8,19 @@ echo " "
 sleep 0.5
 printf "Username:"
 read username
+case $username in
+Mbilse)
+;;
+esac
 sleep 0.5
 printf "Password:"
 read password
+case $password in
+Mbilse)
+;;
+esac
 sleep 0.5
 touch userdata.txt
 echo "Username:$username
-Password:$password" > username.txt
+Password:$password" > userdata.txt
 echo "Login Done!"
