@@ -78,10 +78,10 @@ class GitHubClient {
     const container = document.getElementById('discussions');
     container.innerHTML = discussions.map(d => `
       <div class="comment">
-        <h3>${d。title}</h3>
-        <div>${d。body}</div>
+        <h3>${d.title}</h3>
+        <div>${d.body}</div>
       </div>
-    `)。join('');
+    `).join('');
   }
 }
 
