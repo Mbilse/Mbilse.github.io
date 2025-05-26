@@ -64,7 +64,7 @@ class GitHubClient {
   async loadDiscussions() {
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${CONFIG.repo}/discussions?category=${CONFIG。category}`，
+        `https://api.github.com/repos/${CONFIG.repo}/discussions?category=${CONFIG.category}`，
         { headers: { Authorization: `Bearer ${this.token}` } }
       );
       const discussions = await res.json();
