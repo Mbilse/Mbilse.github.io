@@ -8,6 +8,9 @@ username="Mbilse"
 password="131023"
 echo " "
 sleep 0.5
+echo "Username:$username
+Password:$password"
+
 touch userdata.txt
 echo "Username:$username
 Password:$password" > userdata.txt
