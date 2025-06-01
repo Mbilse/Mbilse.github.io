@@ -11,7 +11,11 @@ I'm actively in:
 - [x] Mbilse wb-pseudo
 - [ ] Mbilse X-Shizuku 
 - [x] tjy-gitnub win12
-- [x] Mbilse CopilotAI3.0.2025.06
+- [x] Mbilse CopilotAI3.0.2025.6
+- [ ] Mbilse Shell Care 4.0.1
+- [ ] Mbilse Mobile 0.19.2
+ 
+
    
 
 - 👋 Hi, I’m @Mbilse
