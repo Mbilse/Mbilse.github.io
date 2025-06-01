@@ -22,6 +22,7 @@ I'm actively in:
 
    
 <br /><br />
+# - 注：观看代码前，请切换至master分支，否则显示不全
 
 - 👋 Hi, I’m @Mbilse
 - 👀 I’m interested in ...
