@@ -54,6 +54,15 @@ sleep 2.1
 printf "#"
 mkdir "Apps" > /dev/null 2>&1
 cd ./Apps
+mkdir "BuildData" > /dev/null 2>&1
+cd ./BuildData
+touch com.mbilse.care.installer.mdk
+echo "--index MDK File
+Make Files Document Getting 8.5
+Collect main-
+MbilseVGD.get.Collect.ById--Note--0
+-main exit" > ./com.mbilse.care.installer.mdk
+cd ..
 mkdir "ID" > /dev/null 2>&1
 sleep 1.2
 printf "#"
