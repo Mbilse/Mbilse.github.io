@@ -11,7 +11,7 @@ I'm actively in:
 - [x] Mbilse wb-pseudo
 - [ ] Mbilse X-Shizuku 
 - [x] tjy-gitnub win12
-- [v] tjy-gitnub win12
+- [x] Mbilse CopilotAI3.0.2025.06
    
 
 - 👋 Hi, I’m @Mbilse
