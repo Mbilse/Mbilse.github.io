@@ -1,4 +1,4 @@
-## Hi,there!
+I'm## Hi,there!
 ### This is a repository for Mbilse's Website!
 
   
@@ -26,6 +26,7 @@ I'm actively in:
 - 👋 Hi, I’m @Mbilse
 - 👀 I’m interested in ...
 - 🌱 I’m currently learning
+HTML CSS JS
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...
 - 😄 Pronouns: ...
