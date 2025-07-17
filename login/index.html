@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Mbilse</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: "PingFang SC", "Microsoft YaHei", monospace, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      width: 120%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 29px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    
+        input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #005ea3;
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #ccc;
+    }
+
+    .or-divider span {
+      margin: 0 12px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #0078D4;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .github-icon {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+ <h1> <br /></h1>
+    <h1>Log in</h1>
+
+    <!-- 用户名和密码输入框 -->
+    <input type="text" placeholder="Username or Email Address" />
+    <input type="password" placeholder="Password" />
+    <button class="btn">Login</button>
+
+    <!-- 分隔线 -->
+    <div class="or-divider"><span>OR</span></div>
+
+    <!-- GitHub OAuth 登录按钮 -->
+    <a class="btn" href="https://github.com/login/oauth/authorize?client_id=Ov23lip9sbDWCZenl4yh">
+      <svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 
+        2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+        0-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 
+        2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 
+        .67-.21 2.2.82a7.54 7.54 0 012 0c1.53-1.03 
+        2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 
+        1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+        3.95.29.25.54.73.54 1.48 0 1.07-.01 
+        1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+        8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      Log in with GitHub
+    </a>
+
+    <!-- 其他登录方式 -->
+    <a class="btn" href="/enterprise-login.html">Log in with Entra ID</a>
+    <a class="btn" href="/mobile-login.html">Log in with Mobile</a>
+     <a class="btn" onclick="
+    location.href = 
+      'https://accounts.google.com/o/oauth2/v2/auth?' +
+      'client_id=1060318817276-ei7644akgfsnfdvrpera7f1gjot7upo7.apps.googleusercontent.com' +
+      '&redirect_uri=' + encodeURIComponent('https://mbilse.github.io/google/welcome.html') +
+      '&response_type=token' +
+      '&scope=' + encodeURIComponent('openid email profile') +
+      '&state=' + Math.random().toString(36).substring(2);">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48" fill="white">
+  <path d="M24 9.5c3.15 0 5.93 1.08 8.15 2.85l6.1-6.1C34.6 3.05 29.65 1 24 1 
+  14.88 1 7.24 6.93 4.3 14.93l7.1 5.52C12.88 14.28 17.95 9.5 24 9.5z"/>
+  <path d="M46.1 24.55c0-1.65-.15-3.25-.45-4.8H24v9.1h12.4c-.55 2.95-2.2 
+  5.44-4.65 7.13l7.2 5.6c4.2-3.88 7.15-9.6 7.15-16.03z"/>
+  <path d="M11.4 28.45a14.6 14.6 0 010-8.9l-7.1-5.52A23.95 23.95 0 001 24c0 
+  3.95.93 7.68 2.57 11l7.83-6.55z"/>
+  <path d="M24 47c6.48 0 11.93-2.13 15.9-5.8l-7.2-5.6c-2.02 1.35-4.57 
+  2.15-8.7 2.15-6.05 0-11.12-4.78-12.6-11.2l-7.83 6.55C7.24 41.07 
+  14.88 47 24 47z"/>
+</svg>Log in with Google</a>
+
+    <!-- 页脚链接 -->
+    <div class="footer">
+      <a href="/forgot-password.html">Forgot Password</a>
+     
+      </div>
+          <div class="footer">
+      <a href="/signup.html">Don't have accounts?Sign up</a>
+    </div>
+  </div>
+</body>
+</html>
