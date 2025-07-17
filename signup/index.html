@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up - Mbilse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "PingFang SC", "Microsoft YaHei", monospace;
+    }
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .inline-code {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .inline-code input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .inline-code button {
+      padding: 10px 16px;
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-blue {
+      width: 100%;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .or-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ccc;
+    }
+    .or-divider:not(:empty)::before {
+      margin-right: .75em;
+    }
+    .or-divider:not(:empty)::after {
+      margin-left: .75em;
+    }
+    .oauth-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+    .footer-links {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .footer-links a {
+      margin: 0 8px;
+      text-decoration: underline;
+      color: #007aff;
+      cursor: pointer;
+    }
+    .favicon {
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sign up</h1>
+    <input type="text" placeholder="Create a Username">
+    <input type="email" placeholder="Your Email Address">
+    <input type="password" placeholder="Password">
+    <input type="password" placeholder="Confirm Password">
+    <div class="inline-code">
+      <input type="text" placeholder="Confirm Code">
+      <button>Send</button>
+    </div>
+    <button class="btn-blue">Sign Up</button>
+
+    <div class="or-divider">OR</div>
+
+    <a class="oauth-btn" href="https://github.com/login/oauth/authorize?client_id=Ov23lip9sbDWCZenl4yh">
+      <svg class="favicon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 
+        2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+        0-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 
+        2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 
+        .67-.21 2.2.82a7.54 7.54 0 012 0c1.53-1.03 
+        2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 
+        1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+        3.95.29.25.54.73.54 1.48 0 1.07-.01 
+        1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+        8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      Sign up with Github
+    </a>
+    <a class="oauth-btn" onclick="
+    location.href = 
+      'https://accounts.google.com/o/oauth2/v2/auth?' +
+      'client_id=1060318817276-ei7644akgfsnfdvrpera7f1gjot7upo7.apps.googleusercontent.com' +
+      '&redirect_uri=' + encodeURIComponent('https://mbilse.github.io/google/welcome.html') +
+      '&response_type=token' +
+      '&scope=' + encodeURIComponent('openid email profile') +
+      '&state=' + Math.random().toString(36).substring(2);">
+    <svg class="favicon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <path fill="#ffffff" d="M43.6 20.5H42V20H24v8h11.3C33.5 32.3 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8.1 3.1l5.7-5.7C33.3 6.1 28.9 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/>
+  <path fill="#ffffff" d="M6.3 14.7l6.6 4.8C14.3 16.2 18.8 12 24 12c3.1 0 5.9 1.2 8.1 3.1l5.7-5.7C33.3 6.1 28.9 4 24 4c-7.7 0-14.4 4.4-17.7 10.7z"/>
+  <path fill="#ffffff" d="M24 44c5.2 0 9.9-1.9 13.5-5.1l-6.3-5.2C28.9 35.8 26.5 36 24 36c-5.2 0-9.6-3.2-11.4-7.8l-6.6 5C9.7 40.6 16.3 44 24 44z"/>
+  <path fill="#ffffff" d="M43.6 20.5H42V20H24v8h11.3c-1.4 3.7-4.9 6.5-9.3 6.5-5.2 0-9.6-3.2-11.4-7.8l-6.6 5C9.7 40.6 16.3 44 24 44c11.1 0 20-8.9 20-20 0-1.2-.1-2.3-.4-3.5z"/>
+</svg>Sign up with Google</a>
+    <a class="oauth-btn" href="https://glanprt.example.com">Sign in via Mobile</a>
+
+    <div class="footer-links">
+      <a href="#">Not a Password</a>
+      </div>
+       <div class="footer-links">
+      <a href="/login">have an account? Log in</a>
+    </div>
+  </div>
+</body>
+</html>
