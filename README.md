@@ -25,7 +25,7 @@ I'm actively in:
 <br /><br />
 
 - 👋 Hi, I’m @Mbilse
-- 👀 I’m interested in ...
+- 👀 I’m interested in Some Open Source Repo
 - 🌱 I’m currently learning
 HTML CSS JS
 - 💞️ I’m looking to collaborate on ...
