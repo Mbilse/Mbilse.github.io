@@ -1,0 +1,51 @@
+body { font-size: 1.2em; }
+
+h1 { font-size: 2em; } h2 { font-size: 1.9em; } h3 { font-size: 1.6em; } h4 { font-size: 1.3em; } h5 { font-size: 1.2em; } h6 { font-size: 1.11em; }
+
+p { font-size: 1.15em; }
+
+label { font-size: 1.1em; margin-right: 0.5em; }
+
+input[type="checkbox"] { appearance: none; width: 20px; height: 20px; border: 2px solid #000; border-radius: 6px; position: relative; cursor: pointer; }
+
+input[type="checkbox"]:checked { background-color: #20c997; border-color: #20c997; }
+
+input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid #000; border-radius: 6px; position: relative; cursor: pointer; }
+
+input[type="radio"]:checked { background-color: #20c997; border-color: #20c997; }
+
+button { background: #20c997; color: white; border: none; padding: 0.5em 1.2em; border-radius: 8px; cursor: pointer; }
+
+button:hover { background: #1ba37a; }
+
+a { background: linear-gradient(to right, #20c997, #007bff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+
+a:hover { filter: brightness(0.8); }
+
+a:active { -webkit-text-fill-color: #20c997; }
+
+br { line-height: 2em; }
+
+hr { border: none; border-top: 1px solid #ccc; }
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="time"], input[type="datetime-local"], input[type="week"], input[type="month"] { border: 2px solid #ccc; padding: 0.3em; border-radius: 6px; outline: none; width: 180px; font-size: 1em; }
+
+input:focus { border-color: #20c997; box-shadow: 0 0 0 2px rgba(32, 201, 151, 0.3); }
+
+input[type="file"] { padding: 0.2em; border-radius: 6px; background-color: #f1f1f1; }
+
+select { padding: 0.2em; border-radius: 6px; border: 1px solid #ccc; background-color: #fff; font-size: 1em; }
+
+select:focus { border-color: #20c997; box-shadow: 0 0 0 2px rgba(32, 201, 151, 0.2); }
+
+ul, ol { list-style: none; padding: 0; }
+
+ul li, ol li { display: table-row; border-bottom: 1px solid #eee; padding: 0.4em; }
+
+ul li::before, ol li::before { display: table-cell; padding-right: 1em; color: #20c997; font-weight: bold; }
+
+ul li::before { content: '•'; }
+
+ol li { counter-increment: item; }
+
+ol li::before { content: counter(item) '.'; }
