@@ -16,7 +16,9 @@ I'm actively in:
 - [ ] Mbilse Shell Care 4.0.1
 - [ ] Mbilse Mobile 0.19.2
 - [x] Mbilse Weatherforecast
-- [x] Mbilse HTML UserInterface 
+- [x] Mbilse HTML UserInterface
+- [x] Mbilse Shell App
+- [ ] Mbilse Termux-X tool
 - [ ] Mbilse Miscussion-App
    
   
