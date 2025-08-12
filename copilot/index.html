@@ -1,113 +1,228 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-  <title>Copilot AI</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative; /* 添加相对定位 */
-  }
-     .online-status {
-    position: absolute;
-    top: 40px; /* 调整位置 */
-    left: 0;
-    width: 100%;
-    background-color: #f5f5f5;
-    color: #a767e5;
-    text-align: center;
-    padding: 5px 0;
-    font-size: 12px;
-    z-index: 6;
-  }
-  .copilot-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    color: #a767e5;
-    text-align: center;
-    padding: 7px 0;
-    font-size: 18px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 2.5;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot AI</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: relative;
+      }
+      .online-status {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        color: #a767e5;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 12px;
+        z-index: 6;
+      }
+      .copilot-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        color: #a767e5;
+        text-align: center;
+        padding: 7px 0;
+        font-size: 18px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 2.5;
+      }
+      .chat-container {
+        width: 90%;
+        max-width: 680px;
+        padding: 15px;
+        background: linear-gradient(135deg, #f59de8, #a767e5);
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        flex-grow: 1;
+        overflow-y: auto;
+        color: white;
+        margin-top: 60px;
+      }
+      .message {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 20px;
+        max-width: 40%;
+        word-wrap: break-word;
+        background-color: rgba(255, 255, 255, 0.3);
+        position: relative;
+      }
+      .message.user {
+        margin-left: auto;
+        text-align: right;
+      }
+      .message.bot {
+        margin-right: auto;
+      }
+      .read-status {
+        position: absolute;
+        bottom: -15px;
+        right: 0;
+        color: white;
+        font-size: 14px;
+      }
+      .input-container {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+      }
+      .input-container input {
+        padding: 10px;
+        flex-grow: 1;
+        border: none;
+        border-radius: 7px 0 0 7px;
+        font-size: 14px;
+      }
+      .input-container button {
+        padding: 10px;
+        border: none;
+        background-color: #a767e5;
+        color: white;
+        border-radius: 0 7px 7px 0;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .thinking {
+        background-color: rgba(255, 255, 255, 0.3);
+        font-style: italic;
+        color: #6c757d;
+        margin-right: auto;
+      }
+    </style>
+</head>
+<body>
+<div class="copilot-header">Copilot AI</div>
+<div class="online-status">在线</div>
+<div class="chat-container" id="chat"></div>
 
-  .chat-container {
-    width: 90%;
-    max-width: 700px;
-    padding: 15px;
-    background: linear-gradient(135deg, #f59de8, #a767e5);
-    border-radius: 3px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex-grow: 1;
-    overflow-y: auto;
-    color: white;
-    margin-top: 60px; /* 为浮动横条留出空间 */
-  }
+<div class="input-container">
+  <input type="text" id="userInput" placeholder="输入你的消息..." onkeypress="handleKeyPress(event)">
+  <button id="sendButton">发送</button>
+</div>
 
-  .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 20px;
-    max-width: 40%;
-    word-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.3);
-    position: relative; /* 为已读标记定位 */
-  }
+<script>
+// 初始化消息
+window.onload = function() {
+    const initMessage = createMessage(
+        ' 您好, 我是 Mbilse-Copilot AI 3.0.25-正式版 ,我可以帮你写作，解说， 我还可以与你一起聊天哦！', 
+        'bot',
+        true
+    );
+    document.getElementById("chat").appendChild(initMessage);
+    scrollToBottom();
+};
 
-  .message.user {
-    margin-left: auto;
-    text-align: right;
-  }
+function handleKeyPress(event) {
+    if (event.key === 'Enter') submitInput();
+}
 
-  .message.bot {
-    margin-right: auto;
-  }
+document.getElementById("sendButton").onclick = submitInput;
 
-  .read-status {
-    position: absolute;
-    bottom: -15px; /* 调整位置 */
-    right: 0;
-    color: white;
-    font-size: 14px;
-  }
+function submitInput() {
+    const userInput = document.getElementById("userInput").value.trim();
+    if (!userInput) return;
 
-  .input-container {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
+    // 显示用户消息（立即添加已送达）
+    const chatDiv = document.getElementById("chat");
+    const userMessage = createMessage(userInput, 'user');
+    chatDiv.appendChild(userMessage);
+    addDeliveryStatus(userMessage);
+    scrollToBottom();
 
-  .input-container input {
-    padding: 10px;
-    flex-grow: 1;
-    border: none;
-    border-radius: 7px 0 0 7px;
-    font-size: 14px;
-  }
+    // 显示正在思考
+    const thinkingMessage = createMessage('Thinking...', 'bot');
+    thinkingMessage.classList.add('thinking');
+    chatDiv.appendChild(thinkingMessage);
+    scrollToBottom();
 
-  .input-container button {
-    padding: 10px;
-    border: none;
-    background-color: #a767e5;
-    color: white;
-    border-radius: 0 7px 7px 0;
-    font-size: 14px;
-    cursor: pointer;
+    // 调用API
+    fetch(`https://api.52vmy.cn/api/chat/spark?msg=${encodeURIComponent(userInput)}`)
+        .then(response => response.json())
+        .then(data => {
+            chatDiv.removeChild(thinkingMessage);
+            const aiResponse = data.data?.answer || "抱歉，由于api请求限制，我们无法成功服务您，请稍后再试。";
+            typeMessage(aiResponse, 'bot');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            chatDiv.removeChild(thinkingMessage);
+            typeMessage('出现错误，请稍后再试。', 'bot');
+        });
+
+    document.getElementById("userInput").value = "";
+}
+
+function createMessage(text, type, immediate = false) {
+    const div = document.createElement('div');
+    div.className = `message ${type}`;
+    div.textContent = `${type === 'user' ? '' : ''}${text}`;
+    
+    // 初始化消息直接添加已读状态
+    if (immediate && type === 'bot') {
+        addReadStatus(div);
+    }
+    return div;
+}
+
+function typeMessage(text, type) {
+    const chatDiv = document.getElementById("chat");
+    const messageDiv = createMessage('', type);
+    chatDiv.appendChild(messageDiv);
+    
+    let index = 0;
+    const typing = setInterval(() => {
+        if (index < text.length) {
+            messageDiv.textContent = `${text.substring(0, index + 1)}`;
+            scrollToBottom();
+            index++;
+        } else {
+            clearInterval(typing);
+            addReadStatus(messageDiv); // 添加已读状态
+        }
+    }, 25);
+}
+
+// 添加已送达状态
+function addDeliveryStatus(messageElement) {
+    const status = document.createElement('div');
+    status.className = 'read-status';
+    status.textContent = '已送达';
+    messageElement.appendChild(status);
+}
+
+// 添加已读状态
+function addReadStatus(messageElement) {
+    const status = document.createElement('div');
+    status.className = 'read-status';
+    status.textContent = '已读';
+    messageElement.appendChild(status);
+    scrollToBottom();
+}
+
+function scrollToBottom() {
+    const chat = document.getElementById("chat");
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+</body>
+</html>r;
   }
 </style>
   <meta name="msvalidate.01" content="D3E0694DAAE374BCED74213494D74D18" />
