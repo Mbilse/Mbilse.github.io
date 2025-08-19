@@ -659,55 +659,8 @@
     </div>
 
     <script>
-          (function() {
-    'use strict';
-
-    // 创建提示框
-    const tipBox = document.createElement('div');
-    tipBox.style.position = 'fixed';
-    tipBox.style.top = '50%'; // 初始位置在中间
-    tipBox.style.left = '50%';
-    tipBox.style.transform = 'translate(-50%, 0)'; // 水平居中
-    tipBox.style.backgroundColor = '#333333';
-    tipBox.style.color = '#ffffff';
-    tipBox.style.padding = '10px 20px';
-    tipBox.style.borderRadius = '5px';
-    tipBox.style.zIndex = '999999';
-    tipBox.style.textAlign = 'center';
-    tipBox.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // 添加过渡效果和弹性动画
-
-    const tipText = document.createElement('span');
-    tipText.textContent = '你好！欢迎来到Mbilse's blog!\n本博客采用最新文章在最下面的方案';
-    tipText.style.marginRight = '10px';
-
-    const closeButton = document.createElement('button');
-    closeButton.textContent = '确定';
-    closeButton.style.backgroundColor = '#0078D7';
-    closeButton.style.color = '#ffffff';
-    closeButton.style.border = 'none';
-    closeButton.style.padding = '5px 10px';
-    closeButton.style.borderRadius = '7px';
-    closeButton.style.cursor = 'pointer';
-
-    closeButton.addEventListener('click', () => {
-        // 点击确定后虚化隐藏并向下移动
-        tipBox.style.opacity = '0';
-        tipBox.style.transform = 'translate(-50%, 0)'; // 保持水平居中
-        tipBox.style.top = '30%'; // 向下移动到中间位置
-        tipBox.style.pointerEvents = 'none'; // 防止再次点击
-    });
-
-    tipBox.appendChild(tipText);
-    tipBox.appendChild(closeButton);
-
-    document.body.appendChild(tipBox);
-
-    // 动画效果：从中间往上滑到距顶10px位置并渐显
-    setTimeout(() => {
-        tipBox.style.opacity = '1';
-        tipBox.style.top = '10px';
-    }, 50); // 延迟50ms后开始动画，避免初始状态的闪烁
-})();
+          
+    
         new Vue({
             el: '#app',
             data: {
