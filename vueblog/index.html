@@ -595,6 +595,9 @@
                     <div class="article-content">
                         <p v-for="(para, index) in currentArticle.content" :key="index">{{ para }}</p>
                     </div>
+                    <a href="#" class="back-button" @click.prevent="showHome">
+                    <i class="fas fa-arrow-left"></i> 返回文章列表
+                    </a>
                 </div>
                 <div v-else class="loader">
                     <div class="dot"></div>
