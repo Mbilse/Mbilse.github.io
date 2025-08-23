@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copilot AI</title>
+    <title>Mbilse Copilot AI</title>
     <style>
       body {
         margin: 0;
@@ -112,7 +112,7 @@
 <div class="chat-container" id="chat"></div>
 
 <div class="input-container">
-  <input type="text" id="userInput" placeholder="输入你的消息..." onkeypress="handleKeyPress(event)">
+  <input type="text" id="userInput" placeholder="Type here..." onkeypress="handleKeyPress(event)">
   <button id="sendButton">Send</button>
 </div>
 
@@ -120,7 +120,7 @@
 // 初始化消息
 window.onload = function() {
     const initMessage = createMessage(
-        ' Hello,I am Mbilse Copilot AI-3.0.25，我可以帮你写作，解说，我还可以与你一起聊天', 
+        ' Hello!I am Mbilse Copilot 3.0.25, I can chat to you!', 
         'bot',
         true
     );
@@ -151,7 +151,7 @@ function submitInput() {
     chatDiv.appendChild(thinkingMessage);
     scrollToBottom();
 
-    fetch(`https://api.52vmy.cn/api/chat/spark?msg=${encodeURIComponent(userInput)}`)
+    fetch(`https://api.52vmy.cn/api/chat/spark?msg=${encodeURIComponent(userInput)}`)  //API接入功能
         .then(response => response.json())
         .then(data => {
             chatDiv.removeChild(thinkingMessage);
@@ -162,7 +162,7 @@ function submitInput() {
             console.error('Error:', error);
             chatDiv.removeChild(thinkingMessage);
             typeMessage('出现错误，请稍后再试。', 'bot');
-        });
+        });   //错误处理系统
 
     document.getElementById("userInput").value = "";
 }
