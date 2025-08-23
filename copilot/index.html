@@ -120,7 +120,7 @@
 // 初始化消息
 window.onload = function() {
     const initMessage = createMessage(
-        ' 您好, 我是Mbilse Copilot AI-3.0.25，我可以帮你写作，解说，我还可以与你一起聊天', 
+        ' Hello,I'm Mbilse Copilot AI-3.0.25，我可以帮你写作，解说，我还可以与你一起聊天', 
         'bot',
         true
     );
@@ -194,7 +194,7 @@ function typeMessage(text, type) {
             clearInterval(typing);
             addReadStatus(messageDiv); // 添加已读状态
         }
-    }, 5); //改变响应时间为5ms
+    }, 10); //改变响应时间为10ms
 }
 
 // 添加已送达状态
