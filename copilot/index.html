@@ -107,13 +107,13 @@
     </style>
 </head>
 <body>
-<div class="copilot-header">Copilot AI</div>
-<div class="online-status">在线</div>
+<div class="copilot-header">Mbilse Copilot AI</div>
+<div class="online-status">Online</div>
 <div class="chat-container" id="chat"></div>
 
 <div class="input-container">
   <input type="text" id="userInput" placeholder="输入你的消息..." onkeypress="handleKeyPress(event)">
-  <button id="sendButton">发送</button>
+  <button id="sendButton">Send</button>
 </div>
 
 <script>
@@ -194,7 +194,7 @@ function typeMessage(text, type) {
             clearInterval(typing);
             addReadStatus(messageDiv); // 添加已读状态
         }
-    }, 10);
+    }, 5); //改变响应时间为5ms
 }
 
 // 添加已送达状态
