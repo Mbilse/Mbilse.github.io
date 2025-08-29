@@ -1,3 +1,13 @@
 User-agent: *
 
 Disallow: /.github
+
+# 禁止访问 GitHub 内部配置
+
+Disallow: /blogs
+
+# 禁止爬取有版权的博客文章
+
+Disallow: /error
+
+Disallow: /404.html
