@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=0.6">
+  <title>Happy New Year 2026</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      font-family: "Consolas", "Courier New", monospace;
+      color: #fff;
+    }
+
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #text {
+      font-size: 28px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      margin-left: 4px;
+      background: white;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      color: #aaa;
+      z-index: 1;
+    }
+    #fadeTip {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  animation: fadeInOut 3s ease forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeInOut {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }  /* 渐显 */
+  70%  { opacity: 1; }  /* 停留 */
+  100% { opacity: 0; }  /* 渐隐 */
+}
+  </style>
+</head>
+<body>
+
+<div id="fireworks"></div>
+<div id="fadeTip">🎆点击任何区域，开启新年🎆</div>
+
+<div class="container">
+  <div id="text"><span id="content"></span><span class="cursor"></span></div>
+</div>
+
+<footer>
+  🎆 黑夜盛放千般火，<br>
+  🎆 人间同贺一岁新。<br>
+  🎆 愿来年，灯火不灭，所行皆坦途。
+</footer>
+<audio id="bgm" src="https://file.sucaibar.com/file/yinxiao/20170418163327_73_5.mp3" loop></audio>
+
+<script>
+  function playMusic() {
+    const audio = document.getElementById('bgm');
+    audio.play();
+    document.removeEventListener('click', playMusic);
+  }
+
+  document.addEventListener('click', playMusic);
+</script>
+
+<!-- 烟花 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2/dist/index.umd.js"></script>
+
+<script>
+  // 初始化烟花
+  const container = document.getElementById('fireworks');
+  const fireworks = new Fireworks.default(container, {
+    rocketsPoint: { min: 0, max: 100 },
+    speed: 2.5,
+    acceleration: 1.05,
+    friction: 0.99,
+    gravity: 1.5,
+    particles: 90,
+    trace: 3,
+    explosion: 5
+  });
+  fireworks.start();
+
+  const contentEl = document.getElementById("content");
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  async function type(text, delay = 70) {
+    for (const ch of text) {
+      contentEl.textContent += ch;
+      await sleep(delay);
+    }
+  }
+
+  function replaceLast(oldText, newText) {
+    contentEl.textContent =
+      contentEl.textContent.slice(0, -oldText.length) + newText;
+  }
+
+  async function run() {
+    await type("2026,");
+    await sleep(200);
+
+    await type("zhu");
+    await sleep(100);
+    replaceLast("zhu", "祝");
+
+    await type("da'jia");
+    await sleep(100);
+    replaceLast("da'jia", "大家");
+
+    await type("xin'nian");
+    await sleep(100);
+    replaceLast("xin'nian", "新年");
+
+    await type("kuai'le");
+    await sleep(100);
+    replaceLast("kuai'le", "快乐");
+
+    await type("！");
+    await sleep(450);
+
+    contentEl.textContent += "\n";
+    await type("Happy new year!");
+    await sleep(450);
+
+    contentEl.textContent += "\n";
+    await type("Mbilse LLC");
+    await sleep(300);
+
+    contentEl.textContent += "";
+    await type("quan'ti'yuan'gong");
+    await sleep(100);
+    replaceLast("quan'ti'yuan'gong", "全体员工");
+
+    contentEl.textContent += "";
+    await type("zhu'ni'xin'nian'kuai'le");
+    await sleep(100);
+    replaceLast("zhu'ni'xin'nian'kuai'le", "祝您新年快乐");
+    
+    await sleep(100);
+    await type("！");
+    await sleep(500);
+  }
+
+  run();
+</script>
+<script>
+  setTimeout(() => {
+    document.getElementById('fadeTip')?.remove()
+  }, 3000)
+</script>
+
+</body>
+</html>
