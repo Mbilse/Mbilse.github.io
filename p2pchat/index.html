@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=0.6">
+<title>Mbilse Secure Chat</title>
+<style>
+body{
+  margin:0;
+  background:#fff;
+  color:#000;
+  font-family:Arial;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+}
+#header{
+  padding:12px;
+  background:#EEEEEE;
+}
+#roomTitle{font-weight:bold;}
+#online{font-size:12px;opacity:.6;}
+#chat{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+}
+.msg{
+  margin:6px 0;
+  padding:8px 12px;
+  border-radius:12px;
+  max-width:50%;
+  word-wrap:break-word;
+}
+.self{
+  background:#DDDDDD;
+  margin-left:auto;
+}
+.other{
+  background:#EEEEEE;
+}
+#inputArea{
+  display:flex;
+  padding:8px;
+  background:#EEEEEE;
+}
+input,button{
+  padding:8px;
+  margin:2px;
+  border:none;
+  border-radius:6px;
+}
+button{
+  background:#4c6ef5;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="roomTitle"></div>
+  <div id="online"></div>
+</div>
+
+<div id="chat"></div>
+
+<div id="inputArea">
+  <input id="message" placeholder="输入消息..." style="flex:1;">
+  <input type="file" id="fileInput">
+  <button id="sendBtn">发送</button>
+</div>
+
+<script type="module">
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, addDoc, onSnapshot } from
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* 🔥 替换成你的 Firebase 配置 */
+const firebaseConfig = {
+  apiKey:"AIzaSyAc5XQy1vLmZ0yAuE5_T9zbcFg_VoDdSpI",
+  authDomain:"main-project-3b456.firebaseapp.com",
+  projectId:"main-project-3b456"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* 👤 基本信息 */
+const roomId = prompt("群名");
+const username = prompt("用户名");
+const password = prompt("群密钥(建议12位+)");
+
+document.getElementById("roomTitle").innerText = "群聊: " + roomId;
+
+/* 🔐 AES 密钥生成 */
+async function deriveKey(pass){
+  const enc = new TextEncoder();
+  const baseKey = await crypto.subtle.importKey(
+    "raw", enc.encode(pass), "PBKDF2", false, ["deriveKey"]
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name:"PBKDF2",
+      salt:enc.encode("mbilse-secure"),
+      iterations:150000,
+      hash:"SHA-256"
+    },
+    baseKey,
+    {name:"AES-GCM", length:256},
+    false,
+    ["encrypt","decrypt"]
+  );
+}
+
+const aesKey = await deriveKey(password);
+
+/* 🔒 加密 */
+async function encrypt(text){
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(text);
+  const cipher = await crypto.subtle.encrypt(
+    {name:"AES-GCM", iv},
+    aesKey,
+    encoded
+  );
+  return { iv:Array.from(iv), data:Array.from(new Uint8Array(cipher)) };
+}
+
+/* 🔓 解密 */
+async function decrypt(payload){
+  const iv = new Uint8Array(payload.iv);
+  const data = new Uint8Array(payload.data);
+  const plain = await crypto.subtle.decrypt(
+    {name:"AES-GCM", iv},
+    aesKey,
+    data
+  );
+  return new TextDecoder().decode(plain);
+}
+
+/* 👥 在线人数 */
+const userRef = doc(db,"rooms",roomId,"users",username);
+await setDoc(userRef,{online:true});
+
+onSnapshot(collection(db,"rooms",roomId,"users"), snap=>{
+  document.getElementById("online").innerText =
+    "在线人数: "+snap.size;
+});
+
+/* 💬 发送文本 */
+document.getElementById("sendBtn")
+.addEventListener("click", async ()=>{
+  const text = document.getElementById("message").value.trim();
+  if(!text) return;
+
+  const encrypted = await encrypt(text);
+
+  await addDoc(collection(db,"rooms",roomId,"messages"),{
+    sender:username,
+    iv:encrypted.iv,
+    data:encrypted.data,
+    file:false,
+    time:Date.now()
+  });
+
+  document.getElementById("message").value="";
+});
+
+/* 📎 文件发送 */
+document.getElementById("fileInput")
+.addEventListener("change", async e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+
+  if(file.size > 2*1024*1024){
+    alert("文件太大（限制2MB）");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async ()=>{
+    const encrypted = await encrypt(reader.result);
+
+    await addDoc(collection(db,"rooms",roomId,"messages"),{
+      sender:username,
+      iv:encrypted.iv,
+      data:encrypted.data,
+      file:true,
+      filename:file.name,
+      time:Date.now()
+    });
+  };
+  reader.readAsDataURL(file);
+});
+
+/* 📥 监听消息 */
+onSnapshot(
+  collection(db,"rooms",roomId,"messages"),
+  async snap=>{
+    const chat = document.getElementById("chat");
+    chat.innerHTML="";
+
+    const docs = snap.docs.sort(
+      (a,b)=>(a.data().time||0)-(b.data().time||0)
+    );
+
+    for(const docSnap of docs){
+      const data = docSnap.data();
+      try{
+        const text = await decrypt(data);
+        const div = document.createElement("div");
+        div.className="msg " + (data.sender===username?"self":"other");
+
+        if(data.file){
+          div.innerHTML = `<b>${data.sender}</b><br>
+            <a href="${text}" download="${data.filename}">
+            下载文件: ${data.filename}</a>`;
+        }else{
+          div.innerHTML = `<b>${data.sender}</b><br>${text}`;
+        }
+
+        chat.appendChild(div);
+      }catch(e){
+        console.error("解密失败:", e);
+      }
+    }
+
+    chat.scrollTop = chat.scrollHeight;
+  }
+);
+
+</script>
+</body>
+</html>
