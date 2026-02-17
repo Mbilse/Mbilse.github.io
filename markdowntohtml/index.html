@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.4">
+<title>Markdown Viewer</title>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    font-family:monospace;
+}
+
+/* 工具栏 */
+.toolbar{
+    background:skyblue;
+    padding:20px;
+    display:flex;
+    align-items:center;
+}
+
+p{
+    font-size:20px;
+}
+
+.toolbar button,
+.toolbar input,
+.tollbar p{
+    padding:5px 9px;
+    cursor:pointer;
+}
+
+/* 主区域 */
+.main{
+    flex:1;
+    display:flex;
+    overflow:hidden;
+}
+
+/* 编辑区 */
+#editor{
+    width:50%;
+    padding:15px;
+    border:none;
+    resize:none;
+    outline:none;
+    font-size:14px;
+    border-right:2px solid #eee;
+}
+
+/* 预览区 */
+#preview{
+    width:50%;
+    padding:20px;
+    overflow:auto;
+    background:white;
+}
+#loading {
+    display: none;          /* 默认隐藏 */
+    margin-left: 15px;
+    color: #1e3c72;
+    background: rgba(255,255,255,0.5);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+    <p>Markdown实时渲染器</p>
+    <input type="file" id="fileInput" accept=".md">
+    <button onclick="downloadMD()">Download Markdown</button>
+    <button onclick="downloadHTML()">Download HTML</button>
+    <span id="loading">载入中...</span>
+
+</div>
+
+<!-- 主内容 -->
+<div class="main">
+    <textarea id="editor" placeholder="在这里写 Markdown..."></textarea>
+    <div id="preview"></div>
+</div>
+
+<script>
+const editor = document.getElementById("editor");
+const preview = document.getElementById("preview");
+const fileInput = document.getElementById("fileInput");
+const loadingEl = document.getElementById("loading");  
+let loadingCount = 0;
+
+// 显示加载 (计数器+1，如果之前为0则显示)
+function showLoading() {
+    loadingCount++;
+    if (loadingCount === 1) {
+        loadingEl.style.display = "inline";
+    }
+}
+
+// 隐藏加载 (计数器-1，减到0时隐藏)
+function hideLoading() {
+    if (loadingCount > 0) {
+        loadingCount--;
+    }
+    if (loadingCount === 0) {
+        loadingEl.style.display = "none";
+    }
+}
+
+// 用于中止上一次未完成读取的引用
+let currentReader = null;
+
+// 实时预览
+editor.addEventListener("input", ()=>{
+    preview.innerHTML = marked.parse(editor.value);
+});
+
+// 上传文件 —— 增强版：载入中状态 + 中止旧读取
+fileInput.addEventListener("change", function(){
+    const file = this.files[0];
+    if (!file) return;  // 没有文件直接返回
+
+    // 如果存在正在读取的reader，且处于加载中状态，则中止它（防止旧读取覆盖新内容）
+    if (currentReader && currentReader.readyState === 1) {  // 1 表示 LOADING
+        currentReader.abort();  // 这将触发该reader的onabort事件，自动调用hideLoading()
+        // 注意：此时并不需要手动 hideLoading，因为onabort里会处理
+    }
+
+    // 创建新的FileReader
+    const reader = new FileReader();
+    currentReader = reader;  // 更新当前reader引用
+
+    // 显示“载入中”
+    showLoading();
+
+    // 读取成功
+    reader.onload = function(e) {
+        // 更新编辑器内容和预览
+        editor.value = e.target.result;
+        preview.innerHTML = marked.parse(editor.value);
+        // 隐藏载入 (计数器减1)
+        hideLoading();
+        // 如果当前reader正是自己，清空currentReader标记 (避免内存残留)
+        if (currentReader === this) {
+            currentReader = null;
+        }
+    };
+
+    // 读取失败 (例如文件损坏或无法访问)
+    reader.onerror = function() {
+        alert("文件读取失败，请重试。");
+        hideLoading();
+        if (currentReader === this) {
+            currentReader = null;
+        }
+    };
+
+    // 读取被中止 (可能是由于我们主动调用了abort，或者外部取消)
+    reader.onabort = function() {
+        // 不弹alert，只是静默隐藏加载状态（计数器已经由showLoading增加，这里必须减少）
+        hideLoading();
+        if (currentReader === this) {
+            currentReader = null;
+        }
+    };
+
+    // 开始以文本方式读取文件
+    reader.readAsText(file);
+});
+
+// 下载 Markdown
+function downloadMD(){
+    const blob = new Blob([editor.value], {type:"text/markdown"});
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "document.md";
+    link.click();
+    // 小优化: 释放内存
+    setTimeout(() => URL.revokeObjectURL(link.href), 100);
+}
+
+// 下载 HTML
+function downloadHTML(){
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Converted Markdown</title>
+</head>
+<body>
+${marked.parse(editor.value)}
+</body>
+</html>
+`;
+    const blob = new Blob([htmlContent], {type:"text/html"});
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "document.html";
+    link.click();
+}
+
+// 默认内容，演示文稿
+editor.value = "# Markdown Viewer\n\n## 演示\n\n支持 **加粗**、*斜体*、`代码` 、~~删除~~等。\n\n- 上传文件\n- 编辑\n- 下载\n---\n\n> 引用文本\n";
+preview.innerHTML = marked.parse(editor.value);
+</script>
+
+</body>
+</html>
