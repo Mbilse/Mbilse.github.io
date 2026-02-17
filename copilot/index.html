@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=0.9" />
+<title>Mbilse Copilot</title>
+<style>
+body {
+  margin: 0;
+  background: #f8f9fa;
+  color: #1e1e1e;
+  font-family: Inter, system-ui;
+}
+
+.wrap {
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 17px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0ea5a0, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 13px;
+  color: #5f6b7a;
+}
+
+.chat {
+  height: 65vh;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  background: #ffffff;
+}
+
+.msg {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0;
+  align-items: flex-start;
+}
+
+
+
+.bubble {
+  padding: 10px 12px;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.bubble.user {
+  background: #cfe2ff;
+  color: #212529;
+  margin-left: auto;
+  border-radius: 12px 12px 4px 12px;
+}
+
+.bubble.ai {
+  background: #d1e7dd;
+  color: #212529;
+  border-radius: 12px 12px 12px 4px;
+}
+
+.composer {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  color: #212529;
+  font-family: inherit;
+  font-size: 14px;
+  height: 20px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+button {
+  background: #ff8a00;
+  border: none;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #e67a00;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #495057;
+  border: 1px solid #ced4da;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: normal;
+}
+
+.btn-ghost:hover {
+  background: #f1f3f5;
+}
+
+.topbar {
+  font-size: 13px;
+  color: #495057;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  color: #212529;
+  font-size: 13px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+#userInfo {
+  color: #2c3e50;
+}
+
+
+.chat::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.chat::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.chat::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Mbilse Copilot</h1>
+<div class="status" id="status">Online</div>
+</header>
+<div class="topbar">
+<span id="userInfo"></span>
+<button id="logoutBtn" class="btn-ghost">退出登录</button>
+</div>
+<div class="chat" id="chat"></div>
+<div class="composer">
+<textarea id="input" placeholder="Type here..."></textarea>
+<button id="sendBtn">Send</button>
+</div>
+</div>
+<script>
+const chatEl = document.getElementById("chat");
+const inputEl = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+const statusEl = document.getElementById("status");
+const userInfo = document.getElementById("userInfo");
+const logoutBtn = document.getElementById("logoutBtn");
+
+let user = JSON.parse(localStorage.getItem("mbilse_user"));
+
+if(!user){
+  createUser();
+}
+
+function createUser(){
+  const name = prompt("输入你的用户名：");
+  if(!name){ location.reload(); return; }
+
+  const userId = "U" + Math.random().toString(36).slice(2,10);
+  const uid = "UID" + Math.random().toString(36).slice(2,12);
+
+  user = { name, userId, uid };
+  localStorage.setItem("mbilse_user", JSON.stringify(user));
+  localStorage.setItem("chat_"+user.userId, JSON.stringify([]));
+}
+
+logoutBtn.onclick = ()=>{
+  if(confirm("确认退出登录？")){
+    localStorage.removeItem("mbilse_user");
+    location.reload();
+  }
+};
+
+userInfo.innerText = "用户: "+user.name+" | ID: "+user.userId;
+
+let history = JSON.parse(localStorage.getItem("chat_"+user.userId) || "[]");
+
+function render(){
+  chatEl.innerHTML="";
+  history.forEach(m=>{
+    const row=document.createElement("div");
+    row.className="msg";
+
+    const av=document.createElement("div");
+    av.className="avatar "+(m.role==="user"?"user":"ai");
+    av.textContent=m.role==="user"?"":"";
+
+    const bubble=document.createElement("div");
+    bubble.className="bubble "+m.role;
+    bubble.textContent = m.text;
+
+    row.appendChild(av);
+    row.appendChild(bubble);
+    chatEl.appendChild(row);
+  });
+  chatEl.scrollTop=chatEl.scrollHeight;
+  localStorage.setItem("chat_"+user.userId, JSON.stringify(history));
+}
+
+render();
+
+inputEl.addEventListener("keydown",e=>{
+  if(e.key==="Enter" && !e.shiftKey){
+    e.preventDefault();
+    send();
+  }
+});
+sendBtn.onclick=send;
+
+async function send(){
+  const msg=inputEl.value.trim();
+  if(!msg) return;
+  inputEl.value="";
+
+  history.push({role:"user",text:msg});
+  render();
+  statusEl.innerText="Thinking…";
+
+  try{
+    const params=new URLSearchParams();
+    params.set("message",msg);
+    params.set("system","你叫 Mbilse Copilot，也可以叫Mbilse Copilot AI，默认回答语言：中文，只有客户问你其他语言，你才可以用其他语言回复，你的回答可以不那么简洁，可以幽默，版本是：4.12 正式版");
+    params.set("id",user.uid);
+
+    const res=await fetch("https://oiapi.net/api/BigModel?"+params.toString());
+    const data=await res.json();
+
+    let reply="";
+    if(data && data.data && data.data.length){
+      reply=data.data[data.data.length-1].content;
+    }else{
+      reply=JSON.stringify(data);
+    }
+
+history.push({role:"ai",text:""});
+render();
+
+let bubbleList = document.querySelectorAll(".bubble.ai");
+let lastBubble = bubbleList[bubbleList.length - 1];
+
+typeWriter(lastBubble, reply, 15);
+
+setTimeout(()=>{
+  history[history.length-1].text = reply;
+  localStorage.setItem("chat_"+user.userId, JSON.stringify(history));
+}, reply.length * 15 + 50);;
+
+  }catch(e){
+    history.push({role:"ai",text:"Error："+e});
+    render();
+  }
+
+  statusEl.innerText="Online";
+}
+function typeWriter(element, text, speed = 10){
+  element.textContent = "";
+  let i = 0;
+
+  function typing(){
+    if(i < text.length){
+      element.textContent += text.charAt(i);
+      i++;
+
+      
+      chatEl.scrollTop = chatEl.scrollHeight;
+
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
+}
+</script>
+</body>
+</html>
